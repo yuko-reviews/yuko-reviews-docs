@@ -200,6 +200,12 @@
                   "earning-rule-object",
                   "list-earning-rule"
                 ]
+              },
+              {
+                "group": "Points Products",
+                "pages": [
+                  "untitled-page"
+                ]
               }
             ]
           }
