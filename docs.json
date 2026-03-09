@@ -184,7 +184,6 @@
                 "group": "Customers",
                 "pages": [
                   "customer-object",
-                  "untitled-page",
                   "retrieve-a-customer"
                 ]
               },
@@ -193,6 +192,12 @@
                 "pages": [
                   "customer-identity-object",
                   "create-or-update-a-customer-identity"
+                ]
+              },
+              {
+                "group": "Earning Rules",
+                "pages": [
+                  "earning-rule-object"
                 ]
               }
             ]
