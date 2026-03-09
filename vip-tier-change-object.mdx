@@ -1,0 +1,107 @@
+---
+title: "VIP Tier Change object"
+---
+
+A VIP tier change is a record of a customer moving from one VIP tier to another.
+
+**id**
+
+**number**
+
+Unique identifier for the VIP tier change.
+
+Example:
+
+`114225280`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-previous-vip-tier)
+
+**previous_vip_tier**
+
+**object**
+
+The nested VIP Tier object representing the tier the customer was in before the change occurred.
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-previous-vip-tier-id)
+
+**previous_vip_tier.id**
+
+**integer**
+
+Example:
+
+`341925843`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-previous-vip-tier-name)
+
+**previous_vip_tier.name**
+
+**string**
+
+Example:
+
+`"Silver"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-previous-vip-tier-image-url)
+
+**previous_vip_tier.image_url**
+
+**string**
+
+Example:
+
+`"https://platform-images.smilecdn.co/379d1fi35m5o.png"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-current-vip-tier)
+
+**current_vip_tier**
+
+**object**
+
+The nested VIP Tier object representing the tier the customer moved to as a result of the change.
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-current-vip-tier-id)
+
+**current_vip_tier.id**
+
+**integer**
+
+Example:
+
+`426715799`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-current-vip-tier-name)
+
+**current_vip_tier.name**
+
+**string**
+
+Example:
+
+`"Gold"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-current-vip-tier-image-url)
+
+**current_vip_tier.image_url**
+
+**string**
+
+Example:
+
+`"https://platform-images.smilecdn.co/582j2kd82k2j.png"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tier-changes/vip-tier-change-object#schema-description)
+
+**description**
+
+**string**
+
+A description of the change that occurred.
+
+Example:
+
+`"Achieved Gold"`

@@ -249,6 +249,12 @@
                   "vip-tier-object",
                   "list-vip-tiers"
                 ]
+              },
+              {
+                "group": "VIP Tier Changes",
+                "pages": [
+                  "vip-tier-change-object"
+                ]
               }
             ]
           }
