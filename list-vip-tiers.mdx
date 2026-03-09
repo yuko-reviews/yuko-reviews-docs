@@ -1,0 +1,199 @@
+---
+title: "List VIP tiers"
+---
+
+**GET** / **vip_tiers - Try it**
+
+This endpoint requires the **vip_tier:read** scope.
+
+Results are sorted by `milestone` in ascending order. This endpoint does not support pagination of any kind.
+
+#### **Authorizations**
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#authorization-authorization)
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Query Parameters**
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#parameter-include)
+
+**include**
+
+**enum\<string\>**
+
+A comma-separated list of nested objects to include in the response.
+
+Available options:
+
+`perks`, 
+
+`entry_rewards` 
+
+#### **Response**
+
+**200 - application/json**
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers)
+
+**vip_tiers**
+
+**object[]**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-id)
+
+**vip_tiers.id**
+
+**integer**
+
+Unique identifier for the VIP tier.
+
+Example:
+
+`426715799`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-name)
+
+**vip_tiers.name**
+
+**string**
+
+The display name of the VIP tier.
+
+Example:
+
+`"Gold"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-image-url)
+
+**vip_tiers.image_url**
+
+**string**
+
+The image of the VIP tier.
+
+Example:
+
+`"https://platform.smile.io/v1/images/vip_tiers/vip-tier-3.svg"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-milestone)
+
+**vip_tiers.milestone**
+
+**integer**
+
+The threshold that a customer must reach to be eligible for the VIP tier. Represents either an amount of points or a dollar amount, depending on the loyalty program's configuration.
+
+Example:
+
+`500`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-perks)
+
+**vip_tiers.perks**
+
+**object[]**
+
+A set of nested objects representing the ongoing benefits a customer is entitled to when they are in the VIP tier.
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-perks-items-name)
+
+**vip_tiers.perks.name**
+
+**string**
+
+A description of the benefit.
+
+Example:
+
+`"Early access to new product releases"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards)
+
+**vip_tiers.entry_rewards**
+
+**object[]**
+
+A set of nested Reward objects representing the rewards that are issued to a customer when they enter the VIP tier.
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-id)
+
+**vip_tiers.entry_rewards.id**
+
+**number**
+
+Unique identifier for the reward.
+
+Example:
+
+`924565472`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-name)
+
+**vip_tiers.entry_rewards.name**
+
+**string**
+
+The name of the reward.
+
+Example:
+
+`"Order discount"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-description)
+
+**vip_tiers.entry_rewards.description**
+
+**string**
+
+A description of the reward.
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-image-url)
+
+**vip_tiers.entry_rewards.image_url**
+
+**string**
+
+An image for the reward.
+
+Example:
+
+`"https://platform-images.smilecdn.co/3755938.png"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-created-at)
+
+**vip_tiers.entry_rewards.created_at**
+
+**string\<date-time\>**
+
+The date and time when the reward was created.
+
+Example:
+
+`"2024-04-04T15:10:42.030Z"`
+
+[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-updated-at)
+
+**vip_tiers.entry_rewards.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the reward was last updated.
+
+Example:
+
+`"2024-04-04T15:10:42.030Z"`
