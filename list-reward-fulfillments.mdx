@@ -1,0 +1,331 @@
+---
+title: "List reward fulfillments"
+---
+
+Retrieves a list of reward fulfillments.
+
+**GET** / **reward_fulfillments - Try it**
+
+This endpoint requires the **reward_fulfillment:read** scope.
+
+Results are sorted by `id` in descending order. This endpoint is commonly used to display a list of a customer’s rewards (e.g. discount codes).
+
+#### **Authorizations**
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#authorization-authorization)
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Query Parameters**
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#parameter-customer-id)
+
+**customer_id**
+
+**integer**
+
+Filter results to only reward fulfillments with the provided Smile customer ID.
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#parameter-fulfillment-status)
+
+**fulfillment_status**
+
+**enum\<string\>**
+
+Filter results to only reward fulfillments whose fulfillment status matches the provided value.
+
+Available options:
+
+`pending`, 
+
+`issued`, 
+
+`cancelled`, 
+
+`failed` 
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#parameter-usage-status)
+
+**usage_status**
+
+**enum\<string\>**
+
+Filter results to only reward fulfillments whose usage status matches the provided values.
+
+Available options:
+
+`used`, 
+
+`unused`, 
+
+`untracked` 
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#parameter-updated-at-min)
+
+**updated_at_min**
+
+**string\<date-time\>**
+
+Filter results to only reward fulfillments updated after the provided date and time.
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#parameter-limit)
+
+**limit**
+
+**integer**
+
+**default:50**
+
+The maximum number of reward fulfillments to retrieve.
+
+Required range: `1 <= x <= 250`
+
+Example:
+
+`1`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#parameter-cursor)
+
+**cursor**
+
+**string**
+
+Cursor for the page of reward fulfillments to retrieve.
+
+#### **Response**
+
+**200 - application/json**
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments)
+
+**reward_fulfillments**
+
+**object[]**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-id)
+
+**reward_fulfillments.id**
+
+**integer**
+
+Unique identifier for the reward fulfillment.
+
+Example:
+
+`625478984`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-name)
+
+**reward_fulfillments.name**
+
+**string**
+
+The name of the reward fulfillment.
+
+Example:
+
+`"$5 off coupon"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-code)
+
+**reward_fulfillments.code**
+
+**string**
+
+A unique code for the customer to use or apply the reward fulfillment. This is commonly a discount code the customer applies at checkout on their next order, but it can be a unique code they use for other purposes like accessing an exclusive page on the merchant's website.
+
+Example:
+
+`"5off-e26d02e39149"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-customer-id)
+
+**reward_fulfillments.customer_id**
+
+**string**
+
+The ID of the customer that the reward fulfillment belongs to.
+
+Example:
+
+`"304169228"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-fulfillment-status)
+
+**reward_fulfillments.fulfillment_status**
+
+**enum\<string\>**
+
+The fulfillment status of the reward fulfillment, indicating whether the reward is available to the customer.
+
+Available options:
+
+`pending`, 
+
+`issued`, 
+
+`cancelled`, 
+
+`failed` 
+
+Example:
+
+`"issued"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-image-url)
+
+**reward_fulfillments.image_url**
+
+**string**
+
+An image for the reward fulfillment.
+
+Example:
+
+`"https://platform-images.smilecdn.co/9283449.png"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-action-text-one-of-0)
+
+**reward_fulfillments.action_text**
+
+**string | null**
+
+A short call-to-action style text, appropriate for use in buttons or links, guiding the customer on how to use the reward fulfillment. This field may be blank
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-action-url-one-of-0)
+
+**reward_fulfillments.action_url**
+
+**string | null**
+
+A URL destination guiding the customer on how to use the reward, often paired with the `action_text` for use in buttons or links. This field may be blank.
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-usage-instructions-one-of-0)
+
+**reward_fulfillments.usage_instructions**
+
+**string | null**
+
+A description of how the customer can use or apply the reward fulfillment.
+
+Example:
+
+`"Use this discount code on your next order!"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-terms-and-conditions-one-of-0)
+
+**reward_fulfillments.terms_and_conditions**
+
+**string | null**
+
+A description of the reward fulfillment's limitations or restrictions. When the reward is a discount code, this commonly includes expiry date, minimum order amounts, or applicability to specific product collections.
+
+Example:
+
+`"Reward expires on June 7, 2025. Reward can only be used on purchase of $50 or more. Reward can only be used on select product collections."`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-expires-at-one-of-0)
+
+**reward_fulfillments.expires_at**
+
+**string\<date-time\> | null**
+
+The date and time when the reward fulfillment expires. When the reward is a discount code, this refers to the expiry date of the discount, and a `null` value indicates that the discount code does not expire.
+
+Example:
+
+`"2025-06-07T23:59:59.999Z"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-usage-status)
+
+**reward_fulfillments.usage_status**
+
+**enum\<string\>**
+
+The usage status of the reward fulfillment, indicating whether the generated reward has been used by the customer.
+
+Available options:
+
+`used`, 
+
+`unused`, 
+
+`untracked` 
+
+Example:
+
+`"unused"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-used-at-one-of-0)
+
+**reward_fulfillments.used_at**
+
+**string\<date-time\> | null**
+
+The date and time when the reward fulfillment was used by the customer. If the reward fulfillments does not support usage tracking, this field may be `null` even after the reward fulfillment has been used.
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-created-at)
+
+**reward_fulfillments.created_at**
+
+**string\<date-time\>**
+
+The date and time when the reward fulfillment was created.
+
+Example:
+
+`"2024-12-07T20:15:27.893Z"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-reward-fulfillments-items-updated-at)
+
+**reward_fulfillments.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the reward fulfillment was last updated.
+
+Example:
+
+`"2024-12-07T20:15:27.893Z"`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-metadata)
+
+**metadata**
+
+**object**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-metadata-next-cursor-one-of-0)
+
+**metadata.next_cursor**
+
+**string | null**
+
+A cursor value that when present, can be used to retrieve the next page of results.
+
+Example:
+
+`"aWQ6MixkaXJlY3Rpb246bmV4dA=="`
+
+[**​**](https://dev.smile.io/api/resources/reward-fulfillments/list-reward-fulfillments#response-metadata-previous-cursor-one-of-0)
+
+**metadata.previous_cursor**
+
+**string | null**
+
+A cursor value that when present, can be used to retrieve the previous page of results.
+
+Example:
+
+`""`

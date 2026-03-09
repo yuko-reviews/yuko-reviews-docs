@@ -239,7 +239,8 @@
               {
                 "group": "Reward Fulfillments",
                 "pages": [
-                  "reward-fulfillment-object"
+                  "reward-fulfillment-object",
+                  "list-reward-fulfillments"
                 ]
               }
             ]
