@@ -242,6 +242,12 @@
                   "reward-fulfillment-object",
                   "list-reward-fulfillments"
                 ]
+              },
+              {
+                "group": "VIP Tiers",
+                "pages": [
+                  "vip-tier-object"
+                ]
               }
             ]
           }
