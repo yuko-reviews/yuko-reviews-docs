@@ -206,7 +206,8 @@
                 "pages": [
                   "untitled-page",
                   "list-points-products",
-                  "retrieve-a-points-product"
+                  "retrieve-a-points-product",
+                  "purchase-a-points-product"
                 ]
               }
             ]
