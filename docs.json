@@ -209,6 +209,12 @@
                   "retrieve-a-points-product",
                   "purchase-a-points-product"
                 ]
+              },
+              {
+                "group": "Points Purchases",
+                "pages": [
+                  "points-purchase-object"
+                ]
               }
             ]
           }
