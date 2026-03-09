@@ -62,7 +62,7 @@
           {
             "group": "4. Display Reviews",
             "pages": [
-              "display-reviews",
+              "display-reviews/introductionToWidgets",
               "display-reviews/product-reviews-display-widget",
               "display-reviews/sidebar-widget",
               "display-reviews/star-rating-widget",
@@ -87,8 +87,6 @@
               "managing-reviews/auto-publishing-reviews",
               "managing-reviews/review-moderation",
               "managing-reviews/review-restrictions-limits",
-              "managing-reviews/email-blacklist",
-              "managing-reviews/product-blacklist",
               "managing-reviews/replying-to-reviews",
               "managing-reviews/verified-badges-for-reviews"
             ]
@@ -156,7 +154,7 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "Rest API ",
+            "group": "Rest API",
             "pages": [
               "introduction",
               "authentication",
