@@ -1,0 +1,176 @@
+---
+title: "Create an activity"
+---
+
+Creates a record of a customer having performed a given action.
+
+**POST**
+
+/
+
+**activities**
+
+**Try it**
+
+This endpoint requires the **activity:write** scope.
+
+Once created, activities will be asynchronously evaluated against the loyalty program’s configuration to determine if any rewards should be issued. This evaluation happens automatically and no additional API calls are required.
+
+#### **Authorizations**
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#authorization-authorization)
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Body**
+
+**application/json**
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#body-activity)
+
+**activity**
+
+**With customer ID · object**
+
+**required**
+
+- **With customer ID**
+- **With customer email**
+
+Show child attributes
+
+#### **Response**
+
+**201 - application/json**
+
+The activity was successfully created.
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity)
+
+**activity**
+
+**object**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-id)
+
+[**activity.id**](http://activity.id)
+
+**integer**
+
+Unique identifier for the activity.
+
+Example:
+
+`503256787`
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-customer-id)
+
+**activity.customer_id**
+
+**integer**
+
+The ID of the customer who performed the activity.
+
+Example:
+
+`304169228`
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-token)
+
+**activity.token**
+
+**string**
+
+A token identifying the activity that was performed.
+
+Example:
+
+`"activity_f57a9b5a8d0ac5"`
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-distinct-id-one-of-0)
+
+**activity.distinct_id**
+
+**string | null**
+
+A unique identifier for the activity in the external system (e.g. the order number).
+
+Example:
+
+`"212993"`
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-created-on-origin-at-one-of-0)
+
+**activity.created_on_origin_at**
+
+**string\<date-time\> | null**
+
+The date and time the activity was performed by the customer in the external system (e.g. when the action actually occurred, which is often earlier than when the activity is created in Yuko).
+
+Example:
+
+`"2024-04-04T15:10:42.030Z"`
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-created-at)
+
+**activity.created_at**
+
+**string\<date-time\>**
+
+The date and time when the activity was created.
+
+Example:
+
+`"2024-05-15T08:35:08.920Z"`
+
+[**​**](https://dev.smile.io/api/resources/activities/create-activity#response-activity-updated-at)
+
+**activity.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the activity was last updated.
+
+Example:
+
+`"2024-05-15T08:35:08.920Z"`
+
+[**Activity object**](https://dev.smile.io/api/resources/activities/activity-object)
+
+[**Previous**](https://dev.smile.io/api/resources/activities/activity-object)
+
+[**Customer object**](https://dev.smile.io/api/resources/customers/customer-object)
+
+[**Next**](https://dev.smile.io/api/resources/customers/customer-object)
+
+[website](https://smile.io/)[linkedin](https://www.linkedin.com/company/smile.io)[youtube](https://www.youtube.com/c/smilerewards)
+
+**Guides**
+
+[Fundamentals](https://dev.smile.io/guides/fundamentals)[Common use cases](https://dev.smile.io/guides/use-cases/common)[How to integrate](https://dev.smile.io/guides/apps/integrate)
+
+**Documentation**
+
+[API Reference](https://dev.smile.io/api/introduction)[JavaScript SDK](https://dev.smile.io/js/introduction)[Smile UI](https://dev.smile.io/ui/introduction)
+
+**Company**
+
+[Careers](https://smile.io/careers)[Partners](https://smile.io/partners)[Contact us](https://smile.io/contact-us)
+
+**Resources**
+
+[Changelog](https://dev.smile.io/changelog)[Help docs](https://help.smile.io/)[Status page](https://status.smile.io/)
+
+[Powered by](https://www.mintlify.com/?utm_campaign=poweredBy&utm_medium=referral&utm_source=smileio)
+
+Create an activity - [Smile.io](http://Smile.io) Developer Documentation
