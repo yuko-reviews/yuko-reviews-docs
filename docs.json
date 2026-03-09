@@ -183,7 +183,9 @@
               {
                 "group": "Customers",
                 "pages": [
-                  "customer-object"
+                  "customer-object",
+                  "untitled-page",
+                  "retrieve-a-customer"
                 ]
               }
             ]
