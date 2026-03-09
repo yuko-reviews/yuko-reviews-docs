@@ -164,7 +164,8 @@
               {
                 "group": "Pagination",
                 "pages": [
-                  "cursor-pagination"
+                  "cursor-pagination",
+                  "classic-pagination"
                 ]
               }
             ]
