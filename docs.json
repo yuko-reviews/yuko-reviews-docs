@@ -219,7 +219,8 @@
               {
                 "group": "Points Transactions",
                 "pages": [
-                  "points-transaction-object"
+                  "points-transaction-object",
+                  "create-a-points-transaction"
                 ]
               }
             ]

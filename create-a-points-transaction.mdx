@@ -1,0 +1,195 @@
+---
+title: "Create a points transaction"
+---
+
+Add or remove points from a customer’s points balance by creating a points transaction.
+
+**POST**
+
+/
+
+**points_transactions**
+
+**Try it**
+
+This endpoint requires the **points_transaction:write** scope.
+
+Points transactions that would result in a negative points balance will be rejected. To issue points as a reward for completing an action, use the [**create an activity**](https://dev.smile.io/api/resources/activities/create-activity) endpoint instead.
+
+#### **Authorizations**
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#authorization-authorization)
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Body**
+
+**application/json**
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#body-points-transaction)
+
+**points_transaction**
+
+**object**
+
+**required**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#body-points-transaction-customer-id)
+
+**points_transaction.customer_id**
+
+**integer**
+
+**required**
+
+The ID of the customer whose balance this points transaction applies to.
+
+Example:
+
+`304169228`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#body-points-transaction-points-change)
+
+**points_transaction.points_change**
+
+**integer**
+
+**required**
+
+The number of points added or removed from the customer's points balance. The value is positive if points were added to the customer's balance and negative if points were deducted.
+
+Example:
+
+`100`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#body-points-transaction-description)
+
+**points_transaction.description**
+
+**string**
+
+A message visible to the customer that describes the reason for the points change.
+
+Example:
+
+`"Points correction"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#body-points-transaction-internal-note)
+
+**points_transaction.internal_note**
+
+**string**
+
+A note that is visible to the merchant. This note should never be visible to customers.
+
+Example:
+
+`"Due to issue with order #6834"`
+
+#### **Response**
+
+**201 - application/json**
+
+The points transaction was successfully created.
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction)
+
+**points_transaction**
+
+**object**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-id)
+
+**points\_**[**transaction.id**](http://transaction.id)
+
+**integer**
+
+Unique identifier for the points transaction.
+
+Example:
+
+`825673452`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-customer-id)
+
+**points_transaction.customer_id**
+
+**integer**
+
+The ID of the customer whose balance this points transaction applies to.
+
+Example:
+
+`304169228`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-points-change)
+
+**points_transaction.points_change**
+
+**integer**
+
+The number of points added or removed from the customer's points balance. The value is positive if points were added to the customer's balance and negative if points were deducted.
+
+Example:
+
+`100`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-description)
+
+**points_transaction.description**
+
+**string**
+
+A message visible to the customer that describes the reason for the points change.
+
+Example:
+
+`"Points correction"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-internal-note-one-of-0)
+
+**points_transaction.internal_note**
+
+**string | null**
+
+A note that is visible to the merchant. This note should never be visible to customers.
+
+Example:
+
+`"Due to issue with order #6834"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-created-at)
+
+**points_transaction.created_at**
+
+**string\<date-time\>**
+
+The date and time when the points transaction was created.
+
+Example:
+
+`"2024-12-07T20:15:27.893Z"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/create-points-transaction#response-points-transaction-updated-at)
+
+**points_transaction.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the points transaction was last updated.
+
+Example:
+
+`"2024-12-07T20:15:27.893Z"`
