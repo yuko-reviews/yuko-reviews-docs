@@ -9,6 +9,20 @@
   },
   "favicon": "/logos/favicon.svg",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Yuko Dashboard",
+          "icon": "book-open-cover",
+          "href": "https://app.yukoapp.com"
+        },
+        {
+          "anchor": "Blog",
+          "icon": "newspaper",
+          "href": "https://yuko.so/blog/"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Guides",
@@ -144,26 +158,12 @@
           {
             "group": "API documentation",
             "pages": [
-              "collect-reviews/openapi"
+              "introduction"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Yuko Dashboard",
-          "href": "https://app.yukoapp.com",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://yuko.so/blog/",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logos/YukoDocs.svg",
