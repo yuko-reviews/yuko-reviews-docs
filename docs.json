@@ -204,7 +204,6 @@
               {
                 "group": "Points Products",
                 "pages": [
-                  "untitled-page",
                   "list-points-products",
                   "retrieve-a-points-product",
                   "purchase-a-points-product"
@@ -235,6 +234,12 @@
                 "group": "Rewards",
                 "pages": [
                   "reward-objects"
+                ]
+              },
+              {
+                "group": "Reward Fulfillments",
+                "pages": [
+                  "reward-fulfillment-object"
                 ]
               }
             ]
