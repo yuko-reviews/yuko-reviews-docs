@@ -167,7 +167,8 @@
                   "cursor-pagination",
                   "classic-pagination"
                 ]
-              }
+              },
+              "rate-limits"
             ]
           }
         ]

@@ -1,0 +1,5 @@
+---
+title: "Rate Limits"
+---
+
+To ensure platform stability and efficient processing for everyone, all of our API endpoints are rate limited. All API tokens are permitted to make up to 10 requests per second, and once this limit is reached all requests will return an `HTTP 429 - Too Many Requests` error. After one second has elapsed, the token’s limit will be reset and additional requests will respond normally.We actively monitor for API consumers regularly exceeding their rate limit and encourage developers to use techniques like caching, limiting the number of requests being made, and intelligent retry/backoff behavior to avoid being flagged.
