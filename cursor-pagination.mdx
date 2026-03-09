@@ -1,0 +1,11 @@
+---
+title: "Cursor pagination"
+---
+
+A cursor is an opaque string representing your current place within a collection. 
+
+When making a request to an endpoint that supports cursor-based pagination, the response will include a `metadata` hash containing the cursors required to move forward or backward within the collection.If a next page is available, the metadata hash will contain a non-null `next_cursor` value. 
+
+If a previous page is available, the `metadata` hash will contain a non-null `previous_cursor` value. By passing either of these values as the `cursor` argument of a subsequent request, you can retrieve the next or previous page of objects.
+
+**Note:** When paginating using cursors, results are always returned in reverse chronological order (with the most recently created first).

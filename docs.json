@@ -160,7 +160,13 @@
             "pages": [
               "introduction",
               "authentication",
-              "errod"
+              "errod",
+              {
+                "group": "Pagination",
+                "pages": [
+                  "cursor-pagination"
+                ]
+              }
             ]
           }
         ]
