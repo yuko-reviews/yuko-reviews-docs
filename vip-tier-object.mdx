@@ -2,21 +2,37 @@
 title: "VIP Tier Object"
 ---
 
-A VIP tier represents a status or level that a customer can achieve as they move through a VIP program. Customers move through different VIP tiers by accruing points or making purchases.
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-id)
+A VIP tier represents a status level that a customer achieves within Yuko's loyalty program. Tiers are based on a `threshold_value` (e.g. points accumulated) and reward customers with a points earning `multiplier` and a set of `benefits` such as discounts or free shipping.
 
 **id**
 
 **integer**
 
-Unique identifier for the VIP tier.
+Unique integer identifier for the VIP tier.
 
 Example:
 
-`426715799`
+`1`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-name)
+**uuid**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the VIP tier.
+
+Example:
+
+`"7fb39c85-3a3f-4247-8333-2e05a9c8ae28"`
+
+**org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this tier belongs to.
+
+Example:
+
+`"ed39de7b-6c31-46bc-af56-ef51676a08e0"`
 
 **name**
 
@@ -26,128 +42,220 @@ The display name of the VIP tier.
 
 Example:
 
-`"Gold"`
+`"Silver"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-image-url)
+**description**
 
-**image_url**
+**string | null**
 
-**string**
-
-The image of the VIP tier.
+A description of the VIP tier shown to customers.
 
 Example:
 
-`"https://platform.smile.io/v1/images/vip_tiers/vip-tier-3.svg"`
+`null`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-milestone)
+**identifier**
 
-**milestone**
+**string**
+
+A unique slug-style identifier for the tier, auto-generated from the tier name. Unique per organisation.
+
+Example:
+
+`"SILVER"`
+
+**threshold_value**
 
 **integer**
 
-The threshold that a customer must reach to be eligible for the VIP tier. Represents either an amount of points or a dollar amount, depending on the loyalty program's configuration.
+The points value a customer must accumulate to reach this tier.
 
 Example:
 
-`500`
+`0`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-perks)
-
-**perks**
-
-**object[]**
-
-A set of nested objects representing the ongoing benefits a customer is entitled to when they are in the VIP tier.
-
-Hide child attributes
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-perks-items-name)
-
-**perks.name**
-
-**string**
-
-A description of the benefit.
-
-Example:
-
-`"Early access to new product releases"`
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards)
-
-**entry_rewards**
-
-**object[]**
-
-A set of nested Reward objects representing the rewards that are issued to a customer when they enter the VIP tier.
-
-Hide child attributes
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards-items-id)
-
-**entry_rewards.id**
+**multiplier**
 
 **number**
 
-Unique identifier for the reward.
+The points earning multiplier applied to customers in this tier. For example, `2` means customers earn double points on activities.
 
 Example:
 
-`924565472`
+`1`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards-items-name)
+**is_default**
 
-**entry_rewards.name**
+**boolean**
 
-**string**
-
-The name of the reward.
+Whether this is the default tier assigned to customers who have not yet reached any threshold.
 
 Example:
 
-`"Order discount"`
+`false`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards-items-description)
+**benefits**
 
-**entry_rewards.description**
+**object[]**
 
-**string**
+A list of benefits associated with this tier. Benefits are rewards or perks automatically issued to customers when they enter the tier.
 
-A description of the reward.
+Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards-items-image-url)
+**benefits.uuid**
 
-**entry_rewards.image_url**
+**string\<uuid\>**
 
-**string**
-
-An image for the reward.
+Unique identifier for the benefit.
 
 Example:
 
-`"https://platform-images.smilecdn.co/3755938.png"`
+`"b1c2d3e4-f5a6-7890-bcde-f01234567890"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards-items-created-at)
+**benefits.tier_uuid**
 
-**entry_rewards.created_at**
+**string\<uuid\>**
+
+The UUID of the tier this benefit belongs to.
+
+Example:
+
+`"7fb39c85-3a3f-4247-8333-2e05a9c8ae28"`
+
+**benefits.name**
+
+**string**
+
+The display name of the benefit.
+
+Example:
+
+`"10% Discount on entry"`
+
+**benefits.benefit_type**
+
+**string**
+
+The type of benefit issued to the customer.
+
+Example:
+
+`"fixed_discount"`
+
+**benefits.benefit_value**
+
+**object**
+
+The value configuration for this benefit. Structure varies by `benefit_type`.
+
+Show child attributes
+
+**benefits.benefit_value.value**
+
+**number**
+
+The discount amount or percentage depending on `benefit_type`.
+
+Example:
+
+`10`
+
+**benefits.benefit_value.points_required**
+
+**integer**
+
+Points required to redeem this benefit, if applicable.
+
+Example:
+
+`0`
+
+**benefits.platform_discount_id**
+
+**string | null**
+
+The discount identifier generated in the external ecommerce platform for this benefit.
+
+Example:
+
+`"1121797341367"`
+
+**benefits.ordering**
+
+**integer**
+
+The sort order of the benefit within the tier.
+
+Example:
+
+`0`
+
+**benefits.metadata**
+
+**object | null**
+
+Additional metadata for the benefit.
+
+Example:
+
+`null`
+
+**benefits.created_at**
 
 **string\<date-time\>**
 
-The date and time when the reward was created.
+The date and time when the benefit was created.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`"2025-09-12T15:44:44.000Z"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/vip-tier-object#schema-entry-rewards-items-updated-at)
-
-**entry_rewards.updated_at**
+**benefits.updated_at**
 
 **string\<date-time\>**
 
-The date and time when the reward was last updated.
+The date and time when the benefit was last updated.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`"2025-09-12T15:44:44.000Z"`
+
+**metadata**
+
+**object | null**
+
+Additional metadata for the tier.
+
+Example:
+
+`null`
+
+**created_at**
+
+**string\<date-time\>**
+
+The date and time when the tier was created.
+
+Example:
+
+`"2025-09-12T15:44:44.000Z"`
+
+**updated_at**
+
+**string\<date-time\>**
+
+The date and time when the tier was last updated.
+
+Example:
+
+`"2025-09-12T15:44:44.000Z"`
+
+**deleted_at**
+
+**string\<date-time\> | null**
+
+The date and time when the tier was deleted. `null` if not deleted.
+
+Example:
+
+`null`

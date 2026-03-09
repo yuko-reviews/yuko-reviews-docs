@@ -1,0 +1,55 @@
+---
+title: "Activity Object"
+---
+
+Activities represent actions performed by customers in Yuko. They are used to track customer behavior and trigger loyalty program events.
+
+**uuid**
+
+**string\<uuid\>**
+
+Unique identifier for the activity.
+
+Example:
+
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
+
+**customer_uuid**
+
+**string\<uuid\>**
+
+The UUID of the customer who performed the activity.
+
+Example:
+
+`"d4e5f6a1-b2c3-4567-89ab-cdef01234567"`
+
+**type**
+
+**string**
+
+The type of activity that was performed.
+
+Example:
+
+`"review_submitted"`
+
+**created_at**
+
+**string\<date-time\>**
+
+The date and time when the activity was created.
+
+Example:
+
+`"2024-05-15T08:35:08.920Z"`
+
+**updated_at**
+
+**string\<date-time\>**
+
+The date and time when the activity was last updated.
+
+Example:
+
+`"2024-05-15T08:35:08.920Z"`

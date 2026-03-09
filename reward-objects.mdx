@@ -2,53 +2,215 @@
 title: "Reward Object"
 ---
 
-A reward is the configuration for a type of coupon/discount/benefit/perk that can be issued to a customer. When the configuration is used to issue a reward, a reward fulfillment is generated.
-
-[**​**](https://dev.smile.io/api/resources/rewards/reward-object#schema-id)
+A reward (way to redeem) defines how customers can exchange their loyalty points for a benefit. When a customer redeems a reward, a [Customer Reward](/customer-reward-object) record is generated. Rewards support multiple types including fixed discounts, percentage discounts, free shipping, free products, and store credit.
 
 **id**
 
-**number**
+**integer**
 
-Unique identifier for the reward.
+Unique integer identifier for the reward.
 
 Example:
 
-`924565472`
+`2`
 
-[**​**](https://dev.smile.io/api/resources/rewards/reward-object#schema-name)
+**uuid**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the reward.
+
+Example:
+
+`"a7b4a995-1ae5-41b9-afd0-6c145916a87b"`
+
+**org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this reward belongs to.
+
+Example:
+
+`"05ca3845-6571-49a5-8d95-2f5d3c13ce5a"`
 
 **name**
 
 **string**
 
-The name of the reward.
+The display name of the reward.
 
 Example:
 
-`"Order discount"`
-
-[**​**](https://dev.smile.io/api/resources/rewards/reward-object#schema-description)
+`"5$ Discount"`
 
 **description**
 
-**string**
+**string | null**
 
-A description of the reward.
-
-[**​**](https://dev.smile.io/api/resources/rewards/reward-object#schema-image-url)
-
-**image_url**
-
-**string**
-
-An image for the reward.
+A description of the reward shown to customers.
 
 Example:
 
-`"https://platform-images.smilecdn.co/3755938.png"`
+`null`
 
-[**​**](https://dev.smile.io/api/resources/rewards/reward-object#schema-created-at)
+**reward_type**
+
+**enum\<string\>**
+
+The type of reward issued to the customer.
+
+Available options:
+
+`fixed_discount`,
+
+`percentage_discount`,
+
+`free_shipping`,
+
+`free_product`,
+
+`store_credit`
+
+Example:
+
+`"fixed_discount"`
+
+**reward_rule**
+
+**object | null**
+
+Defines the rules and configuration for this reward, including points required and discount value.
+
+Show child attributes
+
+**reward_rule.points_required**
+
+**integer**
+
+The number of loyalty points a customer must spend to redeem this reward.
+
+Example:
+
+`10`
+
+**reward_rule.value**
+
+**number**
+
+The value of the reward. For `fixed_discount` and `store_credit` this is a monetary amount; for `percentage_discount` this is a percentage.
+
+Example:
+
+`5`
+
+**reward_rule.method**
+
+**string**
+
+The calculation method for the reward value. Mirrors `reward_type` for display purposes.
+
+Example:
+
+`"fixed"`
+
+**reward_rule.icon_id**
+
+**string | null**
+
+The ID of the icon associated with this reward.
+
+Example:
+
+`null`
+
+**reward_rule.icon_url**
+
+**string**
+
+The URL of the icon displayed alongside this reward.
+
+Example:
+
+`"https://production-yuko.s3.us-east-2.amazonaws.com/static-assets/loyalty/ways-to-redeem-icons/fixed_discount.png"`
+
+**reward_rule.is_expire_enabled**
+
+**boolean**
+
+Whether this reward expires after being issued to a customer.
+
+Example:
+
+`false`
+
+**reward_rule.expire_after**
+
+**integer | null**
+
+The number of periods after which the reward expires. Only present when `is_expire_enabled` is `true`.
+
+Example:
+
+`7`
+
+**reward_rule.expire_period**
+
+**string | null**
+
+The time unit for the expiry period. Only present when `is_expire_enabled` is `true`.
+
+Available options:
+
+`day`,
+
+`month`,
+
+`year`
+
+Example:
+
+`"day"`
+
+**reward_rule.free_product_id**
+
+**string | null**
+
+The platform variation ID of the free product to be issued. Only present when `reward_type` is `free_product`.
+
+Example:
+
+`"prod_variant_123"`
+
+**metadata**
+
+**object | null**
+
+Additional metadata for the reward.
+
+Example:
+
+`null`
+
+**ordering**
+
+**integer**
+
+The sort order of the reward as displayed to customers.
+
+Example:
+
+`0`
+
+**is_active**
+
+**boolean**
+
+Whether the reward is currently active and available for redemption.
+
+Example:
+
+`true`
 
 **created_at**
 
@@ -58,9 +220,7 @@ The date and time when the reward was created.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
-
-[**​**](https://dev.smile.io/api/resources/rewards/reward-object#schema-updated-at)
+`"2025-12-17T11:46:11.000Z"`
 
 **updated_at**
 
@@ -70,4 +230,14 @@ The date and time when the reward was last updated.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`"2025-12-17T11:46:11.000Z"`
+
+**deleted_at**
+
+**string\<date-time\> | null**
+
+The date and time when the reward was deleted. `null` if not deleted.
+
+Example:
+
+`null`

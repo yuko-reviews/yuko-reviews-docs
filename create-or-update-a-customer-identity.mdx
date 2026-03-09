@@ -4,34 +4,18 @@ title: "Create or update a customer identity"
 
 Creates a new customer identity or updates an existing one.
 
-**POST**
+**POST /customer-identities/create-or-update**
 
-/
+**Creating:** If no customer identity exists for the provided `platform` and `platform_customer_id` combination, a new customer identity is created.
 
-**customer_identities**
+- If the provided email matches an existing Yuko customer, the identity is linked to that customer.
+- If the provided email does not match any existing customer, a new customer is created and the identity is linked to them.
 
-/
+**Updating:** If a customer identity already exists for the provided `platform` and `platform_customer_id` combination, it is updated with any new information provided in the request.
 
-**create_or_update**
-
-**Try it**
-
-This endpoint requires the **customer_identity:write** scope.
-
-This endpoint is only available to [**apps**](https://dev.smile.io/guides/apps/build) making calls using an OAuth token. Attempting to use this endpoint with an API key will fail.
-
-**Creating:** If no customer identity exists with the provided `distinct_id`, a new customer identity is created.
-
-- If the provided email matches an existing customer record, the customer identity is linked to that customer.
-- If the provided email does not match an existing customer record, a new customer is created and a customer identity is linked to the new customer.
-
-**Updating:** If a customer identity exists with the provided `distinct_id`, it is updated with any new information provided in the request.
-
-- No changes to the linked customer record will occur.
+- No changes to the linked customer record will occur during an update.
 
 #### **Authorizations**
-
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#authorization-authorization)
 
 **Authorization**
 
@@ -47,8 +31,6 @@ Bearer authentication header of the form `Bearer <token>`, where `<token>` is yo
 
 **application/json**
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#body-customer-identity)
-
 **customer_identity**
 
 **object**
@@ -57,15 +39,67 @@ Bearer authentication header of the form `Bearer <token>`, where `<token>` is yo
 
 Show child attributes
 
+**customer_identity.platform**
+
+**string**
+
+**required**
+
+The ecommerce platform this identity originates from.
+
+Example:
+
+`"woocommerce"`
+
+**customer_identity.platform_customer_id**
+
+**string**
+
+**required**
+
+The customer's unique identifier in the external platform.
+
+Example:
+
+`"cust_19238475"`
+
+**customer_identity.email**
+
+**string\<email\>**
+
+**required**
+
+The customer's email address in the external platform.
+
+Example:
+
+`"jane@doe.com"`
+
+**customer_identity.first_name**
+
+**string | null**
+
+The customer's first name in the external platform.
+
+Example:
+
+`"Jane"`
+
+**customer_identity.last_name**
+
+**string | null**
+
+The customer's last name in the external platform.
+
+Example:
+
+`"Doe"`
+
 #### **Response**
 
-**200**
+**200 - application/json**
 
-**application/json**
-
-Customer identity successfully updated.
-
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity)
+Customer identity successfully created or updated.
 
 **customer_identity**
 
@@ -73,78 +107,92 @@ Customer identity successfully updated.
 
 Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-id)
+**customer_identity.uuid**
 
-**customer_identity.id**
-
-**integer**
+**string\<uuid\>**
 
 Unique identifier for the customer identity in Yuko.
 
 Example:
 
-`863291377`
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-first-name-one-of-0)
+**customer_identity.customer_uuid**
 
-**customer_identity.first_name**
+**string\<uuid\>**
 
-**string | null**
-
-The first name of the customer in the external system.
+The UUID of the Yuko customer this identity is linked to.
 
 Example:
 
-`"Jane"`
+`"63a2c89a-9936-4bc0-9d5f-93db46110b76"`
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-last-name-one-of-0)
-
-**customer_identity.last_name**
-
-**string | null**
-
-The last name of the customer in the external system.
-
-Example:
-
-`"Doe"`
-
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-email)
-
-**customer_identity.email**
-
-**string\<email\>**
-
-The email of the customer in the external system.
-
-Example:
-
-`"jane@doe.com"`
-
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-distinct-id)
-
-**customer_identity.distinct_id**
+**customer_identity.platform**
 
 **string**
 
-The unique identifier for the customer in the external system.
+The ecommerce platform this identity originates from.
+
+Example:
+
+`"woocommerce"`
+
+**customer_identity.platform_customer_id**
+
+**string | null**
+
+The customer's unique identifier in the external platform.
 
 Example:
 
 `"cust_19238475"`
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-properties)
+**customer_identity.first_name**
 
-**customer_identity.properties**
+**string | null**
 
-**object**
+The customer's first name in the external platform.
 
-A restricted hash of additional attributes for the customer identity. Keys are allowlisted on a per-integration basis.
+Example:
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/create-or-update-identity#response-customer-identity-customer-id)
+`"Jane"`
 
-**customer_identity.customer_id**
+**customer_identity.last_name**
 
-**integer**
+**string | null**
 
-The ID of the customer in Yuko that this customer identity is linked to.Rule
+The customer's last name in the external platform.
+
+Example:
+
+`"Doe"`
+
+**customer_identity.email**
+
+**string\<email\>**
+
+The customer's email address in the external platform.
+
+Example:
+
+`"jane@doe.com"`
+
+**customer_identity.created_at**
+
+**string\<date-time\>**
+
+The date and time when the customer identity was created in Yuko.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**customer_identity.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the customer identity was last updated in Yuko.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`

@@ -1,0 +1,419 @@
+---
+title: "List customer rewards"
+---
+
+Retrieves a list of customer rewards. Commonly used to display a customer's issued coupons, discounts, or store credits.
+
+**GET /customer-rewards**
+
+#### **Authorizations**
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Query Parameters**
+
+**customer_uuid**
+
+**string\<uuid\>**
+
+Filter results to only rewards belonging to the specified customer.
+
+Example:
+
+`"a02a4ad4-22c3-4f46-95fb-497e10f3e7d3"`
+
+**status**
+
+**enum\<string\>**
+
+Filter results to only rewards matching the provided status.
+
+Available options:
+
+`active`,
+
+`used`,
+
+`inactive`,
+
+`expired`,
+
+`deleted`,
+
+`revert`
+
+**source_type**
+
+**enum\<string\>**
+
+Filter results to only rewards from the specified source.
+
+Available options:
+
+`loyalty_rewards`,
+
+`loyalty_tier_benefits`,
+
+`loyalty_campaigns`,
+
+`users`,
+
+`external`
+
+**updated_at_min**
+
+**string\<date-time\>**
+
+Filter results to only rewards updated after the provided date and time.
+
+Example:
+
+`"2025-12-01T00:00:00.000Z"`
+
+**limit**
+
+**integer**
+
+**default: 50**
+
+The maximum number of customer rewards to retrieve.
+
+Required range: `1 <= x <= 250`
+
+**cursor**
+
+**string**
+
+Cursor for the page of results to retrieve. Omit to retrieve the first page.
+
+#### **Response**
+
+**200 - application/json**
+
+**customer_rewards**
+
+**object[]**
+
+Hide child attributes
+
+**customer_rewards.uuid**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the customer reward.
+
+Example:
+
+`"1fd80ced-326f-4082-951b-21a38632a603"`
+
+**customer_rewards.org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this reward belongs to.
+
+Example:
+
+`"4f016742-bda6-4586-a3c1-e78f6291b1cf"`
+
+**customer_rewards.customer_uuid**
+
+**string\<uuid\>**
+
+The UUID of the customer this reward was issued to.
+
+Example:
+
+`"a02a4ad4-22c3-4f46-95fb-497e10f3e7d3"`
+
+**customer_rewards.source_type**
+
+**enum\<string\>**
+
+The source that generated this reward.
+
+Available options:
+
+`loyalty_rewards`,
+
+`loyalty_tier_benefits`,
+
+`loyalty_campaigns`,
+
+`users`,
+
+`external`
+
+Example:
+
+`"loyalty_rewards"`
+
+**customer_rewards.source_uuid**
+
+**string\<uuid\> | null**
+
+The UUID of the source record that generated this reward.
+
+Example:
+
+`"90424fa7-e8a9-4ef4-b43a-72c9b2028db5"`
+
+**customer_rewards.discount_code**
+
+**string**
+
+The discount or coupon code issued to the customer.
+
+Example:
+
+`"YUKO-TVJ-BL1"`
+
+**customer_rewards.platform_discount_id**
+
+**string | null**
+
+The discount identifier in the external ecommerce platform.
+
+Example:
+
+`"1121797341367"`
+
+**customer_rewards.discount_amount**
+
+**number**
+
+The value of the discount in the store's currency.
+
+Example:
+
+`5.00`
+
+**customer_rewards.presentment_discount_amount**
+
+**number**
+
+The discount amount in the currency presented to the customer at checkout.
+
+Example:
+
+`5.00`
+
+**customer_rewards.order_uuid**
+
+**string\<uuid\> | null**
+
+The UUID of the order where this reward was used. `null` if not yet used.
+
+Example:
+
+`"8cde36f7-dd34-405b-9d25-0e4c5d2b54d7"`
+
+**customer_rewards.status**
+
+**enum\<string\>**
+
+The current status of the customer reward.
+
+Available options:
+
+`active`,
+
+`used`,
+
+`inactive`,
+
+`expired`,
+
+`deleted`,
+
+`revert`
+
+Example:
+
+`"used"`
+
+**customer_rewards.issued_at**
+
+**string\<date-time\> | null**
+
+The date and time when the reward was issued to the customer.
+
+Example:
+
+`"2025-12-17T12:36:33.000Z"`
+
+**customer_rewards.expire_at**
+
+**string\<date-time\> | null**
+
+The date and time when the reward expires. `null` if it does not expire.
+
+Example:
+
+`null`
+
+**customer_rewards.used_at**
+
+**string\<date-time\> | null**
+
+The date and time when the reward was used. `null` if not yet used.
+
+Example:
+
+`"2025-12-17T12:37:55.000Z"`
+
+**customer_rewards.metadata**
+
+**object | null**
+
+Additional details about how the reward was generated and applied.
+
+Show child attributes
+
+**customer_rewards.metadata.entry_type**
+
+**string**
+
+Whether the associated points transaction was a debit or credit.
+
+Example:
+
+`"debit"`
+
+**customer_rewards.metadata.used_point**
+
+**integer**
+
+The number of loyalty points spent to generate this reward.
+
+Example:
+
+`10`
+
+**customer_rewards.metadata.earning_type**
+
+**enum\<string\>**
+
+The type of reward issued.
+
+Available options:
+
+`points`,
+
+`store_credit`,
+
+`coupon`
+
+Example:
+
+`"points"`
+
+**customer_rewards.metadata.currency_code**
+
+**string**
+
+The ISO 4217 currency code for the discount value.
+
+Example:
+
+`"USD"`
+
+**customer_rewards.metadata.discount_type**
+
+**enum\<string\>**
+
+The type of discount applied.
+
+Available options:
+
+`fixed`,
+
+`percentage`
+
+Example:
+
+`"fixed"`
+
+**customer_rewards.metadata.discount_value**
+
+**number**
+
+The monetary or percentage value of the discount.
+
+Example:
+
+`5`
+
+**customer_rewards.metadata.transaction_uuid**
+
+**string\<uuid\>**
+
+The UUID of the associated points transaction.
+
+Example:
+
+`"c87fa6a9-c89c-4f85-b839-6677312bdfc5"`
+
+**customer_rewards.metadata.point_ledger_uuid**
+
+**string\<uuid\>**
+
+The UUID of the points ledger entry associated with this reward.
+
+Example:
+
+`"a9209405-c3aa-4db4-91ab-5496fc70ac3b"`
+
+**customer_rewards.created_at**
+
+**string\<date-time\>**
+
+The date and time when the customer reward was created.
+
+Example:
+
+`"2025-12-17T12:36:33.000Z"`
+
+**customer_rewards.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the customer reward was last updated.
+
+Example:
+
+`"2025-12-17T12:37:55.000Z"`
+
+**metadata**
+
+**object**
+
+Hide child attributes
+
+**metadata.next_cursor**
+
+**string | null**
+
+A cursor value that, when present, can be used to retrieve the next page of results.
+
+Example:
+
+`"aWQ6MixkaXJlY3Rpb246bmV4dA=="`
+
+**metadata.previous_cursor**
+
+**string | null**
+
+A cursor value that, when present, can be used to retrieve the previous page of results.
+
+Example:
+
+`null`

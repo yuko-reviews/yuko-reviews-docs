@@ -177,7 +177,7 @@
               {
                 "group": "Activities",
                 "pages": [
-                  "a"
+                  "activity-object"
                 ]
               },
               {
@@ -195,24 +195,10 @@
                 ]
               },
               {
-                "group": "Earning Rules",
+                "group": "Ways to Earn",
                 "pages": [
-                  "earning-rule-object",
-                  "list-earning-rule"
-                ]
-              },
-              {
-                "group": "Points Products",
-                "pages": [
-                  "list-points-products",
-                  "retrieve-a-points-product",
-                  "purchase-a-points-product"
-                ]
-              },
-              {
-                "group": "Points Purchases",
-                "pages": [
-                  "points-purchase-object"
+                  "way-to-earn-object",
+                  "list-ways-to-earn"
                 ]
               },
               {
@@ -225,35 +211,26 @@
                 ]
               },
               {
-                "group": "Referrals",
-                "pages": [
-                  "referral-object"
-                ]
-              },
-              {
                 "group": "Rewards",
                 "pages": [
-                  "reward-objects"
-                ]
-              },
-              {
-                "group": "Reward Fulfillments",
-                "pages": [
-                  "reward-fulfillment-object",
-                  "list-reward-fulfillments"
+                  "reward-objects",
+                  "customer-reward-object",
+                  "list-customer-rewards"
                 ]
               },
               {
                 "group": "VIP Tiers",
                 "pages": [
                   "vip-tier-object",
-                  "list-vip-tiers"
+                  "list-vip-tiers",
+                  "vip-tier-change-object"
                 ]
               },
               {
-                "group": "VIP Tier Changes",
+                "group": "Memberships",
                 "pages": [
-                  "vip-tier-change-object"
+                  "membership-object",
+                  "list-memberships"
                 ]
               }
             ]

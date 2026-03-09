@@ -2,15 +2,11 @@
 title: "List VIP tiers"
 ---
 
-**GET** / **vip_tiers - Try it**
+Retrieves a list of VIP tiers for your organisation, sorted by `threshold_value` in ascending order.
 
-This endpoint requires the **vip_tier:read** scope.
-
-Results are sorted by `milestone` in ascending order. This endpoint does not support pagination of any kind.
+**GET /tiers**
 
 #### **Authorizations**
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#authorization-authorization)
 
 **Authorization**
 
@@ -22,49 +18,47 @@ Results are sorted by `milestone` in ascending order. This endpoint does not sup
 
 Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
 
-#### **Query Parameters**
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#parameter-include)
-
-**include**
-
-**enum\<string\>**
-
-A comma-separated list of nested objects to include in the response.
-
-Available options:
-
-`perks`, 
-
-`entry_rewards` 
-
 #### **Response**
 
 **200 - application/json**
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers)
-
-**vip_tiers**
+**tiers**
 
 **object[]**
 
 Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-id)
-
-**vip_tiers.id**
+**tiers.id**
 
 **integer**
 
-Unique identifier for the VIP tier.
+Unique integer identifier for the VIP tier.
 
 Example:
 
-`426715799`
+`1`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-name)
+**tiers.uuid**
 
-**vip_tiers.name**
+**string\<uuid\>**
+
+Unique UUID identifier for the VIP tier.
+
+Example:
+
+`"7fb39c85-3a3f-4247-8333-2e05a9c8ae28"`
+
+**tiers.org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this tier belongs to.
+
+Example:
+
+`"ed39de7b-6c31-46bc-af56-ef51676a08e0"`
+
+**tiers.name**
 
 **string**
 
@@ -72,128 +66,220 @@ The display name of the VIP tier.
 
 Example:
 
-`"Gold"`
+`"Silver"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-image-url)
+**tiers.description**
 
-**vip_tiers.image_url**
+**string | null**
 
-**string**
-
-The image of the VIP tier.
+A description of the VIP tier shown to customers.
 
 Example:
 
-`"https://platform.smile.io/v1/images/vip_tiers/vip-tier-3.svg"`
+`null`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-milestone)
+**tiers.identifier**
 
-**vip_tiers.milestone**
+**string**
+
+A unique slug-style identifier for the tier, auto-generated from the tier name.
+
+Example:
+
+`"SILVER"`
+
+**tiers.threshold_value**
 
 **integer**
 
-The threshold that a customer must reach to be eligible for the VIP tier. Represents either an amount of points or a dollar amount, depending on the loyalty program's configuration.
+The points value a customer must accumulate to reach this tier.
 
 Example:
 
-`500`
+`0`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-perks)
-
-**vip_tiers.perks**
-
-**object[]**
-
-A set of nested objects representing the ongoing benefits a customer is entitled to when they are in the VIP tier.
-
-Hide child attributes
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-perks-items-name)
-
-**vip_tiers.perks.name**
-
-**string**
-
-A description of the benefit.
-
-Example:
-
-`"Early access to new product releases"`
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards)
-
-**vip_tiers.entry_rewards**
-
-**object[]**
-
-A set of nested Reward objects representing the rewards that are issued to a customer when they enter the VIP tier.
-
-Hide child attributes
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-id)
-
-**vip_tiers.entry_rewards.id**
+**tiers.multiplier**
 
 **number**
 
-Unique identifier for the reward.
+The points earning multiplier applied to customers in this tier.
 
 Example:
 
-`924565472`
+`1`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-name)
+**tiers.is_default**
 
-**vip_tiers.entry_rewards.name**
+**boolean**
 
-**string**
-
-The name of the reward.
+Whether this is the default tier assigned to customers who have not yet reached any threshold.
 
 Example:
 
-`"Order discount"`
+`false`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-description)
+**tiers.benefits**
 
-**vip_tiers.entry_rewards.description**
+**object[]**
 
-**string**
+A list of benefits associated with this tier.
 
-A description of the reward.
+Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-image-url)
+**tiers.benefits.uuid**
 
-**vip_tiers.entry_rewards.image_url**
+**string\<uuid\>**
 
-**string**
-
-An image for the reward.
+Unique identifier for the benefit.
 
 Example:
 
-`"https://platform-images.smilecdn.co/3755938.png"`
+`"b1c2d3e4-f5a6-7890-bcde-f01234567890"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-created-at)
+**tiers.benefits.tier_uuid**
 
-**vip_tiers.entry_rewards.created_at**
+**string\<uuid\>**
+
+The UUID of the tier this benefit belongs to.
+
+Example:
+
+`"7fb39c85-3a3f-4247-8333-2e05a9c8ae28"`
+
+**tiers.benefits.name**
+
+**string**
+
+The display name of the benefit.
+
+Example:
+
+`"10% Discount on entry"`
+
+**tiers.benefits.benefit_type**
+
+**string**
+
+The type of benefit issued to the customer.
+
+Example:
+
+`"fixed_discount"`
+
+**tiers.benefits.benefit_value**
+
+**object**
+
+The value configuration for this benefit. Structure varies by `benefit_type`.
+
+Show child attributes
+
+**tiers.benefits.benefit_value.value**
+
+**number**
+
+The discount amount or percentage depending on `benefit_type`.
+
+Example:
+
+`10`
+
+**tiers.benefits.benefit_value.points_required**
+
+**integer**
+
+Points required to redeem this benefit, if applicable.
+
+Example:
+
+`0`
+
+**tiers.benefits.platform_discount_id**
+
+**string | null**
+
+The discount identifier in the external ecommerce platform for this benefit.
+
+Example:
+
+`"1121797341367"`
+
+**tiers.benefits.ordering**
+
+**integer**
+
+The sort order of the benefit within the tier.
+
+Example:
+
+`0`
+
+**tiers.benefits.metadata**
+
+**object | null**
+
+Additional metadata for the benefit.
+
+Example:
+
+`null`
+
+**tiers.benefits.created_at**
 
 **string\<date-time\>**
 
-The date and time when the reward was created.
+The date and time when the benefit was created.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`"2025-09-12T15:44:44.000Z"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-updated-at)
-
-**vip_tiers.entry_rewards.updated_at**
+**tiers.benefits.updated_at**
 
 **string\<date-time\>**
 
-The date and time when the reward was last updated.
+The date and time when the benefit was last updated.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`"2025-09-12T15:44:44.000Z"`
+
+**tiers.metadata**
+
+**object | null**
+
+Additional metadata for the tier.
+
+Example:
+
+`null`
+
+**tiers.created_at**
+
+**string\<date-time\>**
+
+The date and time when the tier was created.
+
+Example:
+
+`"2025-09-12T15:44:44.000Z"`
+
+**tiers.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the tier was last updated.
+
+Example:
+
+`"2025-09-12T15:44:44.000Z"`
+
+**tiers.deleted_at**
+
+**string\<date-time\> | null**
+
+The date and time when the tier was deleted. `null` if not deleted.
+
+Example:
+
+`null`

@@ -1,0 +1,255 @@
+---
+title: "List ways to earn"
+---
+
+Retrieves a list of active ways to earn (campaigns) for your organisation.
+
+**GET /campaigns**
+
+#### **Authorizations**
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Query Parameters**
+
+**limit**
+
+**integer**
+
+**default: 50**
+
+The maximum number of campaigns to retrieve.
+
+Required range: `1 <= x <= 250`
+
+**cursor**
+
+**string**
+
+Cursor for the page of campaigns to retrieve. Omit to retrieve the first page.
+
+#### **Response**
+
+**200 - application/json**
+
+**campaigns**
+
+**object[]**
+
+Hide child attributes
+
+**campaigns.uuid**
+
+**string\<uuid\>**
+
+Unique identifier for the campaign in Yuko.
+
+Example:
+
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
+
+**campaigns.org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this campaign belongs to.
+
+Example:
+
+`"7789dd6a-5f90-4ad1-9126-63ada4827f79"`
+
+**campaigns.name**
+
+**string**
+
+The display name of the way to earn.
+
+Example:
+
+`"Place an order"`
+
+**campaigns.description**
+
+**string | null**
+
+A description of the way to earn, used for display purposes.
+
+Example:
+
+`"Earn points every time you place an order."`
+
+**campaigns.trigger_event**
+
+**enum\<string\>**
+
+The action that triggers the campaign and awards points to the customer.
+
+Available options:
+
+`purchase`,
+
+`signup`,
+
+`review`,
+
+`daily_visit`,
+
+`birthday`,
+
+`anniversary`,
+
+`twitter_follow`,
+
+`twitter_share`,
+
+`instagram_follow`,
+
+`instagram_share`,
+
+`facebook_like`,
+
+`facebook_share`,
+
+`newsletter_subscribe`
+
+Example:
+
+`"purchase"`
+
+**campaigns.earning_rule**
+
+**object | null**
+
+Defines how points are calculated when the campaign is triggered.
+
+Show child attributes
+
+**campaigns.earning_rule.type**
+
+**enum\<string\>**
+
+The method used to calculate the points awarded.
+
+Available options:
+
+`fixed`,
+
+`variable`
+
+Example:
+
+`"variable"`
+
+**campaigns.earning_rule.value**
+
+**number**
+
+The number of points awarded. For `variable` type, this is the points earned per `per_amount` unit.
+
+Example:
+
+`5`
+
+**campaigns.earning_rule.per_amount**
+
+**number | null**
+
+Only present when `type` is `variable`. The unit amount required to earn the specified `value` of points (e.g. `1` means 5 points per $1 spent).
+
+Example:
+
+`1`
+
+**campaigns.conditions**
+
+**object | null**
+
+Optional conditions that must be met for the campaign to trigger.
+
+Example:
+
+`null`
+
+**campaigns.metadata**
+
+**object | null**
+
+Additional metadata for the campaign.
+
+Example:
+
+`null`
+
+**campaigns.ordering**
+
+**integer**
+
+The sort order of the campaign as displayed to customers.
+
+Example:
+
+`1`
+
+**campaigns.is_active**
+
+**boolean**
+
+Whether the campaign is currently active.
+
+Example:
+
+`true`
+
+**campaigns.created_at**
+
+**string\<date-time\>**
+
+The date and time when the campaign was created.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**campaigns.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the campaign was last updated.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**metadata**
+
+**object**
+
+Hide child attributes
+
+**metadata.next_cursor**
+
+**string | null**
+
+A cursor value that, when present, can be used to retrieve the next page of results.
+
+Example:
+
+`"aWQ6MixkaXJlY3Rpb246bmV4dA=="`
+
+**metadata.previous_cursor**
+
+**string | null**
+
+A cursor value that, when present, can be used to retrieve the previous page of results.
+
+Example:
+
+`null`
