@@ -204,7 +204,8 @@
               {
                 "group": "Points Products",
                 "pages": [
-                  "untitled-page"
+                  "untitled-page",
+                  "list-points-products"
                 ]
               }
             ]
