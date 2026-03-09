@@ -230,6 +230,12 @@
                 "pages": [
                   "referral-object"
                 ]
+              },
+              {
+                "group": "Rewards",
+                "pages": [
+                  "reward-objects"
+                ]
               }
             ]
           }
