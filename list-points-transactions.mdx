@@ -1,0 +1,201 @@
+---
+title: "List points transactions"
+---
+
+Retrieves a list of points transactions.
+
+**GET**
+
+/
+
+**points_transactions**
+
+**Try it**
+
+This endpoint requires the **points_transaction:read** scope.
+
+Results are sorted by `id` in descending order. This endpoint is commonly used to display a customer’s points earning history.
+
+#### **Authorizations**
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#authorization-authorization)
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Query Parameters**
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#parameter-customer-id)
+
+**customer_id**
+
+**string**
+
+Filter results to only points transactions with the provided Smile customer ID.
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#parameter-updated-at-min)
+
+**updated_at_min**
+
+**string\<date-time\>**
+
+Filter results to only points transactions updated at or after the provided date and time.
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#parameter-limit)
+
+**limit**
+
+**integer**
+
+**default:50**
+
+The maximum number of points transactions to retrieve.
+
+Required range: `1 <= x <= 250`
+
+Example:
+
+`1`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#parameter-cursor)
+
+**cursor**
+
+**string**
+
+Cursor for the page of points transactions to retrieve.
+
+#### **Response**
+
+**200 - application/json**
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions)
+
+**points_transactions**
+
+**object[]**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-id)
+
+**points\_**[**transactions.id**](http://transactions.id)
+
+**integer**
+
+Unique identifier for the points transaction.
+
+Example:
+
+`825673452`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-customer-id)
+
+**points_transactions.customer_id**
+
+**integer**
+
+The ID of the customer whose balance this points transaction applies to.
+
+Example:
+
+`304169228`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-points-change)
+
+**points_transactions.points_change**
+
+**integer**
+
+The number of points added or removed from the customer's points balance. The value is positive if points were added to the customer's balance and negative if points were deducted.
+
+Example:
+
+`100`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-description)
+
+**points_transactions.description**
+
+**string**
+
+A message visible to the customer that describes the reason for the points change.
+
+Example:
+
+`"Points correction"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-internal-note-one-of-0)
+
+**points_transactions.internal_note**
+
+**string | null**
+
+A note that is visible to the merchant. This note should never be visible to customers.
+
+Example:
+
+`"Due to issue with order #6834"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-created-at)
+
+**points_transactions.created_at**
+
+**string\<date-time\>**
+
+The date and time when the points transaction was created.
+
+Example:
+
+`"2024-12-07T20:15:27.893Z"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-points-transactions-items-updated-at)
+
+**points_transactions.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the points transaction was last updated.
+
+Example:
+
+`"2024-12-07T20:15:27.893Z"`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-metadata)
+
+**metadata**
+
+**object**
+
+Hide child attributes
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-metadata-next-cursor-one-of-0)
+
+[**metadata.next**](http://metadata.next)**\_cursor**
+
+**string | null**
+
+A cursor value that when present, can be used to retrieve the next page of results.
+
+Example:
+
+`"aWQ6MixkaXJlY3Rpb246bmV4dA=="`
+
+[**​**](https://dev.smile.io/api/resources/points-transactions/list-points-transactions#response-metadata-previous-cursor-one-of-0)
+
+**metadata.previous_cursor**
+
+**string | null**
+
+A cursor value that when present, can be used to retrieve the previous page of results.
+
+Example:
+
+`""`
