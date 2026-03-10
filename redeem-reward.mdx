@@ -1,0 +1,232 @@
+---
+title: "Redeem a reward"
+---
+
+Exchanges a customer's loyalty points for a reward. Deducts the required points using FIFO logic, generates a coupon or discount code on the connected platform (e.g. Shopify), and returns the code to present to the customer.
+
+**POST /public/rewards/redeem**
+
+#### **Authorizations**
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
+
+#### **Request Body**
+
+**customer_id**
+
+**string**
+
+**required**
+
+The platform customer ID (e.g. Shopify customer ID)
+
+Example:
+
+`"9049402769586"`
+
+**reward_id**
+
+**string\<uuid\>**
+
+**required**
+
+The UUID of the reward to redeem. Obtain this from the `rewards[].id` field in the [Get redeemable rewards](/get-redeemable-rewards) response.
+
+Example:
+
+`"90424fa7-e8a9-4ef4-b43a-72c9b2028db5"`
+
+#### **Response**
+
+**201 - application/json**
+
+**data**
+
+**object**
+
+Hide child attributes
+
+**data.coupon_code**
+
+**string | null**
+
+The generated coupon or discount code to apply at checkout. `null` for store credit rewards.
+
+Example:
+
+`"YUKO-TVJ-BL1"`
+
+**data.points_spent**
+
+**integer**
+
+The number of points deducted from the customer's balance.
+
+Example:
+
+`500`
+
+**data.reward_type**
+
+**enum\<string\> | null**
+
+The type of reward that was redeemed.
+
+Available options:
+
+`fixed_discount`,
+
+`percentage_discount`,
+
+`free_shipping`,
+
+`free_product`,
+
+`store_credit`
+
+Example:
+
+`"fixed_discount"`
+
+**data.discount_value**
+
+**number | null**
+
+The discount amount or percentage associated with the coupon. `null` for free shipping and free product rewards.
+
+Example:
+
+`5`
+
+**data.expires_at**
+
+**string\<date-time\> | null**
+
+The expiry date of the generated coupon. `null` if the reward has no expiry.
+
+Example:
+
+`"2026-06-01T00:00:00+00:00"`
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url "https://api.yukoapp.com/v1/public/rewards/redeem" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  --header "Content-Type: application/json" \
+  --data '{ "customer_id": "9049402769586", "reward_id": "90424fa7-e8a9-4ef4-b43a-72c9b2028db5" }'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://api.yukoapp.com/v1/public/rewards/redeem",
+  {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      customer_id: "9049402769586",
+      reward_id: "90424fa7-e8a9-4ef4-b43a-72c9b2028db5",
+    }),
+  }
+);
+
+const data = await response.json();
+```
+
+```php PHP
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/public/rewards/redeem");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+    "customer_id" => "9049402769586",
+    "reward_id" => "90424fa7-e8a9-4ef4-b43a-72c9b2028db5",
+]));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "Content-Type: application/json",
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 201
+{
+  "data": {
+    "coupon_code": "YUKO-TVJ-BL1",
+    "points_spent": 500,
+    "reward_type": "fixed_discount",
+    "discount_value": 5,
+    "expires_at": "2026-06-01T00:00:00+00:00"
+  }
+}
+```
+
+```json 422 (insufficient points)
+{
+  "error": {
+    "code": "redemption_failed",
+    "message": "Insufficient points balance"
+  }
+}
+```
+
+```json 422 (reward not found or inactive)
+{
+  "error": {
+    "code": "redemption_failed",
+    "message": "Reward not found or inactive"
+  }
+}
+```
+
+```json 422 (validation error)
+{
+  "error": {
+    "code": "validation_error",
+    "message": "The given data was invalid",
+    "details": {
+      "reward_id": ["The reward id field is required."]
+    }
+  }
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": "not_found",
+    "message": "Customer not found"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
+
+</ResponseExample>

@@ -1,0 +1,429 @@
+---
+title: "List memberships"
+---
+
+Retrieves a list of membership plans for your organisation.
+
+**GET /memberships**
+
+#### **Authorizations**
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+#### **Query Parameters**
+
+**status**
+
+**enum\<string\>**
+
+Filter results to only memberships matching the provided status.
+
+Available options:
+
+`active`,
+
+`inactive`,
+
+`archived`
+
+**limit**
+
+**integer**
+
+**default: 50**
+
+The maximum number of memberships to retrieve.
+
+Required range: `1 <= x <= 250`
+
+**cursor**
+
+**string**
+
+Cursor for the page of results to retrieve. Omit to retrieve the first page.
+
+#### **Response**
+
+**200 - application/json**
+
+**memberships**
+
+**object[]**
+
+Hide child attributes
+
+**memberships.uuid**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the membership.
+
+Example:
+
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
+
+**memberships.org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this membership belongs to.
+
+Example:
+
+`"05ca3845-6571-49a5-8d95-2f5d3c13ce5a"`
+
+**memberships.name**
+
+**string**
+
+The display name of the membership plan.
+
+Example:
+
+`"Gold Member"`
+
+**memberships.description**
+
+**string | null**
+
+A description of the membership plan.
+
+Example:
+
+`"Get exclusive discounts and free shipping every month."`
+
+**memberships.identifier**
+
+**string | null**
+
+A unique slug-style identifier for the membership.
+
+Example:
+
+`"GOLDMEMBER"`
+
+**memberships.merchant_code**
+
+**string | null**
+
+A merchant-defined code for this membership plan.
+
+Example:
+
+`"GOLD-2026"`
+
+**memberships.price**
+
+**number | null**
+
+The recurring price of the membership.
+
+Example:
+
+`9.99`
+
+**memberships.billing_interval**
+
+**string | null**
+
+The billing frequency unit.
+
+Available options:
+
+`DAY`,
+
+`WEEK`,
+
+`MONTH`,
+
+`YEAR`
+
+Example:
+
+`"MONTH"`
+
+**memberships.billing_interval_count**
+
+**integer**
+
+The number of billing interval units between charges.
+
+Example:
+
+`1`
+
+**memberships.discount_type**
+
+**string | null**
+
+The type of discount applied to subscribed orders.
+
+Example:
+
+`"percentage"`
+
+**memberships.status**
+
+**enum\<string\>**
+
+The current status of the membership plan.
+
+Available options:
+
+`active`,
+
+`inactive`,
+
+`archived`
+
+Example:
+
+`"active"`
+
+**memberships.benefits**
+
+**object[]**
+
+A list of benefits associated with this membership.
+
+Hide child attributes
+
+**memberships.benefits.uuid**
+
+**string\<uuid\>**
+
+Unique identifier for the benefit.
+
+Example:
+
+`"c3d4e5f6-a7b8-9012-cdef-012345678901"`
+
+**memberships.benefits.benefitable_uuid**
+
+**string\<uuid\>**
+
+The UUID of the membership this benefit belongs to.
+
+Example:
+
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
+
+**memberships.benefits.benefitable_type**
+
+**string**
+
+Always `membership` for membership benefits.
+
+Example:
+
+`"membership"`
+
+**memberships.benefits.name**
+
+**string**
+
+The display name of the benefit.
+
+Example:
+
+`"10% Monthly Discount"`
+
+**memberships.benefits.benefit_type**
+
+**enum\<string\>**
+
+The type of benefit issued to the customer.
+
+Available options:
+
+`fixed`,
+
+`percentage`,
+
+`store_credit`,
+
+`bonus_points`,
+
+`free_shipping`,
+
+`free_product`
+
+Example:
+
+`"percentage"`
+
+**memberships.benefits.benefit_value**
+
+**object**
+
+The value configuration for this benefit.
+
+Show child attributes
+
+**memberships.benefits.benefit_value.method**
+
+**enum\<string\>**
+
+How the benefit is delivered.
+
+Available options:
+
+`one_time`,
+
+`automatic`
+
+Example:
+
+`"automatic"`
+
+**memberships.benefits.benefit_value.value**
+
+**number**
+
+The discount amount or percentage.
+
+Example:
+
+`10`
+
+**memberships.benefits.benefit_value.recursive_interval**
+
+**integer | null**
+
+How often the benefit repeats. Only present when `method` is `automatic`.
+
+Example:
+
+`1`
+
+**memberships.benefits.benefit_value.recursive_range**
+
+**string | null**
+
+The time unit for the recurring interval. Only present when `method` is `automatic`.
+
+Available options:
+
+`weeks`,
+
+`months`,
+
+`years`
+
+Example:
+
+`"months"`
+
+**memberships.benefits.benefit_value.recursive_max_time**
+
+**integer | null**
+
+Maximum number of times the benefit is issued. `0` means unlimited.
+
+Example:
+
+`0`
+
+**memberships.benefits.platform_discount_id**
+
+**string | null**
+
+The discount identifier in the external platform for this benefit.
+
+Example:
+
+`"1121797341367"`
+
+**memberships.benefits.ordering**
+
+**integer**
+
+The sort order of the benefit.
+
+Example:
+
+`0`
+
+**memberships.benefits.created_at**
+
+**string\<date-time\>**
+
+The date and time when the benefit was created.
+
+Example:
+
+`"2026-02-12T10:00:00.000Z"`
+
+**memberships.benefits.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the benefit was last updated.
+
+Example:
+
+`"2026-02-12T10:00:00.000Z"`
+
+**memberships.metadata**
+
+**object | null**
+
+Additional metadata for the membership.
+
+Example:
+
+`null`
+
+**memberships.created_at**
+
+**string\<date-time\>**
+
+The date and time when the membership was created.
+
+Example:
+
+`"2026-02-12T10:00:00.000Z"`
+
+**memberships.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the membership was last updated.
+
+Example:
+
+`"2026-02-12T10:00:00.000Z"`
+
+**metadata**
+
+**object**
+
+Hide child attributes
+
+**metadata.next_cursor**
+
+**string | null**
+
+A cursor value that, when present, can be used to retrieve the next page of results.
+
+Example:
+
+`"aWQ6MixkaXJlY3Rpb246bmV4dA=="`
+
+**metadata.previous_cursor**
+
+**string | null**
+
+A cursor value that, when present, can be used to retrieve the previous page of results.
+
+Example:
+
+`null`

@@ -2,17 +2,11 @@
 title: "Retrieve a customer"
 ---
 
-meRetrieves a single customer by ID.
+Retrieves a single customer by UUID, including their current points balance.
 
-**GET / customers /  - Try it**
-
-This endpoint requires the **customer:read** scope.
-
-To lookup customers by email, use the [**list customers**](https://dev.smile.io/api/resources/customers/list-customers) endpoint instead.
+**GET /public/customers/\{id\}**
 
 #### **Authorizations**
-
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#authorization-authorization)
 
 **Authorization**
 
@@ -22,37 +16,21 @@ To lookup customers by email, use the [**list customers**](https://dev.smile.io/
 
 **required**
 
-Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
 
 #### **Path Parameters**
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#parameter-id)
-
 **id**
 
-**integer**
+**string\<uuid\>**
 
 **required**
 
-ID of the customer (in Yuko) to retrieve.
+The UUID of the customer in Yuko to retrieve.
 
-#### **Query Parameters**
+Example:
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#parameter-include)
-
-**include**
-
-**enum\<string\>**
-
-A comma-separated list of related objects to include in the response.
-
-Available options:
-
-`vip_status`,
-
-`vip_status.vip_tier`,
-
-`vip_status.next_vip_tier`
+`"63a2c89a-9936-4bc0-9d5f-93db46110b76"`
 
 #### **Response**
 
@@ -60,29 +38,23 @@ Available options:
 
 The customer was successfully retrieved.
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer)
-
-**customer**
+**data**
 
 **object**
 
 Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-id)
+**data.id**
 
-**customer.id**
+**string\<uuid\>**
 
-**integer**
-
-Unique identifier for the customer in Yuko.
+Unique UUID identifier for the customer in Yuko.
 
 Example:
 
-`304169228`
+`"63a2c89a-9936-4bc0-9d5f-93db46110b76"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-first-name-one-of-0)
-
-**customer.first_name**
+**data.first_name**
 
 **string | null**
 
@@ -92,9 +64,7 @@ Example:
 
 `"Jane"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-last-name-one-of-0)
-
-**customer.last_name**
+**data.last_name**
 
 **string | null**
 
@@ -102,11 +72,9 @@ The customer's last name.
 
 Example:
 
-`"Doe"`
+`"Smith"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-email)
-
-**customer.email**
+**data.email**
 
 **string**
 
@@ -114,108 +82,177 @@ The customer's email address.
 
 Example:
 
-`"jane@doe.com"`
+`"jane.smith@example.com"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-state)
+**data.phone**
 
-**customer.state**
+**string | null**
 
-**enum\<string\>**
-
-The customer's state in the loyalty program.
-
-Available options:
-
-`candidate`,
-
-`member`,
-
-`disabled`
+The customer's phone number.
 
 Example:
 
-`"member"`
+`"+14155552671"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-date-of-birth-one-of-0)
-
-**customer.date_of_birth**
-
-**string\<date\> | null**
-
-The customer's birthday. A year value of `1004` means only the customer's birth day and month was entered.
-
-Example:
-
-`"1004-05-27"`
-
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-points-balance)
-
-**customer.points_balance**
-
-**integer**
-
-The customer's current points balance.
-
-Example:
-
-`300`
-
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-referral-url)
-
-**customer.referral_url**
+**data.platform**
 
 **string**
 
-The customer's unique referral URL. Used to share with friends as part of the referral program.
+The ecommerce platform the customer was synced from.
 
 Example:
 
-`"http://i.refs.cc/9qr5Pw"`
+`"shopify"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-vip-tier-id-one-of-0)
+**data.platform_customer_id**
 
-**customer.vip_tier_id**
+**string | null**
 
-**integer | null**
-
-**deprecated**
-
-The ID of the customer's current VIP tier. This field is now deprecated, use the nested `vip_status.vip_tier_id` instead.
+The customer's unique identifier in the external platform.
 
 Example:
 
-`426715794`
+`"7823491023"`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-vip-status)
-
-**customer.vip_status**
+**data.points**
 
 **object**
 
-An object containing details about the customer's status within the VIP program.
+The customer's loyalty points summary.
 
-Show child attributes
+Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-created-at)
+**data.points.balance**
 
-**customer.created_at**
+**integer**
 
-**string\<date-time\>**
-
-The date and time when the customer was created.
+The customer's current redeemable points balance.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`350`
 
-[**​**](https://dev.smile.io/api/resources/customers/retrieve-a-customer#response-customer-updated-at)
+**data.points.earned**
 
-**customer.updated_at**
+**integer**
 
-**string\<date-time\>**
-
-The date and time when the customer was last updated.
+Total points ever earned by the customer.
 
 Example:
 
-`"2025-04-04T15:10:42.030Z"`
+`500`
+
+**data.points.redeemed**
+
+**integer**
+
+Total points redeemed by the customer.
+
+Example:
+
+`150`
+
+**data.created_at**
+
+**string\<date-time\>**
+
+The date and time when the customer was created in Yuko.
+
+Example:
+
+`"2024-06-01T10:00:00.000Z"`
+
+**data.updated_at**
+
+**string\<date-time\>**
+
+The date and time when the customer was last updated in Yuko.
+
+Example:
+
+`"2026-02-15T08:30:00.000Z"`
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url "https://api.yukoapp.com/v1/public/customers/63a2c89a-9936-4bc0-9d5f-93db46110b76" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+```javascript JavaScript
+const customerId = "63a2c89a-9936-4bc0-9d5f-93db46110b76";
+
+const response = await fetch(
+  `https://api.yukoapp.com/v1/public/customers/${customerId}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    },
+  }
+);
+
+const data = await response.json();
+```
+
+```php PHP
+$customerId = "63a2c89a-9936-4bc0-9d5f-93db46110b76";
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/public/customers/{$customerId}");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "data": {
+    "id": "63a2c89a-9936-4bc0-9d5f-93db46110b76",
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jane.smith@example.com",
+    "phone": "+14155552671",
+    "platform": "shopify",
+    "platform_customer_id": "7823491023",
+    "points": {
+      "balance": 350,
+      "earned": 500,
+      "redeemed": 150
+    },
+    "created_at": "2024-06-01T10:00:00.000Z",
+    "updated_at": "2026-02-15T08:30:00.000Z"
+  }
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": "not_found",
+    "message": "Customer not found"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
+
+</ResponseExample>

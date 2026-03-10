@@ -2,9 +2,14 @@
 title: "Authentication"
 ---
 
-The Yuko API uses [**HTTP Bearer Authentication**](https://swagger.io/docs/specification/authentication/bearer-authentication/) (also known as token authentication) to authenticate requests. API requests are always made on behalf of a specific store/merchant/account, however the bearer value you supply depends on the entity that is making the API request:
+The Yuko API uses HTTP Bearer Authentication to authenticate requests. All API requests must be made over HTTPS.
 
-- **Merchants -** Use an [**API key**](https://help.smile.io/en/articles/11328240-manage-your-api-keys).
-- **Apps -** Use the `OAuth Access Token` you received after the merchant completed OAuth.
+To authenticate, include your API key in the `Authorization` header of every request:
 
-Once you’ve located your token value, supply it within an `Authorization` header of the request. These secret keys and tokens carry many privileges, so be sure to keep them a safe. Do not use or include them in publicly accessible areas such as mobile application binaries, client-side code, or in GitHub repositories. Only make API calls that include these secrets from secured backend code.All API requests must be made over HTTPS.
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+You can find your API key in the [Yuko Dashboard](https://app.yukoapp.com) under **Settings → API**.
+
+Keep your API keys secure. Do not expose them in client-side code, mobile app binaries, or public repositories. All API calls containing your secret key must be made from your backend server.

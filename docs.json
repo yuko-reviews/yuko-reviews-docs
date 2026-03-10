@@ -62,7 +62,7 @@
           {
             "group": "4. Display Reviews",
             "pages": [
-              "display-reviews",
+              "display-reviews/introductionToWidgets",
               "display-reviews/product-reviews-display-widget",
               "display-reviews/sidebar-widget",
               "display-reviews/star-rating-widget",
@@ -87,8 +87,6 @@
               "managing-reviews/auto-publishing-reviews",
               "managing-reviews/review-moderation",
               "managing-reviews/review-restrictions-limits",
-              "managing-reviews/email-blacklist",
-              "managing-reviews/product-blacklist",
               "managing-reviews/replying-to-reviews",
               "managing-reviews/verified-badges-for-reviews"
             ]
@@ -156,7 +154,7 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "Rest API ",
+            "group": "Rest API",
             "pages": [
               "introduction",
               "authentication",
@@ -175,85 +173,72 @@
             "group": "API References",
             "pages": [
               {
-                "group": "Activities",
-                "pages": [
-                  "a"
-                ]
-              },
-              {
                 "group": "Customers",
                 "pages": [
                   "customer-object",
+                  "list-customers",
                   "retrieve-a-customer"
-                ]
-              },
-              {
-                "group": "Customer Identities",
-                "pages": [
-                  "customer-identity-object",
-                  "create-or-update-a-customer-identity"
-                ]
-              },
-              {
-                "group": "Earning Rules",
-                "pages": [
-                  "earning-rule-object",
-                  "list-earning-rule"
-                ]
-              },
-              {
-                "group": "Points Products",
-                "pages": [
-                  "list-points-products",
-                  "retrieve-a-points-product",
-                  "purchase-a-points-product"
-                ]
-              },
-              {
-                "group": "Points Purchases",
-                "pages": [
-                  "points-purchase-object"
                 ]
               },
               {
                 "group": "Points Transactions",
                 "pages": [
                   "points-transaction-object",
-                  "create-a-points-transaction",
                   "list-points-transactions",
-                  "retrieve-a-points-transaction"
-                ]
-              },
-              {
-                "group": "Referrals",
-                "pages": [
-                  "referral-object"
+                  "create-a-points-transaction"
                 ]
               },
               {
                 "group": "Rewards",
                 "pages": [
-                  "reward-objects"
+                  "reward-objects",
+                  "list-rewards",
+                  "customer-reward-object",
+                  "list-customer-rewards",
+                  "get-redeemable-rewards",
+                  "redeem-reward"
                 ]
               },
               {
-                "group": "Reward Fulfillments",
+                "group": "Activities",
                 "pages": [
-                  "reward-fulfillment-object",
-                  "list-reward-fulfillments"
+                  "activity-object",
+                  "list-customer-activities"
                 ]
               },
               {
                 "group": "VIP Tiers",
                 "pages": [
                   "vip-tier-object",
-                  "list-vip-tiers"
+                  "list-vip-tiers",
+                  "get-customer-tier"
                 ]
               },
               {
-                "group": "VIP Tier Changes",
+                "group": "Earning Rules",
                 "pages": [
-                  "vip-tier-change-object"
+                  "way-to-earn-object",
+                  "list-ways-to-earn"
+                ]
+              },
+              {
+                "group": "Referrals",
+                "pages": [
+                  "get-referral-program",
+                  "list-customer-referrals"
+                ]
+              },
+              {
+                "group": "Memberships",
+                "pages": [
+                  "membership-object",
+                  "list-memberships"
+                ]
+              },
+              {
+                "group": "Checkout",
+                "pages": [
+                  "checkout-points-estimate"
                 ]
               }
             ]

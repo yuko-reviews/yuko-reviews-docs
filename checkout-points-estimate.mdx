@@ -1,0 +1,317 @@
+---
+title: "Points estimate"
+---
+
+Estimates how many loyalty points a customer will earn for a given set of cart items. Customer is optional — guest checkouts are fully supported.
+
+**POST /public/points/estimate**
+
+#### **Authorizations**
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
+
+#### **Request Body**
+
+**customer**
+
+**object | null**
+
+The customer placing the order. Optional — omit entirely for guest checkouts.
+
+Show child attributes
+
+**customer.id**
+
+**string | null**
+
+The platform customer ID. Used to look up the customer if `email` is not provided.
+
+Example:
+
+`"cus_847362"`
+
+**customer.email**
+
+**string\<email\> | null**
+
+The customer's email address. Takes priority over `id` when both are provided.
+
+Example:
+
+`"rahul.sharma@example.com"`
+
+**currency**
+
+**string**
+
+ISO 4217 currency code for the order.
+
+Required length: `3`
+
+Example:
+
+`"INR"`
+
+**items**
+
+**object[]**
+
+**required**
+
+The line items in the cart. Must contain at least one item.
+
+Show child attributes
+
+**items[].product_id**
+
+**string**
+
+**required**
+
+The platform product ID.
+
+Example:
+
+`"prod_1001"`
+
+**items[].variant_id**
+
+**string**
+
+**required**
+
+The platform variant/SKU ID.
+
+Example:
+
+`"var_1001_red_m"`
+
+**items[].price**
+
+**number**
+
+**required**
+
+The unit price of this item.
+
+Example:
+
+`999.00`
+
+**items[].quantity**
+
+**integer**
+
+**required**
+
+The quantity ordered.
+
+Required range: `1 <= x`
+
+Example:
+
+`1`
+
+**items[].total**
+
+**number**
+
+**required**
+
+The line total (`price × quantity`) used for points calculation.
+
+Example:
+
+`999.00`
+
+#### **Response**
+
+**200 - application/json**
+
+**data**
+
+**object**
+
+Hide child attributes
+
+**data.points_earned**
+
+**integer**
+
+The estimated number of loyalty points the customer will earn after completing the purchase.
+
+Example:
+
+`120`
+
+**data.message**
+
+**string**
+
+A human-readable message to display to the customer.
+
+Example:
+
+`"You will earn 120 points after completing this purchase"`
+
+<RequestExample>
+
+```bash cURL
+curl --request POST \
+  --url "https://api.yukoapp.com/v1/public/points/estimate" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "customer": {
+      "id": "cus_847362",
+      "email": "rahul.sharma@example.com"
+    },
+    "currency": "INR",
+    "items": [
+      {
+        "product_id": "prod_1001",
+        "variant_id": "var_1001_red_m",
+        "price": 999.00,
+        "quantity": 1,
+        "total": 999.00
+      },
+      {
+        "product_id": "prod_2044",
+        "variant_id": "var_2044_black_42",
+        "price": 1400.00,
+        "quantity": 1,
+        "total": 1400.00
+      }
+    ]
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://api.yukoapp.com/v1/public/points/estimate",
+  {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      customer: {
+        id: "cus_847362",
+        email: "rahul.sharma@example.com",
+      },
+      currency: "INR",
+      items: [
+        {
+          product_id: "prod_1001",
+          variant_id: "var_1001_red_m",
+          price: 999.00,
+          quantity: 1,
+          total: 999.00,
+        },
+        {
+          product_id: "prod_2044",
+          variant_id: "var_2044_black_42",
+          price: 1400.00,
+          quantity: 1,
+          total: 1400.00,
+        },
+      ],
+    }),
+  }
+);
+
+const data = await response.json();
+```
+
+```php PHP
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/public/points/estimate");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+    "customer" => [
+        "id"    => "cus_847362",
+        "email" => "rahul.sharma@example.com",
+    ],
+    "currency" => "INR",
+    "items" => [
+        [
+            "product_id" => "prod_1001",
+            "variant_id" => "var_1001_red_m",
+            "price"      => 999.00,
+            "quantity"   => 1,
+            "total"      => 999.00,
+        ],
+        [
+            "product_id" => "prod_2044",
+            "variant_id" => "var_2044_black_42",
+            "price"      => 1400.00,
+            "quantity"   => 1,
+            "total"      => 1400.00,
+        ],
+    ],
+]));
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "Content-Type: application/json",
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "data": {
+    "points_earned": 120,
+    "message": "You will earn 120 points after completing this purchase"
+  }
+}
+```
+
+```json 200 (guest checkout or no matching campaign)
+{
+  "data": {
+    "points_earned": 0,
+    "message": "You will earn 0 points after completing this purchase"
+  }
+}
+```
+
+```json 422 (validation error)
+{
+  "error": {
+    "code": "validation_error",
+    "message": "The given data was invalid",
+    "details": {
+      "items": ["The items field is required."]
+    }
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
+
+</ResponseExample>

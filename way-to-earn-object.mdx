@@ -1,0 +1,197 @@
+---
+title: "Way to Earn Object"
+---
+
+A way to earn (campaign) represents an action a customer can complete to earn loyalty points. Yuko supports a variety of trigger events such as placing an order, leaving a review, signing up, or following on social media.
+
+**uuid**
+
+**string\<uuid\>**
+
+Unique identifier for the campaign in Yuko.
+
+Example:
+
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
+
+**org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this campaign belongs to.
+
+Example:
+
+`"7789dd6a-5f90-4ad1-9126-63ada4827f79"`
+
+**name**
+
+**string**
+
+The display name of the way to earn.
+
+Example:
+
+`"Place an order"`
+
+**description**
+
+**string | null**
+
+A description of the way to earn, used for display purposes.
+
+Example:
+
+`"Earn points every time you place an order."`
+
+**trigger_event**
+
+**enum\<string\>**
+
+The action that triggers the campaign and awards points to the customer.
+
+Available options:
+
+`purchase`,
+
+`signup`,
+
+`review`,
+
+`daily_visit`,
+
+`birthday`,
+
+`anniversary`,
+
+`twitter_follow`,
+
+`twitter_share`,
+
+`instagram_follow`,
+
+`instagram_share`,
+
+`facebook_like`,
+
+`facebook_share`,
+
+`newsletter_subscribe`
+
+Example:
+
+`"purchase"`
+
+**earning_rule**
+
+**object | null**
+
+Defines how points are calculated when the campaign is triggered.
+
+Show child attributes
+
+**earning_rule.type**
+
+**enum\<string\>**
+
+The method used to calculate the points awarded.
+
+Available options:
+
+`fixed`,
+
+`variable`
+
+Example:
+
+`"variable"`
+
+**earning_rule.value**
+
+**number**
+
+The number of points awarded. For `variable` type, this is the points earned per `per_amount` unit.
+
+Example:
+
+`5`
+
+**earning_rule.per_amount**
+
+**number | null**
+
+Only present when `type` is `variable`. The unit amount required to earn the specified `value` of points (e.g. `1` means 5 points per $1 spent).
+
+Example:
+
+`1`
+
+**conditions**
+
+**object | null**
+
+Optional conditions that must be met for the campaign to trigger. May include minimum order amounts, eligible product categories, or customer segments.
+
+Example:
+
+`null`
+
+**metadata**
+
+**object | null**
+
+Additional metadata for the campaign such as display settings, tracking codes, or notification preferences.
+
+Example:
+
+`null`
+
+**ordering**
+
+**integer**
+
+The sort order of the campaign as displayed to customers.
+
+Example:
+
+`1`
+
+**is_active**
+
+**boolean**
+
+Whether the campaign is currently active and able to award points.
+
+Example:
+
+`true`
+
+**created_at**
+
+**string\<date-time\>**
+
+The date and time when the campaign was created.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**updated_at**
+
+**string\<date-time\>**
+
+The date and time when the campaign was last updated.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**deleted_at**
+
+**string\<date-time\> | null**
+
+The date and time when the campaign was deleted. `null` if not deleted.
+
+Example:
+
+`null`

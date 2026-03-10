@@ -2,21 +2,57 @@
 title: "Customer Object"
 ---
 
-Customers represent individuals in the loyalty program. They have a points balance, can earn points by performing activities, and can redeem points for rewards.
-
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-id)
+Customers represent individuals in Yuko. They are synced from your ecommerce platform and enriched with loyalty program data such as points balance, VIP tier, and membership status.
 
 **id**
 
 **integer**
 
-Unique identifier for the customer in Yuko.
+Unique integer identifier for the customer in Yuko.
 
 Example:
 
-`304169228`
+`1379409`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-first-name-one-of-0)
+**uuid**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the customer in Yuko.
+
+Example:
+
+`"63a2c89a-9936-4bc0-9d5f-93db46110b76"`
+
+**platform**
+
+**string**
+
+The ecommerce platform the customer was synced from.
+
+Example:
+
+`"woocommerce"`
+
+**platform_customer_id**
+
+**string | null**
+
+The customer's unique identifier in the external platform.
+
+Example:
+
+`"cust_001"`
+
+**org_uuid**
+
+**string\<uuid\>**
+
+The UUID of the organisation this customer belongs to.
+
+Example:
+
+`"7789dd6a-5f90-4ad1-9126-63ada4827f79"`
 
 **first_name**
 
@@ -26,9 +62,7 @@ The customer's first name.
 
 Example:
 
-`"Jane"`
-
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-last-name-one-of-0)
+`"Bryn"`
 
 **last_name**
 
@@ -38,9 +72,7 @@ The customer's last name.
 
 Example:
 
-`"Doe"`
-
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-email)
+`"Johnson"`
 
 **email**
 
@@ -50,108 +82,390 @@ The customer's email address.
 
 Example:
 
-`"jane@doe.com"`
+`"brynjohnson1@outlook.com"`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-state)
+**phone**
 
-**state**
+**string | null**
 
-**enum\<string\>**
-
-The customer's state in the loyalty program.
-
-Available options:
-
-`candidate`, 
-
-`member`, 
-
-`disabled` 
+The customer's phone number.
 
 Example:
 
-`"member"`
+`"07507355101"`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-date-of-birth-one-of-0)
-
-**date_of_birth**
+**birth_date**
 
 **string\<date\> | null**
 
-The customer's birthday. A year value of `1004` means only the customer's birth day and month was entered.
+The customer's date of birth.
 
 Example:
 
-`"1004-05-27"`
+`"1990-05-27"`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-points-balance)
+**company**
 
-**points_balance**
+**string | null**
 
-**integer**
-
-The customer's current points balance.
+The customer's company name.
 
 Example:
 
-`300`
+`"Acme Ltd"`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-referral-url)
+**address**
 
-**referral_url**
+**string | null**
 
-**string**
-
-The customer's unique referral URL. Used to share with friends as part of the referral program.
+The customer's primary address line.
 
 Example:
 
-`"http://i.refs.cc/9qr5Pw"`
+`"12 High Street"`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-vip-tier-id-one-of-0)
+**address2**
 
-**vip_tier_id**
+**string | null**
 
-**integer | null**
-
-**deprecated**
-
-The ID of the customer's current VIP tier. This field is now deprecated, use the nested `vip_status.vip_tier_id` instead.
+The customer's secondary address line.
 
 Example:
 
-`426715794`
+`"Apartment 4"`
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-vip-status)
+**city**
 
-**vip_status**
+**string | null**
+
+The customer's city.
+
+Example:
+
+`"Penryn"`
+
+**province**
+
+**string | null**
+
+The customer's province or county.
+
+Example:
+
+`"Cornwall"`
+
+**province_code**
+
+**string | null**
+
+The short code for the customer's province or county.
+
+Example:
+
+`"cornwall"`
+
+**zip**
+
+**string | null**
+
+The customer's postal or zip code.
+
+Example:
+
+`"TR10 9FE"`
+
+**country**
+
+**string | null**
+
+The customer's country name.
+
+Example:
+
+`"GB"`
+
+**country_code**
+
+**string | null**
+
+The ISO 3166-1 alpha-2 country code.
+
+Example:
+
+`"GB"`
+
+**accepts_marketing**
+
+**boolean**
+
+Whether the customer has opted in to marketing communications.
+
+Example:
+
+`true`
+
+**is_email_subscribed**
+
+**boolean**
+
+Whether the customer is subscribed to email communications.
+
+Example:
+
+`true`
+
+**email_marketing_consent**
 
 **object**
 
-An object containing details about the customer's status within the VIP program.
+The customer's email marketing consent details.
 
 Show child attributes
 
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-created-at)
+**email_marketing_consent.marketingOptInLevel**
+
+**string**
+
+The opt-in level for email marketing.
+
+Example:
+
+`"SINGLE_OPT_IN"`
+
+**email_marketing_consent.marketingState**
+
+**string**
+
+The current marketing state for email.
+
+Example:
+
+`"SUBSCRIBED"`
+
+**email_marketing_consent.marketingUpdatedAt**
+
+**string\<date-time\>**
+
+The date and time the email marketing consent was last updated.
+
+Example:
+
+`"2026-03-09T14:02:06.183Z"`
+
+**sms_marketing_consent**
+
+**object**
+
+The customer's SMS marketing consent details.
+
+Show child attributes
+
+**sms_marketing_consent.marketingOptInLevel**
+
+**string**
+
+The opt-in level for SMS marketing.
+
+Example:
+
+`"SINGLE_OPT_IN"`
+
+**sms_marketing_consent.marketingState**
+
+**string**
+
+The current marketing state for SMS.
+
+Example:
+
+`"SUBSCRIBED"`
+
+**sms_marketing_consent.marketingUpdatedAt**
+
+**string\<date-time\>**
+
+The date and time the SMS marketing consent was last updated.
+
+Example:
+
+`"2026-03-09T14:02:06.183Z"`
+
+**total_spent**
+
+**number**
+
+The total amount spent by the customer across all orders.
+
+Example:
+
+`150.00`
+
+**currency**
+
+**string**
+
+The ISO 4217 currency code for the customer's store.
+
+Example:
+
+`"GBP"`
+
+**total_points**
+
+**integer**
+
+The customer's current loyalty points balance.
+
+Example:
+
+`500`
+
+**current_tier**
+
+**object | null**
+
+The customer's current VIP tier. `null` if the customer has not reached any tier.
+
+Show child attributes
+
+**current_tier.uuid**
+
+**string\<uuid\>**
+
+Unique identifier for the VIP tier.
+
+Example:
+
+`"b3c4d5e6-f7a8-9012-bcde-f01234567890"`
+
+**current_tier.name**
+
+**string**
+
+The display name of the VIP tier.
+
+Example:
+
+`"Gold"`
+
+**membership**
+
+**object**
+
+Details about the customer's loyalty program membership.
+
+Show child attributes
+
+**membership.status**
+
+**string**
+
+The customer's membership status in the loyalty program.
+
+Available options:
+
+`active`,
+
+`inactive`,
+
+`pending`
+
+Example:
+
+`"active"`
+
+**membership.joined_at**
+
+**string\<date-time\> | null**
+
+The date and time the customer joined the loyalty program.
+
+Example:
+
+`"2024-06-01T10:00:00.000Z"`
+
+**is_lp_banned_customer**
+
+**string**
+
+Whether the customer is banned from the loyalty program.
+
+Available options:
+
+`yes`,
+
+`no`
+
+Example:
+
+`"no"`
+
+**platform_created_at**
+
+**string\<date-time\>**
+
+The date and time the customer was created in the external platform.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**platform_updated_at**
+
+**string\<date-time\>**
+
+The date and time the customer was last updated in the external platform.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
 
 **created_at**
 
 **string\<date-time\>**
 
-The date and time when the customer was created.
+The date and time when the customer was created in Yuko.
 
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
-
-[**​**](https://dev.smile.io/api/resources/customers/customer-object#schema-updated-at)
+`"2026-03-09T14:02:06.000Z"`
 
 **updated_at**
 
 **string\<date-time\>**
 
-The date and time when the customer was last updated.
+The date and time when the customer was last updated in Yuko.
 
 Example:
 
-`"2025-04-04T15:10:42.030Z"`
+`"2026-03-09T14:02:06.000Z"`
+
+**deleted_at**
+
+**string\<date-time\> | null**
+
+The date and time when the customer was deleted. `null` if the customer has not been deleted.
+
+Example:
+
+`null`
+
+**shopify_credit_account_id**
+
+**string | null**
+
+The Shopify credit account ID associated with the customer. Only applicable for Shopify stores.
+
+Example:
+
+`"gid://shopify/ShopifyPaymentsAccount/12345"`
+
+**tags**
+
+**string[]**
+
+A list of tags associated with the customer.
+
+Example:
+
+`["vip", "wholesale"]`

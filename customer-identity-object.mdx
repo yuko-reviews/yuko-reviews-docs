@@ -1,81 +1,95 @@
 ---
-title: "Customer Identity object"
+title: "Customer Identity Object"
 ---
 
-Customer identities represent individuals or entities in an external system and how they map to customers in a Yulko loyalty program. They contain basic details like email and name, along with the external system’s unique identifier for the individual. In practice, a single customer in Yuko may have zero, one, or many different customer identities.
+Customer identities represent how customers from an external platform (e.g. WooCommerce, Shopify) are linked to customers in Yuko. A single Yuko customer may have one or more customer identities across different platforms.
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-id)
+**uuid**
 
-**id**
-
-**integer**
+**string\<uuid\>**
 
 Unique identifier for the customer identity in Yuko.
 
 Example:
 
-`863291377`
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-first-name-one-of-0)
+**customer_uuid**
 
-**first_name**
+**string\<uuid\>**
 
-**string | null**
-
-The first name of the customer in the external system.
+The UUID of the Yuko customer this identity is linked to.
 
 Example:
 
-`"Jane"`
+`"63a2c89a-9936-4bc0-9d5f-93db46110b76"`
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-last-name-one-of-0)
-
-**last_name**
-
-**string | null**
-
-The last name of the customer in the external system.
-
-Example:
-
-`"Doe"`
-
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-email)
-
-**email**
-
-**string\<email\>**
-
-The email of the customer in the external system.
-
-Example:
-
-`"jane@doe.com"`
-
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-distinct-id)
-
-**distinct_id**
+**platform**
 
 **string**
 
-The unique identifier for the customer in the external system.
+The ecommerce platform this identity originates from.
+
+Example:
+
+`"woocommerce"`
+
+**platform_customer_id**
+
+**string | null**
+
+The customer's unique identifier in the external platform.
 
 Example:
 
 `"cust_19238475"`
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-properties)
+**first_name**
 
-**properties**
+**string | null**
 
-**object**
+The customer's first name in the external platform.
 
-A restricted hash of additional attributes for the customer identity. Keys are allowlisted on a per-integration basis.
+Example:
 
-[**​**](https://dev.smile.io/api/resources/customer-identities/customer-identity-object#schema-customer-id)
+`"Jane"`
 
-**customer_id**
+**last_name**
 
-**integer**
+**string | null**
 
-The ID of the customer in Yuko that this customer identity is linked to.
+The customer's last name in the external platform.
+
+Example:
+
+`"Doe"`
+
+**email**
+
+**string\<email\>**
+
+The customer's email address in the external platform.
+
+Example:
+
+`"jane@doe.com"`
+
+**created_at**
+
+**string\<date-time\>**
+
+The date and time when the customer identity was created in Yuko.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`
+
+**updated_at**
+
+**string\<date-time\>**
+
+The date and time when the customer identity was last updated in Yuko.
+
+Example:
+
+`"2026-03-09T14:02:06.000Z"`

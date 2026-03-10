@@ -2,19 +2,17 @@
 title: "Errors"
 ---
 
-Yuko.so uses conventional HTTP response codes to indicate the success or failure of an API request. In general, codes in the 2xx range indicate success, while codes in the 4xx or 5xx range indicate a problem and will be accompanied by a JSON error object in the response body providing more information.
+Yuko uses conventional HTTP response codes to indicate the success or failure of an API request. Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error caused by the information provided. Codes in the `5xx` range indicate an error on Yuko's servers.
 
-## [**​**](https://dev.smile.io/api/errors#error-response-codes)
+## Error response codes
 
-**Error response codes**
-
-| **Status Code** | **Description**                                                                                                                                                                         |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 400             | The request was not accepted by the server, often due to forgotten parameters, bad syntax, or a missing `Content-Type` header.                                                          |
-| 401             | The required authentication credentials are missing from the request or are incorrect.                                                                                                  |
-| 403             | The server is refusing to respond to the request, usually because you are requesting a resource or querying an endpoint you do not have access or permission to see/use.                |
-| 404             | The requested resource doesn’t exist.                                                                                                                                                   |
-| 422             | The request body was well-formed but contains logical or semantic errors (e.g. trying to redeem more points than the customer has). Refer to the response body for further information. |
-| 429             | The request was not accepted because your API consumer has exceeded it’s rate limit.                                                                                                    |
-| 500             | An internal error occurred in Yuko. Simplify or retry your request. If the issue persists, please record any error codes, request IDs, and timestamps, and contact Yuko’s support.      |
-| 503             | The server is currently unavailable. Check the **Yuko Status Page** for any reported outages.                                                                                           |
+| **Status Code** | **Description** |
+| :-------------- | :-------------- |
+| 400 | The request was not accepted, often due to missing parameters, bad syntax, or a missing `Content-Type` header. |
+| 401 | The required authentication credentials are missing or incorrect. |
+| 403 | The server is refusing to respond, usually because you do not have access or permission to the requested resource. |
+| 404 | The requested resource doesn't exist. |
+| 422 | The request body was well-formed but contains semantic errors (e.g. insufficient points balance). Refer to the response body for further information. |
+| 429 | Your API token has exceeded its rate limit. |
+| 500 | An internal error occurred in Yuko. Retry your request. If the issue persists, contact Yuko support. |
+| 503 | The server is currently unavailable. |

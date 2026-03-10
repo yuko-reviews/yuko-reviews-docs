@@ -2,15 +2,11 @@
 title: "List VIP tiers"
 ---
 
-**GET** / **vip_tiers - Try it**
+Retrieves all VIP tiers configured for your organisation, sorted by `threshold_value` in ascending order. Each tier includes its associated benefits.
 
-This endpoint requires the **vip_tier:read** scope.
-
-Results are sorted by `milestone` in ascending order. This endpoint does not support pagination of any kind.
+**GET /public/tiers**
 
 #### **Authorizations**
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#authorization-authorization)
 
 **Authorization**
 
@@ -20,51 +16,29 @@ Results are sorted by `milestone` in ascending order. This endpoint does not sup
 
 **required**
 
-Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
-
-#### **Query Parameters**
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#parameter-include)
-
-**include**
-
-**enum\<string\>**
-
-A comma-separated list of nested objects to include in the response.
-
-Available options:
-
-`perks`, 
-
-`entry_rewards` 
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
 
 #### **Response**
 
 **200 - application/json**
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers)
-
-**vip_tiers**
+**data**
 
 **object[]**
 
 Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-id)
+**data.id**
 
-**vip_tiers.id**
+**string\<uuid\>**
 
-**integer**
-
-Unique identifier for the VIP tier.
+Unique UUID identifier for the VIP tier.
 
 Example:
 
-`426715799`
+`"7fb39c85-3a3f-4247-8333-2e05a9c8ae28"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-name)
-
-**vip_tiers.name**
+**data.name**
 
 **string**
 
@@ -74,126 +48,181 @@ Example:
 
 `"Gold"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-image-url)
-
-**vip_tiers.image_url**
-
-**string**
-
-The image of the VIP tier.
-
-Example:
-
-`"https://platform.smile.io/v1/images/vip_tiers/vip-tier-3.svg"`
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-milestone)
-
-**vip_tiers.milestone**
+**data.threshold_value**
 
 **integer**
 
-The threshold that a customer must reach to be eligible for the VIP tier. Represents either an amount of points or a dollar amount, depending on the loyalty program's configuration.
+The points value a customer must accumulate to reach this tier.
 
 Example:
 
-`500`
+`1000`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-perks)
-
-**vip_tiers.perks**
-
-**object[]**
-
-A set of nested objects representing the ongoing benefits a customer is entitled to when they are in the VIP tier.
-
-Hide child attributes
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-perks-items-name)
-
-**vip_tiers.perks.name**
-
-**string**
-
-A description of the benefit.
-
-Example:
-
-`"Early access to new product releases"`
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards)
-
-**vip_tiers.entry_rewards**
-
-**object[]**
-
-A set of nested Reward objects representing the rewards that are issued to a customer when they enter the VIP tier.
-
-Hide child attributes
-
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-id)
-
-**vip_tiers.entry_rewards.id**
+**data.multiplier**
 
 **number**
 
-Unique identifier for the reward.
+The points earning multiplier applied to customers in this tier.
 
 Example:
 
-`924565472`
+`2.0`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-name)
+**data.icon_url**
 
-**vip_tiers.entry_rewards.name**
+**string | null**
 
-**string**
-
-The name of the reward.
+URL of the tier icon image.
 
 Example:
 
-`"Order discount"`
+`"https://cdn.yukoapp.com/tiers/gold-icon.png"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-description)
+**data.benefits**
 
-**vip_tiers.entry_rewards.description**
+**object[]**
 
-**string**
+A list of benefits associated with this tier.
 
-A description of the reward.
+Hide child attributes
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-image-url)
-
-**vip_tiers.entry_rewards.image_url**
+**data.benefits.name**
 
 **string**
 
-An image for the reward.
+The display name of the benefit.
 
 Example:
 
-`"https://platform-images.smilecdn.co/3755938.png"`
+`"10% Discount on every order"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-created-at)
+**data.benefits.benefit_type**
 
-**vip_tiers.entry_rewards.created_at**
+**string**
+
+The type of benefit issued to the customer.
+
+Available options:
+
+`fixed_discount`,
+
+`percentage_discount`,
+
+`free_shipping`,
+
+`multiplier`
+
+Example:
+
+`"percentage_discount"`
+
+**data.benefits.benefit_value**
+
+**object**
+
+The value configuration for this benefit. Structure varies by `benefit_type`.
+
+Example:
+
+`{ "value": 10 }`
+
+**data.created_at**
 
 **string\<date-time\>**
 
-The date and time when the reward was created.
-
 Example:
 
-`"2024-04-04T15:10:42.030Z"`
+`"2025-09-12T15:44:44.000Z"`
 
-[**​**](https://dev.smile.io/api/resources/vip-tiers/list-vip-tiers#response-vip-tiers-items-entry-rewards-items-updated-at)
+<RequestExample>
 
-**vip_tiers.entry_rewards.updated_at**
+```bash cURL
+curl --request GET \
+  --url "https://api.yukoapp.com/v1/public/tiers" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
 
-**string\<date-time\>**
+```javascript JavaScript
+const response = await fetch(
+  "https://api.yukoapp.com/v1/public/tiers",
+  {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    },
+  }
+);
 
-The date and time when the reward was last updated.
+const data = await response.json();
+```
 
-Example:
+```php PHP
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/public/tiers");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]);
 
-`"2024-04-04T15:10:42.030Z"`
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "data": [
+    {
+      "id": "7fb39c85-3a3f-4247-8333-2e05a9c8ae28",
+      "name": "Silver",
+      "threshold_value": 500,
+      "multiplier": 1.5,
+      "icon_url": null,
+      "benefits": [
+        {
+          "name": "5% Discount on every order",
+          "benefit_type": "percentage_discount",
+          "benefit_value": { "value": 5 }
+        }
+      ],
+      "created_at": "2025-09-12T15:44:44.000Z"
+    },
+    {
+      "id": "8ac40d96-4b4e-5358-9444-3f16ba d9bf39",
+      "name": "Gold",
+      "threshold_value": 1000,
+      "multiplier": 2.0,
+      "icon_url": "https://cdn.yukoapp.com/tiers/gold-icon.png",
+      "benefits": [
+        {
+          "name": "10% Discount on every order",
+          "benefit_type": "percentage_discount",
+          "benefit_value": { "value": 10 }
+        },
+        {
+          "name": "Free Shipping",
+          "benefit_type": "free_shipping",
+          "benefit_value": {}
+        }
+      ],
+      "created_at": "2025-09-12T15:44:44.000Z"
+    }
+  ]
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
+
+</ResponseExample>
