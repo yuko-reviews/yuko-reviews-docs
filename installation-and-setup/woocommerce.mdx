@@ -123,7 +123,8 @@ Follow these 5 steps to complete your Yuko installation:
   <Step title="Download the Yuko Plugin" icon="download">
     Download the plugin file that connects your WordPress site to Yuko.
 
-    **How to download:**
+    - Download the Yuko WooCommerce plugin when prompted
+    - Upload and activate it on your WordPress site
 
     - Download the Yuko WooCommerce plugin when prompted by clicking on **"Download Plugin"**
     - You will see a zip file downloaded
@@ -167,6 +168,7 @@ Follow these 5 steps to complete your Yuko installation:
     \
     Return to your **Yuko Onboarding** (you will be redirected to this page)
 
+    1. Return to your **Yuko Dashboard** (in the other browser tab)
     4. In the **Store URL** field, enter your store's URL
        - Example: `https://yourstore.com` or `https://shop.yourstore.com`
        - Include `https://` but not `/wp-admin` or other paths
@@ -175,9 +177,7 @@ Follow these 5 steps to complete your Yuko installation:
        ![Importa](/images/importa.png)
     8. Wait for the connection to complete (shows "Connected" status)
 
-       ![Sett](/images/sett.png)
-
-    ---
+       ![Sett 1](/images/sett-1.png)
 
     ### Sync Your Store Data
 
@@ -189,16 +189,14 @@ Follow these 5 steps to complete your Yuko installation:
     4. Click **Sync Data** button to start importing:
        - All products from your catalog
        - Customer list (names and emails only)
-       - Existing WooCommerce reviews (if any)
+       - Existing WooCommerce reviews (if selected)
     5. Wait for sync to complete
+
+    ![YUKO 01 15 2026 09 47 PM](/images/YUKO-01-15-2026_09_47_PM.png)
 
     **Sync time:** 1-5 minutes depending on store size (small stores sync in 1 minute, large stores may take 5 minutes)
 
-    **Total time for this step:** 7 minutes (connection + sync)
-
-    <Info>
-      **Installation Complete!** Your WooCommerce store is now connected to Yuko and ready to collect reviews.
-    </Info>
+    **Installation Complete!** Your WooCommerce store is now connected to Yuko and ready to collect reviews.
   </Step>
 </Steps>
 
@@ -242,6 +240,185 @@ Now that installation is complete, set up your review collection system:
 <Tip>
   **Follow the quickstart:** For a complete setup guide with all essential steps, see the [Quickstart Guide](/quickstart)
 </Tip>
+
+---
+
+## Advanced Installation Options
+
+<AccordionGroup>
+  <Accordion title="Install Plugin via FTP (For Advanced Users)" icon="code">
+    If the WordPress upload method doesn't work, use FTP to install manually:
+
+    **Requirements:**
+
+    - FTP client software (FileZilla, Cyberduck, etc.)
+    - FTP credentials from your hosting provider
+
+    **Steps:**
+
+    1. Download yuko.zip from Yuko Dashboard
+    2. **Unzip** the file on your computer (important!)
+    3. Connect to your site via FTP
+    4. Navigate to `/wp-content/plugins/`
+    5. Upload the entire unzipped `yuko` folder
+    6. Go to WordPress Admin → Plugins
+    7. Find "Yuko" and click "Activate"
+
+    **Time:** 10 minutes (if you know how to use FTP)
+  </Accordion>
+  <Accordion title="Install on WordPress Multisite" icon="layer-group">
+    For WordPress Multisite installations:
+
+    **Network Activation:**
+
+    1. Install plugin normally
+    2. Go to Network Admin → Plugins
+    3. Click "Network Activate" under Yuko
+
+    **Per-Site Activation:**
+
+    1. Install plugin to network
+    2. Go to each site's Admin → Plugins
+    3. Activate Yuko individually on sites that need it
+
+    **Connection:** Each site needs separate connection to Yuko Dashboard (use different Store URLs for each site)
+  </Accordion>
+  <Accordion title="Use Staging Environment First" icon="flask">
+    **Recommended for large stores:** Test on staging before production.
+
+    **Steps:**
+
+    1. Install Yuko on your staging site first
+    2. Test review collection and display
+    3. Verify everything works correctly
+    4. Then install on production site
+    5. Reconnect using production Store URL
+
+    **Note:** Each environment (staging, production) needs separate connection in Yuko Dashboard.
+  </Accordion>
+  <Accordion title="Server Requirements & Hosting" icon="server">
+    **Minimum server requirements:**
+
+    - PHP 7.4 or higher (PHP 8.0+ recommended)
+    - MySQL 5.6+ or MariaDB 10.0+
+    - HTTPS enabled (SSL certificate installed)
+    - WordPress memory limit: 128MB minimum (256MB recommended)
+    - Max execution time: 30 seconds minimum
+
+    **Tested hosting providers:**
+
+    - ✅ SiteGround
+    - ✅ WP Engine
+    - ✅ Kinsta
+    - ✅ Bluehost
+    - ✅ GoDaddy
+    - ✅ HostGator
+
+    **Check your server:** Go to WooCommerce → Status → System Status Report
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Installation Issues
+
+<AccordionGroup>
+  <Accordion title="Plugin activated but Yuko not showing in sidebar" icon="triangle-exclamation">
+    **Possible causes:**
+
+    1. **Cache issue:**
+       - Clear your browser cache (Ctrl+Shift+Delete)
+       - Log out of WordPress and log back in
+       - Try a different browser
+    2. **User permissions:**
+       - Make sure you're logged in as Administrator
+       - Check User → Your Profile → Capabilities
+    3. **Plugin conflict:**
+       - Deactivate other plugins temporarily
+       - Check if Yuko appears
+       - Reactivate plugins one by one to find conflict
+
+    **Still not working?** Contact [support@yuko.so](mailto:support@yuko.so) with:
+
+    - WordPress version
+    - WooCommerce version
+    - PHP version (from WooCommerce → Status)
+    - List of active plugins
+  </Accordion>
+  <Accordion title="Connection keeps failing" icon="wifi-slash">
+    **Checklist to fix connection issues:**
+
+    ✓ **Store URL is correct:**
+
+    - Include https:// (not http://)
+    - Use your actual domain (not localhost)
+    - Don't include /wp-admin or other paths
+    - Example: `https://yourstore.com`
+
+    ✓ **Plugin is activated:**
+
+    - Go to WordPress → Plugins
+    - Yuko should show "Active" status
+
+    ✓ **WooCommerce is active:**
+
+    - Make sure WooCommerce plugin is working
+    - Test by visiting your store's shop page
+
+    ✓ **No security blocking:**
+
+    - Temporarily disable security plugins
+    - Try connecting again
+    - Re-enable security plugins after successful connection
+
+    ✓ **Firewall not blocking:**
+
+    - Some hosting providers block external API calls
+    - Contact your hosting support
+    - Ask them to whitelist Yuko API (app.yukoapp.com)
+  </Accordion>
+  <Accordion title="Products/Orders not syncing" icon="rotate-exclamation">
+    **If products aren't appearing in Yuko:**
+
+    1. **Check product status in WooCommerce:**
+       - Products must be "Published" (not Draft or Private)
+       - Products must be visible in catalog
+    2. **Wait for sync:**
+       - Initial sync takes 1-5 minutes for small stores
+       - Large stores (1000+ products) may take 15 minutes
+    3. **Force manual sync:**
+       - Go to Yuko Dashboard → Settings → Integrations
+       - Click "Sync Now" button
+       - Wait 2-3 minutes
+
+    **If orders aren't appearing:**
+
+    - Yuko only syncs "Completed" orders
+    - Check that orders are marked "Completed" in WooCommerce
+    - Orders older than 90 days are not imported (performance reasons)
+    - Pending, Processing, or Draft orders won't sync
+  </Accordion>
+  <Accordion title="Email verification link not working" icon="envelope-open-text">
+    **If clicking verification link shows error:**
+
+    1. **Link expired:**
+       - Links expire after 24 hours
+       - Go to Yuko login page
+       - Click "Resend verification email"
+    2. **Link was already used:**
+       - Try logging in directly
+       - Your account may already be verified
+    3. **Email client broke the link:**
+       - Some email apps break long URLs
+       - Copy the entire link manually
+       - Paste into browser address bar
+
+    **Still can't verify?**
+
+    - Email [support@yuko.so](mailto:support@yuko.so) from the email address you used
+    - We'll verify your account manually (within 24 hours)
+  </Accordion>
+</AccordionGroup>
 
 ---
 
