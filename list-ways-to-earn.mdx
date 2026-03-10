@@ -1,10 +1,10 @@
 ---
-title: "List ways to earn"
+title: "List earning rules"
 ---
 
-Retrieves a list of active ways to earn (campaigns) for your organisation.
+Retrieves a paginated list of active earning rules (campaigns) for your organisation. Results are sorted by `created_at` in descending order.
 
-**GET /campaigns**
+**GET /external/earning-rules**
 
 #### **Authorizations**
 
@@ -16,81 +16,15 @@ Retrieves a list of active ways to earn (campaigns) for your organisation.
 
 **required**
 
-Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
 
 #### **Query Parameters**
 
-**limit**
-
-**integer**
-
-**default: 50**
-
-The maximum number of campaigns to retrieve.
-
-Required range: `1 <= x <= 250`
-
-**cursor**
-
-**string**
-
-Cursor for the page of campaigns to retrieve. Omit to retrieve the first page.
-
-#### **Response**
-
-**200 - application/json**
-
-**campaigns**
-
-**object[]**
-
-Hide child attributes
-
-**campaigns.uuid**
-
-**string\<uuid\>**
-
-Unique identifier for the campaign in Yuko.
-
-Example:
-
-`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
-
-**campaigns.org_uuid**
-
-**string\<uuid\>**
-
-The UUID of the organisation this campaign belongs to.
-
-Example:
-
-`"7789dd6a-5f90-4ad1-9126-63ada4827f79"`
-
-**campaigns.name**
-
-**string**
-
-The display name of the way to earn.
-
-Example:
-
-`"Place an order"`
-
-**campaigns.description**
-
-**string | null**
-
-A description of the way to earn, used for display purposes.
-
-Example:
-
-`"Earn points every time you place an order."`
-
-**campaigns.trigger_event**
+**campaign_type**
 
 **enum\<string\>**
 
-The action that triggers the campaign and awards points to the customer.
+Filter results to only earning rules of the given type.
 
 Available options:
 
@@ -120,23 +54,87 @@ Available options:
 
 `newsletter_subscribe`
 
+**per_page**
+
+**integer**
+
+**default: 20**
+
+The number of results per page.
+
+Required range: `1 <= x <= 100`
+
+**page**
+
+**integer**
+
+**default: 1**
+
+The page number to retrieve.
+
+#### **Response**
+
+**200 - application/json**
+
+**data**
+
+**object[]**
+
+Hide child attributes
+
+**data.id**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the earning rule.
+
+Example:
+
+`"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
+
+**data.name**
+
+**string**
+
+The display name of the earning rule.
+
+Example:
+
+`"Place an order"`
+
+**data.description**
+
+**string | null**
+
+A short description shown to customers.
+
+Example:
+
+`"Earn 5 points for every $1 spent."`
+
+**data.campaign_type**
+
+**enum\<string\>**
+
+The type of action that triggers this earning rule.
+
 Example:
 
 `"purchase"`
 
-**campaigns.earning_rule**
+**data.earning_rule**
 
 **object | null**
 
-Defines how points are calculated when the campaign is triggered.
+Defines how points are calculated when the rule is triggered.
 
 Show child attributes
 
-**campaigns.earning_rule.type**
+**data.earning_rule.type**
 
 **enum\<string\>**
 
-The method used to calculate the points awarded.
+The method used to calculate points awarded.
 
 Available options:
 
@@ -148,108 +146,201 @@ Example:
 
 `"variable"`
 
-**campaigns.earning_rule.value**
+**data.earning_rule.value**
 
 **number**
 
-The number of points awarded. For `variable` type, this is the points earned per `per_amount` unit.
+Points awarded. For `variable` type, this is points earned per `per_amount` unit.
 
 Example:
 
 `5`
 
-**campaigns.earning_rule.per_amount**
+**data.earning_rule.per_amount**
 
 **number | null**
 
-Only present when `type` is `variable`. The unit amount required to earn the specified `value` of points (e.g. `1` means 5 points per $1 spent).
+Only present for `variable` type. The unit amount required to earn the `value` of points.
 
 Example:
 
 `1`
 
-**campaigns.conditions**
+**data.conditions**
 
 **object | null**
 
-Optional conditions that must be met for the campaign to trigger.
+Optional conditions that must be met for the rule to trigger.
 
 Example:
 
 `null`
 
-**campaigns.metadata**
-
-**object | null**
-
-Additional metadata for the campaign.
-
-Example:
-
-`null`
-
-**campaigns.ordering**
-
-**integer**
-
-The sort order of the campaign as displayed to customers.
-
-Example:
-
-`1`
-
-**campaigns.is_active**
+**data.is_active**
 
 **boolean**
 
-Whether the campaign is currently active.
+Whether this earning rule is currently active.
 
 Example:
 
 `true`
 
-**campaigns.created_at**
+**data.created_at**
 
 **string\<date-time\>**
 
-The date and time when the campaign was created.
-
 Example:
 
-`"2026-03-09T14:02:06.000Z"`
+`"2026-01-10T09:00:00.000Z"`
 
-**campaigns.updated_at**
-
-**string\<date-time\>**
-
-The date and time when the campaign was last updated.
-
-Example:
-
-`"2026-03-09T14:02:06.000Z"`
-
-**metadata**
+**meta**
 
 **object**
 
 Hide child attributes
 
-**metadata.next_cursor**
+**meta.pagination**
 
-**string | null**
+**object**
 
-A cursor value that, when present, can be used to retrieve the next page of results.
+Hide child attributes
 
-Example:
+**meta.pagination.current_page**
 
-`"aWQ6MixkaXJlY3Rpb246bmV4dA=="`
-
-**metadata.previous_cursor**
-
-**string | null**
-
-A cursor value that, when present, can be used to retrieve the previous page of results.
+**integer**
 
 Example:
 
-`null`
+`1`
+
+**meta.pagination.per_page**
+
+**integer**
+
+Example:
+
+`20`
+
+**meta.pagination.total**
+
+**integer**
+
+Example:
+
+`4`
+
+**meta.pagination.last_page**
+
+**integer**
+
+Example:
+
+`1`
+
+**meta.pagination.has_more**
+
+**boolean**
+
+Example:
+
+`false`
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url "https://api.yukoapp.com/v1/external/earning-rules?campaign_type=purchase" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+```javascript JavaScript
+const params = new URLSearchParams({ campaign_type: "purchase" });
+
+const response = await fetch(
+  `https://api.yukoapp.com/v1/external/earning-rules?${params}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    },
+  }
+);
+
+const data = await response.json();
+```
+
+```php PHP
+$query = http_build_query(["campaign_type" => "purchase"]);
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/external/earning-rules?{$query}");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "data": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Place an order",
+      "description": "Earn 5 points for every $1 spent.",
+      "campaign_type": "purchase",
+      "earning_rule": {
+        "type": "variable",
+        "value": 5,
+        "per_amount": 1
+      },
+      "conditions": null,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00.000Z"
+    },
+    {
+      "id": "b2c3d4e5-f6a7-8901-bcde-f01234567890",
+      "name": "Sign up",
+      "description": "Earn 200 points when you create an account.",
+      "campaign_type": "signup",
+      "earning_rule": {
+        "type": "fixed",
+        "value": 200,
+        "per_amount": null
+      },
+      "conditions": null,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "current_page": 1,
+      "per_page": 20,
+      "total": 2,
+      "last_page": 1,
+      "has_more": false
+    }
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
+
+</ResponseExample>

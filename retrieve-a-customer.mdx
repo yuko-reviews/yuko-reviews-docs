@@ -2,9 +2,9 @@
 title: "Retrieve a customer"
 ---
 
-Retrieves a single customer by UUID.
+Retrieves a single customer by UUID, including their current points balance.
 
-**GET /customers/\{uuid\}**
+**GET /external/customers/\{id\}**
 
 #### **Authorizations**
 
@@ -16,11 +16,11 @@ Retrieves a single customer by UUID.
 
 **required**
 
-Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
 
 #### **Path Parameters**
 
-**uuid**
+**id**
 
 **string\<uuid\>**
 
@@ -38,23 +38,13 @@ Example:
 
 The customer was successfully retrieved.
 
-**customer**
+**data**
 
 **object**
 
 Hide child attributes
 
-**customer.id**
-
-**integer**
-
-Unique integer identifier for the customer in Yuko.
-
-Example:
-
-`1379409`
-
-**customer.uuid**
+**data.id**
 
 **string\<uuid\>**
 
@@ -64,37 +54,7 @@ Example:
 
 `"63a2c89a-9936-4bc0-9d5f-93db46110b76"`
 
-**customer.platform**
-
-**string**
-
-The ecommerce platform the customer was synced from.
-
-Example:
-
-`"woocommerce"`
-
-**customer.platform_customer_id**
-
-**string | null**
-
-The customer's unique identifier in the external platform.
-
-Example:
-
-`"cust_001"`
-
-**customer.org_uuid**
-
-**string\<uuid\>**
-
-The UUID of the organisation this customer belongs to.
-
-Example:
-
-`"7789dd6a-5f90-4ad1-9126-63ada4827f79"`
-
-**customer.first_name**
+**data.first_name**
 
 **string | null**
 
@@ -102,9 +62,9 @@ The customer's first name.
 
 Example:
 
-`"Bryn"`
+`"Jane"`
 
-**customer.last_name**
+**data.last_name**
 
 **string | null**
 
@@ -112,9 +72,9 @@ The customer's last name.
 
 Example:
 
-`"Johnson"`
+`"Smith"`
 
-**customer.email**
+**data.email**
 
 **string**
 
@@ -122,9 +82,9 @@ The customer's email address.
 
 Example:
 
-`"brynjohnson1@outlook.com"`
+`"jane.smith@example.com"`
 
-**customer.phone**
+**data.phone**
 
 **string | null**
 
@@ -132,335 +92,67 @@ The customer's phone number.
 
 Example:
 
-`"07507355101"`
+`"+14155552671"`
 
-**customer.birth_date**
+**data.platform**
 
-**string\<date\> | null**
+**string**
 
-The customer's date of birth.
+The ecommerce platform the customer was synced from.
 
 Example:
 
-`"1990-05-27"`
+`"shopify"`
 
-**customer.company**
+**data.platform_customer_id**
 
 **string | null**
 
-The customer's company name.
+The customer's unique identifier in the external platform.
 
 Example:
 
-`"Acme Ltd"`
+`"7823491023"`
 
-**customer.address**
-
-**string | null**
-
-The customer's primary address line.
-
-Example:
-
-`"12 High Street"`
-
-**customer.address2**
-
-**string | null**
-
-The customer's secondary address line.
-
-Example:
-
-`"Apartment 4"`
-
-**customer.city**
-
-**string | null**
-
-The customer's city.
-
-Example:
-
-`"Penryn"`
-
-**customer.province**
-
-**string | null**
-
-The customer's province or county.
-
-Example:
-
-`"Cornwall"`
-
-**customer.province_code**
-
-**string | null**
-
-The short code for the customer's province or county.
-
-Example:
-
-`"cornwall"`
-
-**customer.zip**
-
-**string | null**
-
-The customer's postal or zip code.
-
-Example:
-
-`"TR10 9FE"`
-
-**customer.country**
-
-**string | null**
-
-The customer's country name.
-
-Example:
-
-`"GB"`
-
-**customer.country_code**
-
-**string | null**
-
-The ISO 3166-1 alpha-2 country code.
-
-Example:
-
-`"GB"`
-
-**customer.accepts_marketing**
-
-**boolean**
-
-Whether the customer has opted in to marketing communications.
-
-Example:
-
-`true`
-
-**customer.is_email_subscribed**
-
-**boolean**
-
-Whether the customer is subscribed to email communications.
-
-Example:
-
-`true`
-
-**customer.email_marketing_consent**
+**data.points**
 
 **object**
 
-The customer's email marketing consent details.
+The customer's loyalty points summary.
 
-Show child attributes
+Hide child attributes
 
-**customer.email_marketing_consent.marketingOptInLevel**
-
-**string**
-
-The opt-in level for email marketing.
-
-Example:
-
-`"SINGLE_OPT_IN"`
-
-**customer.email_marketing_consent.marketingState**
-
-**string**
-
-The current marketing state for email.
-
-Example:
-
-`"SUBSCRIBED"`
-
-**customer.email_marketing_consent.marketingUpdatedAt**
-
-**string\<date-time\>**
-
-The date and time the email marketing consent was last updated.
-
-Example:
-
-`"2026-03-09T14:02:06.183Z"`
-
-**customer.sms_marketing_consent**
-
-**object**
-
-The customer's SMS marketing consent details.
-
-Show child attributes
-
-**customer.sms_marketing_consent.marketingOptInLevel**
-
-**string**
-
-The opt-in level for SMS marketing.
-
-Example:
-
-`"SINGLE_OPT_IN"`
-
-**customer.sms_marketing_consent.marketingState**
-
-**string**
-
-The current marketing state for SMS.
-
-Example:
-
-`"SUBSCRIBED"`
-
-**customer.sms_marketing_consent.marketingUpdatedAt**
-
-**string\<date-time\>**
-
-The date and time the SMS marketing consent was last updated.
-
-Example:
-
-`"2026-03-09T14:02:06.183Z"`
-
-**customer.total_spent**
-
-**number**
-
-The total amount spent by the customer across all orders.
-
-Example:
-
-`150.00`
-
-**customer.currency**
-
-**string**
-
-The ISO 4217 currency code for the customer's store.
-
-Example:
-
-`"GBP"`
-
-**customer.total_points**
+**data.points.balance**
 
 **integer**
 
-The customer's current loyalty points balance.
+The customer's current redeemable points balance.
+
+Example:
+
+`350`
+
+**data.points.earned**
+
+**integer**
+
+Total points ever earned by the customer.
 
 Example:
 
 `500`
 
-**customer.current_tier**
+**data.points.redeemed**
 
-**object | null**
+**integer**
 
-The customer's current VIP tier. `null` if the customer has not reached any tier.
-
-Show child attributes
-
-**customer.current_tier.uuid**
-
-**string\<uuid\>**
-
-Unique identifier for the VIP tier.
+Total points redeemed by the customer.
 
 Example:
 
-`"b3c4d5e6-f7a8-9012-bcde-f01234567890"`
+`150`
 
-**customer.current_tier.name**
-
-**string**
-
-The display name of the VIP tier.
-
-Example:
-
-`"Gold"`
-
-**customer.membership**
-
-**object**
-
-Details about the customer's loyalty program membership.
-
-Show child attributes
-
-**customer.membership.status**
-
-**string**
-
-The customer's membership status in the loyalty program.
-
-Available options:
-
-`active`,
-
-`inactive`,
-
-`pending`
-
-Example:
-
-`"active"`
-
-**customer.membership.joined_at**
-
-**string\<date-time\> | null**
-
-The date and time the customer joined the loyalty program.
-
-Example:
-
-`"2024-06-01T10:00:00.000Z"`
-
-**customer.is_lp_banned_customer**
-
-**string**
-
-Whether the customer is banned from the loyalty program.
-
-Available options:
-
-`yes`,
-
-`no`
-
-Example:
-
-`"no"`
-
-**customer.platform_created_at**
-
-**string\<date-time\>**
-
-The date and time the customer was created in the external platform.
-
-Example:
-
-`"2026-03-09T14:02:06.000Z"`
-
-**customer.platform_updated_at**
-
-**string\<date-time\>**
-
-The date and time the customer was last updated in the external platform.
-
-Example:
-
-`"2026-03-09T14:02:06.000Z"`
-
-**customer.created_at**
+**data.created_at**
 
 **string\<date-time\>**
 
@@ -468,9 +160,9 @@ The date and time when the customer was created in Yuko.
 
 Example:
 
-`"2026-03-09T14:02:06.000Z"`
+`"2024-06-01T10:00:00.000Z"`
 
-**customer.updated_at**
+**data.updated_at**
 
 **string\<date-time\>**
 
@@ -478,34 +170,89 @@ The date and time when the customer was last updated in Yuko.
 
 Example:
 
-`"2026-03-09T14:02:06.000Z"`
+`"2026-02-15T08:30:00.000Z"`
 
-**customer.deleted_at**
+<RequestExample>
 
-**string\<date-time\> | null**
+```bash cURL
+curl --request GET \
+  --url "https://api.yukoapp.com/v1/external/customers/63a2c89a-9936-4bc0-9d5f-93db46110b76" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
 
-The date and time when the customer was deleted. `null` if not deleted.
+```javascript JavaScript
+const customerId = "63a2c89a-9936-4bc0-9d5f-93db46110b76";
 
-Example:
+const response = await fetch(
+  `https://api.yukoapp.com/v1/external/customers/${customerId}`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    },
+  }
+);
 
-`null`
+const data = await response.json();
+```
 
-**customer.shopify_credit_account_id**
+```php PHP
+$customerId = "63a2c89a-9936-4bc0-9d5f-93db46110b76";
 
-**string | null**
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/external/customers/{$customerId}");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]);
 
-The Shopify credit account ID associated with the customer. Only applicable for Shopify stores.
+$response = curl_exec($ch);
+curl_close($ch);
 
-Example:
+$data = json_decode($response, true);
+```
 
-`"gid://shopify/ShopifyPaymentsAccount/12345"`
+</RequestExample>
 
-**customer.tags**
+<ResponseExample>
 
-**string[]**
+```json 200
+{
+  "data": {
+    "id": "63a2c89a-9936-4bc0-9d5f-93db46110b76",
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jane.smith@example.com",
+    "phone": "+14155552671",
+    "platform": "shopify",
+    "platform_customer_id": "7823491023",
+    "points": {
+      "balance": 350,
+      "earned": 500,
+      "redeemed": 150
+    },
+    "created_at": "2024-06-01T10:00:00.000Z",
+    "updated_at": "2026-02-15T08:30:00.000Z"
+  }
+}
+```
 
-A list of tags associated with the customer.
+```json 404
+{
+  "error": {
+    "code": "not_found",
+    "message": "Customer not found"
+  }
+}
+```
 
-Example:
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
 
-`["vip", "wholesale"]`
+</ResponseExample>

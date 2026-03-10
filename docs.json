@@ -173,47 +173,37 @@
             "group": "API References",
             "pages": [
               {
-                "group": "Activities",
-                "pages": [
-                  "activity-object"
-                ]
-              },
-              {
                 "group": "Customers",
                 "pages": [
                   "customer-object",
+                  "list-customers",
                   "retrieve-a-customer"
-                ]
-              },
-              {
-                "group": "Customer Identities",
-                "pages": [
-                  "customer-identity-object",
-                  "create-or-update-a-customer-identity"
-                ]
-              },
-              {
-                "group": "Ways to Earn",
-                "pages": [
-                  "way-to-earn-object",
-                  "list-ways-to-earn"
                 ]
               },
               {
                 "group": "Points Transactions",
                 "pages": [
                   "points-transaction-object",
-                  "create-a-points-transaction",
                   "list-points-transactions",
-                  "retrieve-a-points-transaction"
+                  "create-a-points-transaction"
                 ]
               },
               {
                 "group": "Rewards",
                 "pages": [
                   "reward-objects",
+                  "list-rewards",
                   "customer-reward-object",
-                  "list-customer-rewards"
+                  "list-customer-rewards",
+                  "get-redeemable-rewards",
+                  "redeem-reward"
+                ]
+              },
+              {
+                "group": "Activities",
+                "pages": [
+                  "activity-object",
+                  "list-customer-activities"
                 ]
               },
               {
@@ -221,7 +211,21 @@
                 "pages": [
                   "vip-tier-object",
                   "list-vip-tiers",
-                  "vip-tier-change-object"
+                  "get-customer-tier"
+                ]
+              },
+              {
+                "group": "Earning Rules",
+                "pages": [
+                  "way-to-earn-object",
+                  "list-ways-to-earn"
+                ]
+              },
+              {
+                "group": "Referrals",
+                "pages": [
+                  "get-referral-program",
+                  "list-customer-referrals"
                 ]
               },
               {
@@ -229,6 +233,12 @@
                 "pages": [
                   "membership-object",
                   "list-memberships"
+                ]
+              },
+              {
+                "group": "Checkout",
+                "pages": [
+                  "checkout-points-estimate"
                 ]
               }
             ]

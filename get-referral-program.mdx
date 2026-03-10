@@ -1,0 +1,243 @@
+---
+title: "Get referral program"
+---
+
+Retrieves the referral program configuration for your organisation, including referrer and friend reward settings, qualifying rules, and fraud protection rules.
+
+**GET /external/referral/program**
+
+#### **Authorizations**
+
+**Authorization**
+
+**string**
+
+**header**
+
+**required**
+
+Bearer authentication header of the form `Bearer <token>`, where `<token>` is your REST API token.
+
+#### **Response**
+
+**200 - application/json**
+
+**data**
+
+**object**
+
+Hide child attributes
+
+**data.id**
+
+**string\<uuid\>**
+
+Unique UUID identifier for the referral program.
+
+Example:
+
+`"c3d4e5f6-a7b8-9012-cdef-a01234567890"`
+
+**data.referrer_reward**
+
+**object**
+
+The reward configuration for the customer who makes the referral (the advocate).
+
+Show child attributes
+
+**data.referrer_reward.type**
+
+**enum\<string\>**
+
+The type of reward issued to the referrer.
+
+Available options:
+
+`points`,
+
+`fixed_discount`,
+
+`percentage_discount`,
+
+`free_shipping`
+
+Example:
+
+`"points"`
+
+**data.referrer_reward.value**
+
+**number**
+
+The reward value (points or discount amount).
+
+Example:
+
+`500`
+
+**data.friend_reward**
+
+**object**
+
+The reward configuration for the referred friend.
+
+Show child attributes
+
+**data.friend_reward.type**
+
+**enum\<string\>**
+
+The type of reward issued to the referred friend.
+
+Available options:
+
+`points`,
+
+`fixed_discount`,
+
+`percentage_discount`,
+
+`free_shipping`
+
+Example:
+
+`"fixed_discount"`
+
+**data.friend_reward.value**
+
+**number**
+
+The reward value (points or discount amount).
+
+Example:
+
+`10`
+
+**data.qualifying_rules**
+
+**object | null**
+
+Rules that determine whether a referral qualifies for a reward (e.g. minimum order value).
+
+Example:
+
+`{ "min_order_value": 50 }`
+
+**data.fraud_rules**
+
+**object | null**
+
+Rules used to detect and prevent fraudulent referrals.
+
+Example:
+
+`{ "same_ip_block": true, "same_email_domain_block": false }`
+
+**data.display_config**
+
+**object | null**
+
+Display configuration for the referral widget.
+
+**data.created_at**
+
+**string\<date-time\>**
+
+Example:
+
+`"2025-10-01T00:00:00.000Z"`
+
+**data.updated_at**
+
+**string\<date-time\>**
+
+Example:
+
+`"2026-01-15T10:00:00.000Z"`
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url "https://api.yukoapp.com/v1/external/referral/program" \
+  --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://api.yukoapp.com/v1/external/referral/program",
+  {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    },
+  }
+);
+
+const data = await response.json();
+```
+
+```php PHP
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "https://api.yukoapp.com/v1/external/referral/program");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "data": {
+    "id": "c3d4e5f6-a7b8-9012-cdef-a01234567890",
+    "referrer_reward": {
+      "type": "points",
+      "value": 500
+    },
+    "friend_reward": {
+      "type": "fixed_discount",
+      "value": 10
+    },
+    "qualifying_rules": {
+      "min_order_value": 50
+    },
+    "fraud_rules": {
+      "same_ip_block": true,
+      "same_email_domain_block": false
+    },
+    "display_config": null,
+    "created_at": "2025-10-01T00:00:00.000Z",
+    "updated_at": "2026-01-15T10:00:00.000Z"
+  }
+}
+```
+
+```json 404
+{
+  "error": {
+    "code": "not_found",
+    "message": "Referral program not found"
+  }
+}
+```
+
+```json 401
+{
+  "error": {
+    "code": "invalid_token",
+    "message": "Invalid or revoked API token"
+  }
+}
+```
+
+</ResponseExample>
