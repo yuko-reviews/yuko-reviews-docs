@@ -212,15 +212,15 @@
                 "pages": [
                   "checkout-points-estimate"
                 ]
+              },
+              {
+                "group": "Apps & Integrations",
+                "pages": [
+                  "third-party-checkout-integrations"
+                ]
               }
             ]
           }
-        ]
-      },
-      {
-        "tab": "Integrations",
-        "pages": [
-          "third-party-checkout-integrations"
         ]
       }
     ]
