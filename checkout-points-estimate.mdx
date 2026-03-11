@@ -48,18 +48,6 @@ Example:
 
 `"rahul.sharma@example.com"`
 
-**currency**
-
-**string**
-
-ISO 4217 currency code for the order.
-
-Required length: `3`
-
-Example:
-
-`"INR"`
-
 **items**
 
 **object[]**
@@ -93,44 +81,6 @@ The platform variant/SKU ID.
 Example:
 
 `"var_1001_red_m"`
-
-**items[].price**
-
-**number**
-
-**required**
-
-The unit price of this item.
-
-Example:
-
-`999.00`
-
-**items[].quantity**
-
-**integer**
-
-**required**
-
-The quantity ordered.
-
-Required range: `1 <= x`
-
-Example:
-
-`1`
-
-**items[].total**
-
-**number**
-
-**required**
-
-The line total (`price × quantity`) used for points calculation.
-
-Example:
-
-`999.00`
 
 #### **Response**
 
@@ -174,21 +124,14 @@ curl --request POST \
       "id": "cus_847362",
       "email": "rahul.sharma@example.com"
     },
-    "currency": "INR",
     "items": [
       {
         "product_id": "prod_1001",
-        "variant_id": "var_1001_red_m",
-        "price": 999.00,
-        "quantity": 1,
-        "total": 999.00
+        "variant_id": "var_1001_red_m"
       },
       {
         "product_id": "prod_2044",
-        "variant_id": "var_2044_black_42",
-        "price": 1400.00,
-        "quantity": 1,
-        "total": 1400.00
+        "variant_id": "var_2044_black_42"
       }
     ]
   }'
@@ -208,21 +151,14 @@ const response = await fetch(
         id: "cus_847362",
         email: "rahul.sharma@example.com",
       },
-      currency: "INR",
       items: [
         {
           product_id: "prod_1001",
           variant_id: "var_1001_red_m",
-          price: 999.00,
-          quantity: 1,
-          total: 999.00,
         },
         {
           product_id: "prod_2044",
           variant_id: "var_2044_black_42",
-          price: 1400.00,
-          quantity: 1,
-          total: 1400.00,
         },
       ],
     }),
@@ -242,21 +178,14 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
         "id"    => "cus_847362",
         "email" => "rahul.sharma@example.com",
     ],
-    "currency" => "INR",
     "items" => [
         [
             "product_id" => "prod_1001",
             "variant_id" => "var_1001_red_m",
-            "price"      => 999.00,
-            "quantity"   => 1,
-            "total"      => 999.00,
         ],
         [
             "product_id" => "prod_2044",
             "variant_id" => "var_2044_black_42",
-            "price"      => 1400.00,
-            "quantity"   => 1,
-            "total"      => 1400.00,
         ],
     ],
 ]));
