@@ -4,7 +4,7 @@ title: "Retrieve a customer"
 
 Retrieves a single customer by their platform customer ID, enriched with current VIP tier and loyalty membership status.
 
-**GET /public/customers/retrieve**
+**GET /public/customers/{id}**
 
 #### **Authorizations**
 
@@ -24,9 +24,9 @@ Bearer authentication header of the form `Bearer <token>`, where `<token>` is yo
 
 This endpoint requires the `customers` scope with **Read Access**. Configure token scopes in Settings → Integrations → REST API.
 
-#### **Query Parameters**
+#### **Path Parameters**
 
-**customer_id**
+**id**
 
 **string**
 
@@ -250,7 +250,7 @@ Example:
 
 ```bash cURL
 curl --request GET \
-  --url "https://api.yukoapp.com/api/v1/public/customers/retrieve?customer_id=9049402769586" \
+  --url "https://api.yukoapp.com/api/v1/public/customers/9049402769586" \
   --header "Authorization: Bearer py_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
@@ -258,7 +258,7 @@ curl --request GET \
 const customerId = "9049402769586";
 
 const response = await fetch(
-  `https://api.yukoapp.com/api/v1/public/customers/retrieve?customer_id=${customerId}`,
+  `https://api.yukoapp.com/api/v1/public/customers/${customerId}`,
   {
     method: "GET",
     headers: {

@@ -176,6 +176,7 @@
                   "get-customer-tier",
                   "list-customer-rewards",
                   "get-redeemable-rewards",
+                  "redeem-reward",
                   "list-customer-activities",
                   "list-points-transactions",
                   "create-a-points-transaction",
@@ -185,8 +186,7 @@
               {
                 "group": "Rewards",
                 "pages": [
-                  "list-rewards",
-                  "redeem-reward"
+                  "list-rewards"
                 ]
               },
               {
