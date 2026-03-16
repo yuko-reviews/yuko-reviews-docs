@@ -12,12 +12,12 @@ description: "Step-by-step guide for third party checkout providers to integrate
 
 When a customer reaches your checkout, this integration lets you show them three things from Yuko — in real time:
 
-| What the customer sees / does                             | API endpoint                                                   |
-| --------------------------------------------------------- | -------------------------------------------------------------- |
-| Their current points balance                              | [`GET /customers/rewards/redeemable`](/get-redeemable-rewards) |
-| Rewards available to redeem right now                     | [`GET /customers/rewards/redeemable`](/get-redeemable-rewards) |
-| Spend their points to get a discount code or store credit | [`POST /customers/rewards/redeem`](/redeem-reward)             |
-| Points they will earn on this purchase                    | [`POST /points/estimate`](/checkout-points-estimate)           |
+| What the customer sees / does                             | API endpoint                        |
+| --------------------------------------------------------- | ----------------------------------- |
+| Their current points balance                              | `GET /customers/rewards/redeemable` |
+| Rewards available to redeem right now                     | `GET /customers/rewards/redeemable` |
+| Spend their points to get a discount code or store credit | `POST /customers/rewards/redeem`    |
+| Points they will earn on this purchase                    | `POST /points/estimate`             |
 
 Three API calls. One seamless checkout experience.
 
