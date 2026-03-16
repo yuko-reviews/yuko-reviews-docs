@@ -156,7 +156,7 @@
           {
             "group": "Rest API",
             "pages": [
-              "introduction",
+              "developer/api/introduction",
               "authentication",
               "errod",
               "classic-pagination",
