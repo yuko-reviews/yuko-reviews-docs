@@ -50,7 +50,7 @@
             "pages": [
               "collect-reviews",
               "collect-reviews/review-collection-form",
-              "collect-reviews/collecting-shop-site-review",
+              "collect-reviews/collecting-store-reviews",
               "collect-reviews/customizing-review-inputs"
             ]
           },
