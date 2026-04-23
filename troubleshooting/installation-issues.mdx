@@ -1,0 +1,129 @@
+---
+title: "Installation & Connection Issues"
+description: "Plugin won't activate, store won't connect, authentication fails — fixes for the most common install problems."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+---
+
+## Plugin activates but "Yuko Integration" is missing from the WordPress sidebar
+
+**Possible causes, in order of likelihood:**
+
+<AccordionGroup>
+  <Accordion title="Browser or admin cache" icon="broom">
+    1. Hard-refresh the WordPress admin page (Ctrl+Shift+R / Cmd+Shift+R)
+    2. Log out and log back in
+    3. Try a different browser or an incognito window
+
+    Cached admin menu HTML is the #1 reason for this.
+  </Accordion>
+  <Accordion title="User role not Administrator" icon="user-lock">
+    Yuko menu items are only visible to users with the `manage_options` capability (Administrator role).
+
+    Check **Users → Your Profile → Role**. If you're an Editor or Shop Manager, ask a site admin to grant access.
+  </Accordion>
+  <Accordion title="Plugin conflict" icon="puzzle-piece">
+    1. Deactivate every non-essential plugin except Yuko and WooCommerce
+    2. Check if the Yuko menu appears
+    3. Reactivate plugins one at a time, checking after each, until the conflict surfaces
+
+    Common culprits: aggressive security plugins (WordFence, iThemes), caching plugins that strip admin pages, or custom role managers.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## "Connection failed" when authenticating your store
+
+**Checklist:**
+
+<Check>
+  **Store URL format is correct:**
+
+  - Starts with `https://` (not `http://` — Yuko requires SSL)
+  - Uses your primary domain, not a staging preview URL
+  - Does **not** include `/wp-admin`, `/shop`, or trailing slashes
+  - Matches exactly what's set in **WordPress Admin → Settings → General → WordPress Address (URL)**
+
+  ✅ `https://yourstore.com`
+  ❌ `http://yourstore.com/wp-admin`
+</Check>
+
+<Check>
+  **Plugin and WooCommerce are both active:**
+
+  - Yuko Integration shows "Active" under **Plugins**
+  - WooCommerce shows "Active" under **Plugins**
+  - Your shop page loads normally at the front end
+</Check>
+
+<Check>
+  **Security isn't blocking the handshake:**
+
+  Temporarily disable:
+  - WordFence / Sucuri / iThemes Security
+  - "Block REST API" rules in any security plugin
+  - Cloudflare's "Under Attack" mode (drop to "Medium" for a minute)
+
+  Try connecting again, then re-enable. Whitelist `app.yukoapp.com` in your security rules permanently.
+</Check>
+
+<Check>
+  **REST API is reachable:**
+
+  Visit `https://yourstore.com/wp-json/yuko/v2/` in your browser. You should see a JSON response (possibly `{"error":"unauthorized"}` — that's fine). A 404 or 500 means the REST API is blocked.
+
+  If blocked, check **Settings → Permalinks** and re-save to refresh rewrite rules.
+</Check>
+
+---
+
+## "Invalid signature" error during authentication
+
+This happens when the plugin and backend don't agree on the HMAC signature. Usually caused by:
+
+1. **Clock drift** — your server's time is off by more than 5 minutes. Check with `date` on the server or a time-checking WordPress plugin. Contact your host if skewed.
+2. **Plugin reinstalled** — the local secret key was regenerated but the backend still holds the old one. Disconnect from the Yuko dashboard (Account → Integrations → WooCommerce → **Disconnect**), then re-authenticate from WordPress.
+3. **Two plugin installs on the same WP site** — only one Yuko Integration install per site is supported.
+
+---
+
+## "HTTPS required" error
+
+Yuko requires HTTPS on the storefront. If you see this:
+
+1. Install a free SSL certificate via your host (most hosts offer Let's Encrypt one-click)
+2. Force HTTPS in **Settings → General → WordPress Address (URL)** — both fields must start with `https://`
+3. Update any hardcoded `http://` URLs with a plugin like **Better Search Replace**
+4. Flush permalinks (Settings → Permalinks → Save)
+5. Re-authenticate in Yuko
+
+---
+
+## Plugin upload fails with "file too large"
+
+Your host's PHP `upload_max_filesize` or `post_max_size` is too low.
+
+- Ask your host to bump both to at least 10 MB, or
+- Install via FTP instead (see [Advanced installation](/installation/woocommerce#advanced-installation-options) in the install guide)
+
+---
+
+## After a host migration, Yuko shows "Disconnected"
+
+Moving your site between hosts changes file paths and often regenerates secrets. After migration:
+
+1. Yuko Dashboard → **Account → Integrations → WooCommerce → Disconnect**
+2. WordPress Admin → **Yuko Integration → Re-authenticate**
+3. Confirm the new store URL (usually the same)
+4. Run a fresh sync
+
+Your collected reviews are preserved — they live on the Yuko backend, not in the WordPress database.
+
+---
+
+## Need Help?
+
+<NeedHelp />

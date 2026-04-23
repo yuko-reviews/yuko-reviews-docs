@@ -1,0 +1,152 @@
+---
+title: "Custom CSS"
+description: "Style Yuko widgets to match your theme using the Custom CSS field and stable class names."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+import { PlanAvailability } from '/snippets/plan-availability.mdx';
+
+Every Yuko widget has a **Custom CSS** editor in its customization panel. Rules you add there are scoped to that widget and injected into the storefront at render time.
+
+<PlanAvailability plans="Basic, Advanced, and Growth plans" />
+
+---
+
+## Where to write Custom CSS
+
+1. Open the widget: **Reviews → Widgets → [Widget] → Customize**
+2. Switch to the **Custom CSS** tab (code icon)
+3. Write standard CSS — no preprocessor, no build step
+4. Click **Save** to publish
+
+Changes apply within ~60 seconds on the storefront (cache-dependent).
+
+---
+
+## Stable class names you can target
+
+Yuko's widget markup uses class names prefixed with `yuko-` and `y-`. The following classes are considered stable API and won't change without a major version bump.
+
+### Star rating
+
+| Class | Element |
+| --- | --- |
+| `.yuko-star-rating` | Wrapper |
+| `.yuko-star-rating__icon` | Individual star SVG |
+| `.yuko-star-rating__count` | "(12 reviews)" label |
+| `.yuko-star-rating--empty` | Modifier for zero-review state |
+
+### Product reviews display
+
+| Class | Element |
+| --- | --- |
+| `.y-reviews` | Outer widget container |
+| `.y-reviews__header` | Summary bar (avg rating, distribution) |
+| `.y-reviews__filters` | Filter and sort controls |
+| `.y-reviews__list` | Review list container |
+| `.y-review` | Single review card |
+| `.y-review__author` | Reviewer name + badges |
+| `.y-review__rating` | Star rating on a single review |
+| `.y-review__title` | Review headline |
+| `.y-review__body` | Review text |
+| `.y-review__photos` | Photo gallery |
+| `.y-review__reply` | Merchant reply block |
+| `.y-verified-badge` | Verified buyer badge |
+
+### Review form
+
+| Class | Element |
+| --- | --- |
+| `.y-review-form` | Form container |
+| `.y-review-form__field` | Field group |
+| `.y-review-form__submit` | Submit button |
+
+### Carousel
+
+| Class | Element |
+| --- | --- |
+| `.y-carousel` | Outer container |
+| `.y-carousel__slide` | Single slide |
+| `.y-carousel__nav` | Next/prev buttons |
+| `.y-carousel__dot` | Pagination dot |
+
+---
+
+## Common recipes
+
+### Match your brand font
+
+```css
+.y-reviews,
+.y-review-form {
+  font-family: "Your Brand Font", sans-serif;
+}
+```
+
+### Tighter review cards on mobile
+
+```css
+@media (max-width: 640px) {
+  .y-review {
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .y-review__photos img {
+    width: 60px;
+    height: 60px;
+  }
+}
+```
+
+### Recolor the verified badge to match your brand
+
+```css
+.y-verified-badge {
+  background-color: #2aa674;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 11px;
+}
+```
+
+### Hide the "Write a Review" button on category pages
+
+```css
+body.archive .y-reviews__write-btn {
+  display: none;
+}
+```
+
+---
+
+## Rules of thumb
+
+<AccordionGroup>
+  <Accordion title="Prefer Custom CSS over theme overrides" icon="shield">
+    When you write CSS in the widget editor, Yuko loads it with the correct specificity and lifecycle. Rules in your theme's `style.css` may lose the cascade fight against widget defaults — start with Custom CSS first.
+  </Accordion>
+  <Accordion title="Don't target generated hash classes" icon="hashtag">
+    Classes like `.css-1a2b3c4` or `._fjkdsl8` are compiled at build time and change on every Yuko release. Only use the `y-` and `yuko-` prefixed classes documented above.
+  </Accordion>
+  <Accordion title="Use `!important` sparingly" icon="triangle-exclamation">
+    If you need `!important`, the selector is usually wrong. Increase specificity with a parent class (e.g. `.y-reviews .y-review__title`) first.
+  </Accordion>
+  <Accordion title="Test on mobile" icon="mobile-screen">
+    70% of reviewers are on mobile. Always verify changes in responsive mode before shipping.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## When Custom CSS isn't enough
+
+If you need to change markup, add JavaScript behaviour, or integrate with another component system, use the **[Plugin Hooks & Filters](/developer/plugin-hooks)** to replace or wrap widget output at the PHP layer.
+
+For brand-wide consistency (logo, primary color, font) across every widget, use [Branding & appearance](/display-reviews/branding) instead — those settings are applied before Custom CSS so you don't have to repeat rules per widget.
+
+---
+
+## Need Help?
+
+<NeedHelp />

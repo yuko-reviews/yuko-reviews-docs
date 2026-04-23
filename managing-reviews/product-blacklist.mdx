@@ -1,0 +1,90 @@
+---
+title: "Product Blacklist"
+description: "Exclude specific products from review collection without affecting existing reviews."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+import { DashboardPath } from '/snippets/dashboard-path.mdx';
+
+The Product Blacklist tells Yuko to skip certain products when sending review requests. Use it for products where reviews don't make sense — gift cards, services, bundles, or discontinued items.
+
+<DashboardPath path="Reviews → Product Blacklist (or Account → Review Settings → Review Restrictions & Limits → Manage Product Blacklist)" />
+
+![Product blacklist](/images/sf.png)
+
+---
+
+## What the blacklist does
+
+- Blacklisted products **don't receive review request emails**
+- **Manual review requests** from the Orders screen also skip these products
+- **Existing reviews are kept** — the blacklist only affects future collection
+- Removing a product from the blacklist immediately re-enables review requests
+
+<Info>
+  The Product Blacklist affects **review collection**, not review display. To stop a review from appearing on the storefront, moderate the review directly from **Reviews → Manage Reviews**.
+</Info>
+
+---
+
+## Add products to the blacklist
+
+<Tabs>
+  <Tab title="Add manually">
+    1. Click **Add Manually**
+    2. Enter **numeric product IDs**, separated by commas
+    3. Click **Save**
+
+    **Example:** `123, 456, 789`
+
+    <Tip>
+      You can find a product's ID in WordPress Admin → Products — hover over a product row to see the ID in the bottom status bar, or check the browser address bar when editing it (`post=123`).
+    </Tip>
+
+    Invalid or non-numeric IDs are ignored silently.
+  </Tab>
+  <Tab title="Upload CSV">
+    For larger catalogs, use CSV upload.
+
+    **CSV requirements:**
+
+    - One numeric product ID per row
+    - No column headers required
+    - Invalid IDs are skipped automatically
+
+    Click **Download sample CSV** to see the expected format.
+  </Tab>
+</Tabs>
+
+---
+
+## Good candidates for the blacklist
+
+<CardGroup cols={2}>
+  <Card title="Gift cards & vouchers" icon="gift">
+    Customers rarely review a gift card itself — reviews on these products usually describe the buying experience, not the product.
+  </Card>
+  <Card title="Services & bookings" icon="calendar">
+    Installation, warranties, and subscription add-ons don't benefit from product reviews.
+  </Card>
+  <Card title="Sample / trial SKUs" icon="flask">
+    Free samples and trials distort average ratings — skip them and let paid purchases drive the review flow.
+  </Card>
+  <Card title="Discontinued products" icon="box-archive">
+    Stop sending review requests for items you no longer stock, so new customers don't land on an empty page.
+  </Card>
+</CardGroup>
+
+---
+
+## Related controls
+
+- **[Email Blacklist](/managing-reviews/email-blacklist)** — stop email to specific addresses or domains
+- **[Product Groups](/managing-reviews/product-groups)** — apply review logic to a set of products at once
+- **[Review restrictions](/managing-reviews/review-restrictions-limits)** — control who can submit reviews
+
+---
+
+## Need Help?
+
+<NeedHelp />

@@ -1,0 +1,137 @@
+---
+title: "Plugin Hooks & Filters"
+description: "WordPress action and filter hooks exposed by the Yuko Integration plugin."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+The Yuko Integration plugin exposes WordPress hooks so you can customize its behaviour without forking the plugin. All hooks live in the global namespace and are prefixed with `yuko_`.
+
+<Info>
+  Add custom code to your child theme's `functions.php` or a site-specific MU plugin. Never edit the Yuko plugin files directly — changes are overwritten on update.
+</Info>
+
+---
+
+## Action hooks
+
+Fired at key points in the plugin lifecycle.
+
+| Hook | Fires | Use case |
+| --- | --- | --- |
+| `yuko_before_init` | Before `Route::init()` runs | Replace or wrap a component before the default is registered |
+| `yuko_after_init` | After all components are registered | Enqueue supplementary scripts, register additional shortcodes |
+| `yuko_before_schema_output` | Just before JSON-LD schema is printed | Modify or extend the schema markup |
+| `yuko_clear_cache` | When the admin triggers a cache reset | Clear your own caches that depend on Yuko data |
+| `yuko_reactivate_disabled_webhooks` | Daily cron | Hook into webhook recovery (e.g. log to monitoring) |
+
+**Example:**
+
+```php
+add_action( 'yuko_after_init', function () {
+    wp_enqueue_script(
+        'my-yuko-customizations',
+        get_stylesheet_directory_uri() . '/js/yuko-custom.js',
+        [ 'yuko-review-main' ],
+        '1.0.0',
+        true
+    );
+} );
+```
+
+---
+
+## Filter hooks
+
+Modify plugin values before they are used.
+
+### Webhook delivery
+
+| Filter | Default | Purpose |
+| --- | --- | --- |
+| `yuko_webhook_topics` | Array of registered topics | Add or remove webhook events |
+| `yuko_blocked_order_statuses_for_webhooks` | `['draft', 'auto-draft']` | Prevent certain statuses from firing webhooks |
+| `yuko_order_cancelled_status` | `'cancelled'` | Map your custom status to the "cancelled" event |
+| `yuko_order_fulfilled_status` | `'completed'` | Map your custom status to the "fulfilled" event |
+| `yuko_order_paid_status` | `'processing'` | Map your custom status to the "paid" event |
+
+**Example — add a custom webhook topic:**
+
+```php
+add_filter( 'yuko_webhook_topics', function ( $topics ) {
+    $topics['order.custom_shipped'] = [
+        'label' => 'Order marked as shipped',
+        'hook'  => 'woocommerce_order_status_shipped',
+    ];
+    return $topics;
+} );
+```
+
+### Storefront rendering
+
+| Filter | Purpose |
+| --- | --- |
+| `yuko_disable_woocommerce_ratings` | Return `true` to hide WooCommerce's native star ratings (Yuko replaces them by default) |
+| `yuko_enable_category_page_rating_widget` | Return `true`/`false` to toggle star display on category/archive pages |
+| `yuko_structured_data_product` | Modify the JSON-LD product schema array before output |
+| `yuko_product_sync_status` | Array of post statuses that are synced to Yuko (default: `['publish']`) |
+
+**Example — show Yuko ratings on category pages:**
+
+```php
+add_filter( 'yuko_enable_category_page_rating_widget', '__return_true' );
+```
+
+**Example — keep WooCommerce's default ratings visible alongside Yuko:**
+
+```php
+add_filter( 'yuko_disable_woocommerce_ratings', '__return_false' );
+```
+
+### Data sync
+
+| Filter | Purpose |
+| --- | --- |
+| `yuko_payload_order` | Modify the order payload before it's sent to the Yuko backend |
+| `yuko_payload_product` | Modify the product payload before sync |
+| `yuko_payload_customer` | Modify the customer payload before sync |
+
+**Example — strip internal SKU prefix before sending to Yuko:**
+
+```php
+add_filter( 'yuko_payload_product', function ( $payload ) {
+    $payload['sku'] = preg_replace( '/^INTERNAL-/', '', $payload['sku'] );
+    return $payload;
+} );
+```
+
+---
+
+## Constants
+
+You can override plugin behaviour with constants in `wp-config.php`:
+
+| Constant | Default | Purpose |
+| --- | --- | --- |
+| `YUKO_APP_URL` | `https://app.yukoapp.com` | Override the backend URL (useful for staging) |
+| `YUKO_DEBUG` | `false` | Enable verbose logging to `wp-content/debug.log` |
+
+---
+
+## Triggering events manually
+
+Some hooks are useful to call from your own code to simulate Yuko behaviour (e.g. after migrating data):
+
+```php
+// Re-sync a single product
+do_action( 'yuko_sync_product', $product_id );
+
+// Clear Yuko's internal caches
+do_action( 'yuko_clear_cache' );
+```
+
+---
+
+## Need Help?
+
+<NeedHelp />

@@ -1,0 +1,80 @@
+---
+title: "Troubleshooting"
+description: "Fix the most common Yuko issues on WooCommerce — installation, sync, emails, and storefront display."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+Most Yuko issues fall into one of four buckets. Pick the closest match below.
+
+<CardGroup cols={2}>
+  <Card title="Installation & connection" icon="plug-circle-xmark" href="/troubleshooting/installation-issues">
+    Plugin won't activate, store won't connect, "connection failed" errors.
+  </Card>
+  <Card title="Reviews not appearing" icon="eye-slash" href="/troubleshooting/reviews-not-appearing">
+    Submitted reviews don't show on the storefront, widget is blank, star ratings missing.
+  </Card>
+  <Card title="Emails not sending" icon="envelope-circle-check" href="/troubleshooting/emails-not-sending">
+    Review requests not going out, customers not receiving emails, deliverability issues.
+  </Card>
+  <Card title="Sync issues" icon="arrows-rotate" href="/troubleshooting/sync-issues">
+    Products or orders missing, customer data stale, sync stuck.
+  </Card>
+</CardGroup>
+
+---
+
+## Before you troubleshoot
+
+Most issues are resolved by one of these four actions. Try them in order — each takes less than a minute.
+
+<Steps>
+  <Step title="Check the WooCommerce System Status" icon="clipboard-check">
+    **WordPress Admin → WooCommerce → Status → System Status**
+
+    Look at the **Template overrides** and **Logs** sections. Yuko flags issues with a red ❌ if something's wrong on the WordPress side.
+  </Step>
+  <Step title="Check the Yuko dashboard integration status" icon="signal">
+    **Yuko Dashboard → Account → Integrations → WooCommerce**
+
+    The connection card shows either **Connected** (green), **Disconnected** (grey), or **Failed** (red). If red, click **Re-authenticate**.
+  </Step>
+  <Step title="Force a data sync" icon="rotate">
+    **Yuko Dashboard → Account → Integrations → WooCommerce → Configure → Sync Data**
+
+    Re-pulls products, orders, and customers from WooCommerce. Takes 1–5 minutes for most stores.
+  </Step>
+  <Step title="Clear caches" icon="broom">
+    Clear any page cache (WP Rocket, W3 Total Cache, LiteSpeed, etc.), CDN cache (Cloudflare, BunnyCDN), and your browser cache. Stale HTML is the #1 cause of "widget isn't updating" reports.
+  </Step>
+</Steps>
+
+---
+
+## Quick diagnostic table
+
+| Symptom | Most likely cause | Start here |
+| --- | --- | --- |
+| Plugin activates but Yuko sidebar missing | User role not Administrator, or plugin conflict | [Installation issues](/troubleshooting/installation-issues) |
+| Store URL won't authenticate | HTTPS mismatch, security plugin blocking, incorrect URL format | [Installation issues](/troubleshooting/installation-issues) |
+| New reviews not visible on product page | Cache, pending moderation, widget disabled | [Reviews not appearing](/troubleshooting/reviews-not-appearing) |
+| Star rating shows zero despite reviews existing | Category page widget not enabled, schema cached | [Reviews not appearing](/troubleshooting/reviews-not-appearing) |
+| Review request never arrived | Customer on Email Blacklist, product on Product Blacklist, order status never reached "Completed" | [Emails not sending](/troubleshooting/emails-not-sending) |
+| Customer reports email in spam folder | DNS records (SPF/DKIM) not set up, no custom sending domain | [Emails not sending](/troubleshooting/emails-not-sending) |
+| Products missing from Yuko dashboard | Product status not Published, large catalog still syncing, HPOS migration incomplete | [Sync issues](/troubleshooting/sync-issues) |
+| Orders stuck in "Processing" never trigger emails | Workflow set to trigger on "Completed", not "Processing" | [Sync issues](/troubleshooting/sync-issues) |
+
+---
+
+## Still stuck?
+
+<NeedHelp />
+
+When you contact support, include:
+
+- Your Yuko organization name or email
+- WordPress, WooCommerce, and PHP versions (from **WooCommerce → Status**)
+- The exact error message or a screenshot
+- Timestamp (in your timezone) of when the issue happened — our logs are time-indexed
+
+This turns what could be a multi-day back-and-forth into a same-day fix.

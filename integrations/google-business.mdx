@@ -1,0 +1,77 @@
+---
+title: "Google Business Profile"
+description: "Sync reviews from your Google Business Profile into Yuko, and respond to them from a single dashboard."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+import { DashboardPath } from '/snippets/dashboard-path.mdx';
+import { PlanAvailability } from '/snippets/plan-availability.mdx';
+
+Connect your Google Business Profile to centralize review management — Google reviews show up alongside your Yuko product reviews, and replies posted from Yuko sync back to Google.
+
+<PlanAvailability plans="Growth plan" />
+
+<DashboardPath path="Account → Integrations → Google Business Profile" />
+
+---
+
+## What this integration does
+
+- **Imports your Google reviews** into Yuko's Manage Reviews dashboard
+- **Surfaces new Google reviews** in your daily moderation workflow alongside Yuko-collected reviews
+- **Syncs merchant replies** — type a reply in Yuko, it posts to Google Business Profile
+- **Tags imported reviews** with `source: google` so you can filter them out of on-site widgets
+
+This integration does **not** push Yuko product reviews to Google Business Profile — Google doesn't accept third-party reviews on business listings. For search-result star ratings, use [Google SEO rich snippets](/integrations/google-seo) and [Google Shopping feed](/integrations/google-shopping) instead.
+
+---
+
+## Connect Google Business Profile
+
+<Steps>
+  <Step title="Click Connect" icon="plug">
+    In Yuko: **Account → Integrations → Google Business Profile → Connect with Google**.
+
+    You'll be redirected to Google to authorize Yuko.
+  </Step>
+  <Step title="Grant the required scopes" icon="check">
+    Yuko requests:
+    - **Read and manage business.profile reviews**
+    - **Read business profile location info**
+
+    Approve — these are the minimum scopes needed.
+  </Step>
+  <Step title="Choose the location to sync" icon="location-dot">
+    If your Google account manages multiple business locations, pick the one that matches the store connected to Yuko.
+
+    Multi-location syncing is available on request — [contact support](https://yukoreviews.com/support).
+  </Step>
+  <Step title="Wait for the initial import" icon="hourglass">
+    Yuko imports the last 200 Google reviews. Large accounts may take 5–10 minutes. New reviews appear in near-real-time after that.
+  </Step>
+</Steps>
+
+---
+
+## Managing Google reviews in Yuko
+
+Imported Google reviews appear in **Reviews → Manage Reviews** tagged with a **Google** badge.
+
+- Replies you post via the reply box are sent to Google Business Profile immediately
+- Yuko does **not** change the status of Google reviews (no approve/reject) — Google publishes all reviews by default
+- You cannot delete Google reviews from Yuko; use Google's own flagging flow for that
+- The star rating on Google reviews is imported as-is
+
+---
+
+## Disconnect
+
+**Account → Integrations → Google Business Profile → Disconnect**.
+
+Imported reviews remain in your Yuko dashboard as a historical record. To remove them entirely, delete each review manually after disconnecting.
+
+---
+
+## Need Help?
+
+<NeedHelp />

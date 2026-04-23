@@ -1,0 +1,133 @@
+---
+title: "REST API"
+description: "REST endpoints exposed by the WooCommerce plugin and by the Yuko backend."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+Yuko exposes two REST surfaces:
+
+1. **Plugin REST API** — endpoints registered on your WordPress site under `/wp-json/yuko/v2/`. Authenticated with WooCommerce consumer keys. Used internally by the Yuko backend to sync data.
+2. **Public Yuko API** — endpoints on `https://app.yukoapp.com/api/v1/public/`. Authenticated with a Bearer token. Use these to read/write reviews from external services.
+
+<Warning>
+  Endpoints and payload shapes are versioned and documented here. For automation without writing code, prefer **[Webhooks](/integrations/webhooks)** or **[Zapier](/integrations/zapier)**.
+</Warning>
+
+---
+
+## Plugin REST API (`/wp-json/yuko/v2/`)
+
+Registered by the Yuko Integration plugin on your WordPress site. The plugin uses these to expose order, product, and customer data to the Yuko backend.
+
+### Authentication
+
+All requests require a WooCommerce REST API key with **Read** permissions:
+
+```bash
+curl -u consumer_key:consumer_secret \
+  https://yourstore.com/wp-json/yuko/v2/orders
+```
+
+Generate keys in **WordPress Admin → WooCommerce → Settings → Advanced → REST API**.
+
+### Endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/orders` | List orders, enriched with Yuko review status |
+| `GET` | `/orders/{id}` | Single order with line items and customer |
+| `GET` | `/products` | List synced products |
+| `GET` | `/products/{id}` | Single product |
+| `GET` | `/customers` | List customers |
+| `POST` | `/sync/trigger` | Manually trigger a full sync (use sparingly) |
+
+Responses include standard WooCommerce fields plus Yuko-specific metadata like `review_request_sent_at`, `review_count`, and `average_rating`.
+
+---
+
+## Public Yuko API (`https://app.yukoapp.com/api/v1/public/`)
+
+Use these endpoints to read review data into a custom frontend, submit reviews programmatically, or integrate Yuko with a third-party platform.
+
+### Authentication
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_TOKEN" \
+  https://app.yukoapp.com/api/v1/public/reviews
+```
+
+Create an API token in **Account → Integrations → API Keys → Generate Token**.
+
+### Common endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/reviews` | List reviews (filter by product, rating, date, status) |
+| `GET` | `/reviews/{id}` | Single review with photos and replies |
+| `POST` | `/reviews` | Submit a new review on behalf of a customer |
+| `PATCH` | `/reviews/{id}` | Update status (approve / reject / spam / trash) |
+| `POST` | `/reviews/{id}/reply` | Post a merchant reply |
+| `GET` | `/products/{id}/summary` | Aggregate rating and review count |
+| `GET` | `/widgets/{type}/settings` | Fetch widget config (useful for headless storefronts) |
+
+### Query parameters
+
+Most list endpoints support:
+
+- `page` (int, default 1)
+- `per_page` (int, default 20, max 100)
+- `sort` — e.g. `created_at:desc`
+- `status` — `approved`, `pending`, `spam`, `trashed`
+- `rating` — integer 1–5
+- `from`, `to` — ISO 8601 date filters
+
+### Example: fetch the 5 most recent 5-star reviews for a product
+
+```bash
+curl -H "Authorization: Bearer $YUKO_TOKEN" \
+  "https://app.yukoapp.com/api/v1/public/reviews?\
+product_id=128&rating=5&status=approved&per_page=5&sort=created_at:desc"
+```
+
+### Rate limits
+
+- **120 requests per minute** per token on read endpoints
+- **30 requests per minute** per token on write endpoints
+- Exceeding the limit returns `429 Too Many Requests` with a `Retry-After` header
+
+---
+
+## Error responses
+
+All errors return a JSON body with:
+
+```json
+{
+  "error": {
+    "code": "invalid_rating",
+    "message": "Rating must be between 1 and 5",
+    "status": 422
+  }
+}
+```
+
+Common codes:
+
+| Code | HTTP status | Meaning |
+| --- | --- | --- |
+| `unauthorized` | 401 | Missing or invalid token |
+| `forbidden` | 403 | Token lacks the required scope |
+| `not_found` | 404 | Resource doesn't exist or isn't accessible to this token |
+| `validation_failed` | 422 | One or more fields are invalid — see `errors` array |
+| `rate_limited` | 429 | Slow down, check `Retry-After` |
+
+---
+
+## Need Help?
+
+<NeedHelp />
+
+<Note>
+  **Need an endpoint not listed here?** [Talk to us](https://yukoreviews.com/support) — the public API is actively expanding and we prioritize based on user demand.
+</Note>

@@ -1,0 +1,75 @@
+---
+title: "Manual Review Requests"
+description: "Manually send a review request email to customers from the Orders screen."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+import { DashboardPath } from '/snippets/dashboard-path.mdx';
+import { PlanAvailability } from '/snippets/plan-availability.mdx';
+
+Manual review requests let you email a specific customer on demand — useful when an order slipped past the automated workflow, when a customer asks to review late, or when you want to re-send after a delivery delay.
+
+<PlanAvailability plans="Basic, Advanced, and Growth plans" />
+
+<DashboardPath path="Reviews → Orders" />
+
+---
+
+## Send a manual request
+
+<Steps>
+  <Step title="Open the Orders screen" icon="list">
+    In the Yuko Dashboard, go to **Reviews → Orders**. You'll see every order Yuko has synced from WooCommerce, with status, customer, and review-request state.
+  </Step>
+  <Step title="Find the order" icon="magnifying-glass">
+    Filter by date, customer email, or review status. Orders that have never been emailed show a dormant state; orders that have already been emailed show the send date.
+  </Step>
+  <Step title="Click the email icon" icon="envelope">
+    On the order row, click the **email** (✉) icon in the Actions column. A confirmation modal shows which email template will be sent, to which address, and for which products.
+  </Step>
+  <Step title="Confirm and send" icon="paper-plane">
+    Click **Send**. The email queues immediately and is delivered within a minute. The order row updates to show the manual send timestamp.
+  </Step>
+</Steps>
+
+---
+
+## When to use a manual request
+
+<CardGroup cols={2}>
+  <Card title="Late fulfillment" icon="truck-clock">
+    An order was marked completed weeks after delivery. The automated email never fired because the delay exceeded your workflow window. Send manually to catch the customer while the product is still fresh.
+  </Card>
+  <Card title="Customer asked to review" icon="hand-wave">
+    A customer emails asking how to leave a review. Send them the official form link without typing it up by hand.
+  </Card>
+  <Card title="Importing an order retroactively" icon="file-import">
+    After importing historical orders, you may want to send a batch of one-off review requests rather than turn on the full workflow.
+  </Card>
+  <Card title="Re-send after a complaint is resolved" icon="heart-pulse">
+    You resolved a shipping issue and want to give the customer a fresh chance to leave feedback that reflects your response.
+  </Card>
+</CardGroup>
+
+---
+
+## What the email contains
+
+The manual request uses the same template configured under **Reviews → Emails → Review Request**. Any branding, subject line, or shortcode changes you've made apply to manual sends too.
+
+If the **[Email Blacklist](/managing-reviews/email-blacklist)** or **[Product Blacklist](/managing-reviews/product-blacklist)** would block the automated request, it also blocks the manual one — Yuko refuses to send and shows a warning in the confirmation modal.
+
+---
+
+## Limits and behaviour
+
+- You can only send one manual request per order per 24 hours, to avoid accidental spam.
+- The customer's email must not be on the Email Blacklist.
+- The order must have at least one reviewable product (not entirely blacklisted).
+- Manual sends count toward your plan's monthly order quota only once per order — re-sending a manual request on the same order does not consume extra quota.
+
+---
+
+## Need Help?
+
+<NeedHelp />
