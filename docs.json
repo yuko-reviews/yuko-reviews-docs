@@ -147,8 +147,8 @@
     ]
   },
   "logo": {
-    "light": "/logos/YukoDocs.svg",
-    "dark": "/logos/YukoDocs.svg"
+    "light": "https://yukoreviews.com/assets/yuko-logo.svg",
+    "dark": "https://yukoreviews.com/assets/yuko-logo.svg"
   },
   "navbar": {
     "links": [
