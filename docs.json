@@ -181,5 +181,10 @@
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
     }
+  },
+  "integrations": {
+    "intercom": {
+      "appId": "p36lo8p9"
+    }
   }
 }
