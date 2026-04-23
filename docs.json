@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Yuko Documentation",
+  "name": "Yuko Reviews Documentation",
   "colors": {
     "primary": "#685eef",
     "light": "#a6adfb",
@@ -123,7 +123,6 @@
             "pages": [
               "integrations",
               "integrations/woocommerce",
-              "integrations/shopify",
               "integrations/google-seo",
               "integrations/wployalty",
               "integrations/webhooks",
@@ -146,79 +145,6 @@
             "group": "12. Support",
             "pages": [
               "support"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "Rest API",
-            "pages": [
-              "developer/api/introduction",
-              "developer/api/authentication",
-              "developer/api/errors",
-              "developer/api/classic-pagination",
-              "developer/api/rate-limits"
-            ]
-          },
-          {
-            "group": "API References",
-            "pages": [
-              {
-                "group": "Customers",
-                "pages": [
-                  "developer/api/list-customers",
-                  "developer/api/retrieve-a-customer",
-                  "developer/api/get-customer-balance",
-                  "developer/api/list-memberships",
-                  "developer/api/get-customer-tier",
-                  "developer/api/list-customer-rewards",
-                  "developer/api/get-redeemable-rewards",
-                  "developer/api/redeem-reward",
-                  "developer/api/list-customer-activities",
-                  "developer/api/list-points-transactions",
-                  "developer/api/create-a-points-transaction",
-                  "developer/api/list-customer-referrals"
-                ]
-              },
-              {
-                "group": "Rewards",
-                "pages": [
-                  "developer/api/list-rewards"
-                ]
-              },
-              {
-                "group": "VIP Tiers",
-                "pages": [
-                  "developer/api/list-vip-tiers"
-                ]
-              },
-              {
-                "group": "Earning Rules",
-                "pages": [
-                  "developer/api/list-ways-to-earn"
-                ]
-              },
-              {
-                "group": "Referrals",
-                "pages": [
-                  "developer/api/get-referral-program"
-                ]
-              },
-              {
-                "group": "Points",
-                "pages": [
-                  "developer/api/checkout-points-estimate"
-                ]
-              },
-              {
-                "group": "Apps & Integrations",
-                "pages": [
-                  "third-party-checkout-integrations"
-                ]
-              }
             ]
           }
         ]
