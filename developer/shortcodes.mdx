@@ -1,22 +1,26 @@
 ---
-title: "Shortcodes & Blocks"
-description: "Reference for every Yuko shortcode and Gutenberg block you can embed in WooCommerce pages, posts, and templates."
+title: "Shortcodes"
+description: "Reference for every Yuko shortcode you can embed in WooCommerce pages, posts, and templates."
 ---
 
 import NeedHelp from '/snippets/need-help.mdx';
 
-Every Yuko widget is available as both a **shortcode** (classic editor, page builders, PHP templates) and a **Gutenberg block** (block editor). Dashboard-level toggles and styling still apply — shortcodes let you control placement.
+Yuko widgets are available as WordPress **shortcodes** for classic editor, page builders, and PHP templates. Dashboard toggles and styling still apply — shortcodes control placement.
+
+<Info>
+  **Block editor users:** use a **Shortcode** block and paste the shortcode string. Yuko does not yet ship dedicated Gutenberg blocks — the shortcodes work inside every WordPress editor and page builder we've tested.
+</Info>
 
 ---
 
-## Quick reference
+## Available shortcodes
 
-| Shortcode | Block | Widget |
-| --- | --- | --- |
-| `[yuko_star_rating]` | **Yuko → Star Rating** | [Star Rating](/display-reviews/star-rating-widget) |
-| `[yuko_product_reviews]` | **Yuko → Product Reviews** | [Product Reviews Display](/display-reviews/product-reviews-display-widget) |
-| `[yuko_all_reviews]` | **Yuko → All Reviews** | [Wall of Fame](/display-reviews/all-reviews-wall-of-fame-widget) |
-| `[yuko_featured_carousel]` | **Yuko → Reviews Carousel** | [Testimonial Carousel](/display-reviews/carousel-testimonial-widget) |
+| Shortcode | Widget |
+| --- | --- |
+| `[yuko_star_rating]` | [Star Rating](/display-reviews/star-rating-widget) |
+| `[yuko_product_reviews]` | [Product Reviews Display](/display-reviews/product-reviews-display-widget) |
+| `[yuko_all_reviews]` | [Wall of Fame](/display-reviews/all-reviews-wall-of-fame-widget) |
+| `[yuko_featured_carousel]` | [Testimonial Carousel](/display-reviews/carousel-testimonial-widget) |
 
 ---
 
@@ -24,42 +28,40 @@ Every Yuko widget is available as both a **shortcode** (classic editor, page bui
 
 Displays a star rating and review count for a specific product.
 
-**Attributes:**
+**Attribute:**
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `product_id` | int | Current product | WooCommerce product ID to display rating for |
-| `show_count` | bool | `true` | Show the "(12 reviews)" label next to stars |
-| `size` | `small` / `medium` / `large` | `medium` | Star size |
+| `id` | int | Current product ID | WooCommerce product ID to display the rating for |
 
 **Examples:**
 
 ```text
 [yuko_star_rating]
-[yuko_star_rating product_id="128"]
-[yuko_star_rating product_id="128" show_count="false" size="large"]
+[yuko_star_rating id="128"]
 ```
 
 <Tip>
-  On a single product template (`content-single-product.php`), omit `product_id` — the shortcode picks up the current product automatically.
+  On a single product template (`content-single-product.php`), omit `id` — the shortcode picks up the current product automatically.
 </Tip>
 
 ---
 
 ## `[yuko_product_reviews]`
 
-The main product reviews display — the full widget with filters, photo gallery, and write-a-review form.
+Renders the full product reviews widget — header, filters, review list, photo gallery, and write-a-review form.
 
-**Attributes:**
+**Attribute:**
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `product_id` | int | Current product | Which product's reviews to show |
-| `layout` | `list` / `grid` / `masonry` | Dashboard setting | Override the configured layout for this placement |
+| `id` | int | Current product ID | Product whose reviews to show |
+
+**Examples:**
 
 ```text
 [yuko_product_reviews]
-[yuko_product_reviews product_id="128" layout="grid"]
+[yuko_product_reviews id="128"]
 ```
 
 ---
@@ -68,52 +70,35 @@ The main product reviews display — the full widget with filters, photo gallery
 
 Paginated gallery of reviews across every product. Best used on a dedicated "Reviews" page.
 
-**Attributes:**
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `per_page` | int | `20` | Reviews per page |
-| `rating_filter` | int 1–5 | none | Show only reviews with this minimum rating |
-| `photos_only` | bool | `false` | Restrict to reviews with photos |
+This shortcode accepts no attributes — configure layout, filters, and pagination inside the widget's **Customize** panel in the Yuko dashboard.
 
 ```text
 [yuko_all_reviews]
-[yuko_all_reviews per_page="12" rating_filter="4"]
-[yuko_all_reviews photos_only="true"]
 ```
 
 ---
 
 ## `[yuko_featured_carousel]`
 
-Auto-playing slider of hand-picked or highest-rated reviews. Good fit for homepages and landing pages.
+Auto-playing slider of featured reviews. Good fit for homepages and landing pages.
 
-**Attributes:**
-
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `count` | int | `10` | Number of reviews to show |
-| `autoplay` | bool | `true` | Auto-rotate slides |
-| `interval` | int (ms) | `5000` | Milliseconds between slides |
-| `rating_filter` | int 1–5 | `4` | Minimum rating included |
+This shortcode accepts no attributes — configure slide count, autoplay, and curation rules inside the widget's **Customize** panel in the Yuko dashboard.
 
 ```text
 [yuko_featured_carousel]
-[yuko_featured_carousel count="6" autoplay="false"]
-[yuko_featured_carousel rating_filter="5" interval="7000"]
 ```
 
 ---
 
 ## Using in PHP templates
 
-From a theme file, render a shortcode directly:
+Render a shortcode directly from a theme file:
 
 ```php
-echo do_shortcode( '[yuko_product_reviews product_id="' . esc_attr( $product->get_id() ) . '"]' );
+echo do_shortcode( '[yuko_product_reviews id="' . esc_attr( $product->get_id() ) . '"]' );
 ```
 
-For block themes, use the block inserter or drop the shortcode into a **Shortcode** block inside your template part.
+For block themes, drop the shortcode into a **Shortcode** block inside your template part.
 
 ---
 
@@ -122,7 +107,7 @@ For block themes, use the block inserter or drop the shortcode into a **Shortcod
 Yuko shortcodes work in Elementor, Divi, Beaver Builder, Bricks, Oxygen, and Breakdance. Drop a **Shortcode** widget, paste the code, and preview.
 
 <Warning>
-  Some page builders aggressively cache rendered HTML. If a review doesn't appear after submission, clear the builder's cache or add the **Yuko → Clear Cache** action to your deploy script.
+  Some page builders aggressively cache rendered HTML. If a new review doesn't appear after submission, clear the builder's cache and your page/CDN caches.
 </Warning>
 
 ---

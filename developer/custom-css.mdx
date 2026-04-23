@@ -1,149 +1,99 @@
 ---
-title: "Custom CSS"
-description: "Style Yuko widgets to match your theme using the Custom CSS field and stable class names."
+title: "Advanced CSS"
+description: "Style Yuko widgets to match your theme using the Advanced CSS editor inside the widget customize panel."
 ---
 
 import NeedHelp from '/snippets/need-help.mdx';
 import { PlanAvailability } from '/snippets/plan-availability.mdx';
 
-Every Yuko widget has a **Custom CSS** editor in its customization panel. Rules you add there are scoped to that widget and injected into the storefront at render time.
+Most Yuko widgets expose an **Advanced CSS** editor in their customize panel. Rules you add there are injected when the widget renders on your storefront.
 
 <PlanAvailability plans="Basic, Advanced, and Growth plans" />
 
 ---
 
-## Where to write Custom CSS
+## Where to write Advanced CSS
 
 1. Open the widget: **Reviews → Widgets → [Widget] → Customize**
-2. Switch to the **Custom CSS** tab (code icon)
+2. Switch to the **Advanced CSS** tab (code icon)
 3. Write standard CSS — no preprocessor, no build step
 4. Click **Save** to publish
 
-Changes apply within ~60 seconds on the storefront (cache-dependent).
+Clear your page cache and CDN cache afterwards so visitors see the new styles.
 
 ---
 
-## Stable class names you can target
+## Which widgets expose Advanced CSS?
 
-Yuko's widget markup uses class names prefixed with `yuko-` and `y-`. The following classes are considered stable API and won't change without a major version bump.
+Advanced CSS is available on most but not all widgets:
 
-### Star rating
+| Widget | Advanced CSS tab |
+| --- | :---: |
+| All Reviews / Wall of Fame | ✓ |
+| Product Reviews Display | ✓ |
+| Review Collection Form | ✓ |
+| Reviews Carousel | ✓ |
+| Q&A Collection Form | ✓ |
+| Q&A Display | ✓ |
+| Star Rating | — |
+| Sidebar | — |
 
-| Class | Element |
-| --- | --- |
-| `.yuko-star-rating` | Wrapper |
-| `.yuko-star-rating__icon` | Individual star SVG |
-| `.yuko-star-rating__count` | "(12 reviews)" label |
-| `.yuko-star-rating--empty` | Modifier for zero-review state |
+For the **Star Rating** and **Sidebar** widgets, use the Colors and Style panels inside the widget, or add rules to your theme's stylesheet.
 
-### Product reviews display
+---
 
-| Class | Element |
-| --- | --- |
-| `.y-reviews` | Outer widget container |
-| `.y-reviews__header` | Summary bar (avg rating, distribution) |
-| `.y-reviews__filters` | Filter and sort controls |
-| `.y-reviews__list` | Review list container |
-| `.y-review` | Single review card |
-| `.y-review__author` | Reviewer name + badges |
-| `.y-review__rating` | Star rating on a single review |
-| `.y-review__title` | Review headline |
-| `.y-review__body` | Review text |
-| `.y-review__photos` | Photo gallery |
-| `.y-review__reply` | Merchant reply block |
-| `.y-verified-badge` | Verified buyer badge |
+## Writing effective rules
 
-### Review form
+Widget markup is considered an **internal implementation detail** — class names are not a stable public API and may change between releases. To keep your styles robust:
 
-| Class | Element |
-| --- | --- |
-| `.y-review-form` | Form container |
-| `.y-review-form__field` | Field group |
-| `.y-review-form__submit` | Submit button |
+1. **Prefer the widget's own Colors, Style, and Layout panels** whenever possible — those settings are versioned and won't break on upgrade.
+2. **Use high-level structural selectors** (like the widget's outer wrapper) rather than deeply nested inner classes.
+3. **Scope your rules** to the widget's container so they don't affect the rest of the page.
+4. **Test after plugin updates** — if a release changes widget markup, your rules may need a light touch-up.
 
-### Carousel
-
-| Class | Element |
-| --- | --- |
-| `.y-carousel` | Outer container |
-| `.y-carousel__slide` | Single slide |
-| `.y-carousel__nav` | Next/prev buttons |
-| `.y-carousel__dot` | Pagination dot |
+If you need a style the customize panel doesn't offer, open the widget on your storefront, inspect the element, and target the class you see there. Keep the selector as simple as possible.
 
 ---
 
 ## Common recipes
 
-### Match your brand font
+### Match your brand font across review widgets
 
 ```css
-.y-reviews,
-.y-review-form {
+/* Apply globally to the widget wrapper, whatever class it has */
+[class*="review"] {
   font-family: "Your Brand Font", sans-serif;
 }
 ```
 
-### Tighter review cards on mobile
+### Tighter spacing on mobile
 
 ```css
 @media (max-width: 640px) {
-  .y-review {
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-  .y-review__photos img {
-    width: 60px;
-    height: 60px;
+  /* Reduce padding on the widget container */
+  .widget-outer-wrapper {
+    padding: 0.75rem !important;
   }
 }
 ```
 
-### Recolor the verified badge to match your brand
+### Hide a specific element you don't want shown
 
 ```css
-.y-verified-badge {
-  background-color: #2aa674;
-  color: #ffffff;
-  border-radius: 999px;
-  padding: 2px 8px;
-  font-size: 11px;
-}
-```
-
-### Hide the "Write a Review" button on category pages
-
-```css
-body.archive .y-reviews__write-btn {
-  display: none;
+/* Open the widget on your storefront, inspect the element,
+   and replace the selector with the class you find */
+.element-you-want-hidden {
+  display: none !important;
 }
 ```
 
 ---
 
-## Rules of thumb
+## When Advanced CSS isn't enough
 
-<AccordionGroup>
-  <Accordion title="Prefer Custom CSS over theme overrides" icon="shield">
-    When you write CSS in the widget editor, Yuko loads it with the correct specificity and lifecycle. Rules in your theme's `style.css` may lose the cascade fight against widget defaults — start with Custom CSS first.
-  </Accordion>
-  <Accordion title="Don't target generated hash classes" icon="hashtag">
-    Classes like `.css-1a2b3c4` or `._fjkdsl8` are compiled at build time and change on every Yuko release. Only use the `y-` and `yuko-` prefixed classes documented above.
-  </Accordion>
-  <Accordion title="Use `!important` sparingly" icon="triangle-exclamation">
-    If you need `!important`, the selector is usually wrong. Increase specificity with a parent class (e.g. `.y-reviews .y-review__title`) first.
-  </Accordion>
-  <Accordion title="Test on mobile" icon="mobile-screen">
-    70% of reviewers are on mobile. Always verify changes in responsive mode before shipping.
-  </Accordion>
-</AccordionGroup>
+If you need to change markup, add JavaScript, or swap out the whole widget output, use the **[Plugin Hooks & Filters](/developer/plugin-hooks)** to modify plugin behaviour at the PHP layer.
 
----
-
-## When Custom CSS isn't enough
-
-If you need to change markup, add JavaScript behaviour, or integrate with another component system, use the **[Plugin Hooks & Filters](/developer/plugin-hooks)** to replace or wrap widget output at the PHP layer.
-
-For brand-wide consistency (logo, primary color, font) across every widget, use [Branding & appearance](/display-reviews/branding) instead — those settings are applied before Custom CSS so you don't have to repeat rules per widget.
+For brand-wide consistency (logo, primary color, font) across every widget, use [Branding & appearance](/display-reviews/branding) — those settings are applied before widget-level styling so you don't have to repeat rules per widget.
 
 ---
 

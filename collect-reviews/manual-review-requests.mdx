@@ -25,10 +25,10 @@ Manual review requests let you email a specific customer on demand — useful wh
     Filter by date, customer email, or review status. Orders that have never been emailed show a dormant state; orders that have already been emailed show the send date.
   </Step>
   <Step title="Click the email icon" icon="envelope">
-    On the order row, click the **email** (✉) icon in the Actions column. A confirmation modal shows which email template will be sent, to which address, and for which products.
+    On the order row, click the **email** (✉) icon in the Actions column. Confirm the send in the prompt.
   </Step>
-  <Step title="Confirm and send" icon="paper-plane">
-    Click **Send**. The email queues immediately and is delivered within a minute. The order row updates to show the manual send timestamp.
+  <Step title="Wait for delivery" icon="paper-plane">
+    The email queues immediately and is delivered within a minute. The order row updates to show the manual send timestamp.
   </Step>
 </Steps>
 
@@ -57,16 +57,13 @@ Manual review requests let you email a specific customer on demand — useful wh
 
 The manual request uses the same template configured under **Reviews → Emails → Review Request**. Any branding, subject line, or shortcode changes you've made apply to manual sends too.
 
-If the **[Email Blacklist](/managing-reviews/email-blacklist)** or **[Product Blacklist](/managing-reviews/product-blacklist)** would block the automated request, it also blocks the manual one — Yuko refuses to send and shows a warning in the confirmation modal.
-
 ---
 
-## Limits and behaviour
+## Good practice
 
-- You can only send one manual request per order per 24 hours, to avoid accidental spam.
-- The customer's email must not be on the Email Blacklist.
-- The order must have at least one reviewable product (not entirely blacklisted).
-- Manual sends count toward your plan's monthly order quota only once per order — re-sending a manual request on the same order does not consume extra quota.
+- **Respect the Email Blacklist.** If a customer's address is on your [Email Blacklist](/managing-reviews/email-blacklist), remove them only if they've asked to start receiving email again.
+- **Respect the Product Blacklist.** If every product in the order is on your [Product Blacklist](/managing-reviews/product-blacklist), a manual request won't make sense — there's nothing to review.
+- **Don't re-send repeatedly to the same customer.** One manual nudge is fine; a second is often perceived as spam.
 
 ---
 

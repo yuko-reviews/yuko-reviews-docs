@@ -1,45 +1,50 @@
 ---
 title: "Klaviyo Integration"
-description: "Send Yuko review events and attributes to Klaviyo so you can trigger flows, segments, and campaigns from review activity."
+description: "Send Yuko review events into Klaviyo so you can trigger flows, segments, and campaigns from review activity."
 ---
 
 import NeedHelp from '/snippets/need-help.mdx';
 import { DashboardPath } from '/snippets/dashboard-path.mdx';
-import { PlanAvailability } from '/snippets/plan-availability.mdx';
 
-The Klaviyo integration pushes Yuko review events into Klaviyo as **Events** and updates customer **Profile Properties** with review counts, average rating, and last review date. Use these to build powerful flows and segments based on review behavior.
+The Klaviyo integration pushes Yuko review events into Klaviyo as **Events** with a rich set of event properties. Use those events to build flows, segments, and campaigns triggered by review activity.
 
-<PlanAvailability plans="Advanced and Growth plans" />
-
-<DashboardPath path="Account → Integrations → Klaviyo → Configure" />
+<DashboardPath path="Account → Integrations → Klaviyo" />
 
 ---
 
-## What syncs to Klaviyo
+## Events sent to Klaviyo
 
-### Events
+When a review-related action happens in Yuko, the matching event is sent to Klaviyo with the customer's email as the profile identifier.
 
-When a customer interacts with reviews in Yuko, a matching event is sent to Klaviyo:
-
-| Yuko event | Klaviyo event name | Fires when |
+| Event ID | Display name | Fires when |
 | --- | --- | --- |
-| Review Requested | `Yuko Review Requested` | A review request email is queued |
-| Review Submitted | `Yuko Review Submitted` | A customer submits a review form |
-| Review Approved | `Yuko Review Approved` | A review reaches Published status |
-| Review Replied | `Yuko Review Replied` | You post a merchant reply |
-| Photo Review Submitted | `Yuko Photo Review Submitted` | A review includes a photo |
+| `order_review_request` | Review Request | A review request is triggered for an order |
+| `review_request_sent` | Review Request Sent | A review request email is delivered |
+| `review_submitted` | Review Submitted | A customer submits a review |
+| `review_approved` | Review Published | A review reaches Published status |
+| `review_reply_added` | Review Reply Added | You post a merchant reply to a review |
 
-Each event carries the review ID, product ID, rating, and text so you can filter flows on them.
+---
 
-### Profile properties
+## Event properties
 
-Updated on the customer's Klaviyo profile whenever a review activity happens:
+Each review event carries the fields below, so you can filter Klaviyo flows and segments on them:
 
-- `yuko_review_count` — total approved reviews by this customer
-- `yuko_average_rating` — their average rating given
-- `yuko_last_review_at` — ISO timestamp of the most recent review
-- `yuko_has_photo_review` — `true` if any review includes a photo
-- `yuko_verified_buyer` — `true` if any review was verified
+| Property | Description |
+| --- | --- |
+| `review_uuid` | Yuko's unique ID for the review |
+| `email` | Customer email (also used as the Klaviyo profile identifier) |
+| `rating` | Star rating 1–5 |
+| `status` | Current review status (e.g. `approved`, `pending`) |
+| `review_title` | Review headline |
+| `review_content` | Full review text |
+| `product_name` | Name of the product reviewed |
+| `has_photos` | `true` if the review includes photos |
+| `has_videos` | `true` if the review includes videos |
+| `is_verified` | `true` if the review came from a verified buyer |
+| `created_at` | ISO timestamp of review creation |
+
+Filter on `rating`, `has_photos`, and `is_verified` to build highly targeted flows without writing any Klaviyo-side logic.
 
 ---
 
@@ -47,23 +52,13 @@ Updated on the customer's Klaviyo profile whenever a review activity happens:
 
 <Steps>
   <Step title="Get your Klaviyo private API key" icon="key">
-    In Klaviyo: **Account → Settings → API Keys → Create Private API Key**.
-
-    Grant the key these scopes:
-    - **Events** — read/write
-    - **Profiles** — read/write
-    - **Lists** — read
+    In Klaviyo: **Account → Settings → API Keys → Create Private API Key**. Grant scopes for Events and Profiles (read/write).
   </Step>
   <Step title="Paste the key into Yuko" icon="plug">
-    In Yuko: **Account → Integrations → Klaviyo → Configure**. Paste the key and click **Connect**.
-
-    Yuko runs a test call — a green checkmark means you're connected.
+    In Yuko: **Account → Integrations → Klaviyo**. Paste the key and save.
   </Step>
-  <Step title="Choose which events to sync" icon="list-check">
-    Toggle on the events you want pushed to Klaviyo. Start with **Review Submitted** and **Review Approved** — those cover 90% of flow use cases.
-  </Step>
-  <Step title="Backfill historical data (optional)" icon="clock-rotate-left">
-    Click **Sync historical reviews** to push your last 90 days of reviews to Klaviyo as events. Useful for bootstrapping segments.
+  <Step title="Submit a test review" icon="vial">
+    The fastest way to verify the connection is to submit a test review from a test account. Within a few seconds, the matching event (`review_submitted`, then `review_approved` once you publish it) should appear in Klaviyo under the customer's profile timeline.
   </Step>
 </Steps>
 
@@ -73,20 +68,20 @@ Updated on the customer's Klaviyo profile whenever a review activity happens:
 
 <CardGroup cols={2}>
   <Card title="Thank-you flow after a 5-star review" icon="heart">
-    **Trigger:** `Yuko Review Approved` where `rating = 5`
-    **Actions:** Send thank-you email + tag profile as "Advocate" + add to referral list.
+    **Trigger:** `review_approved` where `rating = 5`
+    **Actions:** Send thank-you email, tag profile as "Advocate", add to a referral list.
   </Card>
   <Card title="Win-back on low ratings" icon="face-frown">
-    **Trigger:** `Yuko Review Approved` where `rating ≤ 2`
-    **Actions:** Wait 24 hours, send personal apology email with a 20% off coupon, notify your support team in Slack.
+    **Trigger:** `review_approved` where `rating ≤ 2`
+    **Actions:** Wait 24 hours, send personal apology email with a 20% off coupon, notify support in Slack.
   </Card>
-  <Card title="Photo-review reward" icon="camera">
-    **Trigger:** `Yuko Photo Review Submitted`
-    **Actions:** Generate coupon, send via Klaviyo template, add profile property `photo_reviewer = true`.
+  <Card title="Photo-review spotlight" icon="camera">
+    **Trigger:** `review_approved` where `has_photos = true`
+    **Actions:** Route the review to your UGC tooling or a social-proof app.
   </Card>
-  <Card title="VIP segment" icon="crown">
-    **Segment definition:** `yuko_review_count ≥ 3 AND yuko_average_rating ≥ 4`
-    **Use:** Send early-access sales, beta products, loyalty perks.
+  <Card title="Verified-buyer nurture" icon="badge-check">
+    **Segment definition:** customers with at least one `review_approved` where `is_verified = true`
+    **Use:** Early-access launches, loyalty perks, referral invites.
   </Card>
 </CardGroup>
 
@@ -96,12 +91,12 @@ Updated on the customer's Klaviyo profile whenever a review activity happens:
 
 | Use case | Better in |
 | --- | --- |
-| Review request and reminder sequences | **Yuko** — built-in, no event cost |
-| Photo review rewards / coupon on submission | **Yuko** — generates coupon, sends email, one click |
-| Win-back, re-engagement, VIP segmentation | **Klaviyo** — better deliverability and segmentation |
+| Review request and reminder sequences | **Yuko** — built-in, tuned for deliverability |
+| Photo review rewards / coupon on submission | **Yuko** — generates coupon and sends email in one step |
+| Win-back, re-engagement, multi-touch nurture | **Klaviyo** — stronger segmentation and multi-channel |
 | Cross-channel (email + SMS + push) | **Klaviyo** — multi-channel orchestration |
 
-Use Yuko for review-collection flows (they're faster to set up and tuned for deliverability). Use Klaviyo for downstream marketing flows where review activity is the trigger.
+Use Yuko for collection-flow emails. Use Klaviyo for downstream marketing flows where review activity is the trigger.
 
 ---
 
@@ -109,7 +104,7 @@ Use Yuko for review-collection flows (they're faster to set up and tuned for del
 
 **Account → Integrations → Klaviyo → Disconnect**.
 
-Disconnecting stops future event sync. Historical events and profile properties remain in Klaviyo — delete them manually if needed.
+Disconnecting stops future event sync. Events already delivered remain in Klaviyo's history.
 
 ---
 

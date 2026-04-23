@@ -12,7 +12,7 @@ import NeedHelp from '/snippets/need-help.mdx';
 Yuko keeps a copy of your products, orders, and customers for fast lookup during review workflows. Syncing happens three ways:
 
 1. **Real-time webhooks** — fire on `order.updated`, `product.updated`, `customer.deleted`, etc. This is how most data gets in.
-2. **Scheduled reconciliation** — a daily cron (`yuko_reactivate_disabled_webhooks`) re-enables any webhooks WooCommerce disabled and backfills missed events.
+2. **Scheduled recovery** — the `yuko_reactivate_disabled_webhooks` action re-enables any webhooks WooCommerce has disabled after delivery failures.
 3. **Manual sync** — you click **Sync Data** in **Account → Integrations → WooCommerce**.
 
 If data is missing or stale, one of these three failed.
@@ -47,9 +47,9 @@ If data is missing or stale, one of these three failed.
   <Accordion title="Webhook disabled by WooCommerce" icon="plug-circle-xmark">
     WooCommerce auto-disables webhooks after 5 consecutive failures. If your site was down or slow recently, a webhook may be turned off.
 
-    Fix automatically: wait for the daily `yuko_reactivate_disabled_webhooks` cron (runs at ~midnight UTC).
+    Yuko schedules a recovery task (`yuko_reactivate_disabled_webhooks`) that re-enables disabled webhooks automatically on its next run.
 
-    Fix now: **WordPress Admin → WooCommerce → Settings → Advanced → Webhooks** — find Yuko webhooks and set status to **Active**.
+    To fix now without waiting: **WordPress Admin → WooCommerce → Settings → Advanced → Webhooks** — find Yuko webhooks and set status to **Active**.
   </Accordion>
 </AccordionGroup>
 
@@ -60,9 +60,6 @@ If data is missing or stale, one of these three failed.
 <AccordionGroup>
   <Accordion title="Order status never reached a tracked status" defaultOpen icon="flag">
     Yuko tracks `order.paid` (status → Processing), `order.fulfilled` (status → Completed), and `order.cancelled`. Orders that skip straight to Completed without ever being Processing may miss the `paid` event. This is cosmetic unless your workflow depends on it.
-  </Accordion>
-  <Accordion title="Order older than 90 days" icon="calendar-xmark">
-    Historical orders are not imported during initial sync — only orders from the last 90 days. If you need to review an older order, use [Manual review requests](/collect-reviews/manual-review-requests).
   </Accordion>
   <Accordion title="Order has no customer email" icon="at">
     Guest checkout orders without an email (test orders, manual entries) can't be synced — Yuko needs an email address to send review requests.

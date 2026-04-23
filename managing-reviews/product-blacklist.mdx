@@ -48,11 +48,11 @@ The Product Blacklist tells Yuko to skip certain products when sending review re
 
     **CSV requirements:**
 
-    - One numeric product ID per row
-    - No column headers required
-    - Invalid IDs are skipped automatically
+    - A header row with the column name `product_id`
+    - One numeric product ID per row below the header
+    - Invalid or non-numeric IDs are skipped silently
 
-    Click **Download sample CSV** to see the expected format.
+    Click **Download sample CSV** to see the exact format.
   </Tab>
 </Tabs>
 
