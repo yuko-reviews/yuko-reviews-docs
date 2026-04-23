@@ -131,10 +131,8 @@
             "group": "Developer Reference",
             "pages": [
               "developer/index",
-              "developer/plugin-hooks",
               "developer/shortcodes",
-              "developer/custom-css",
-              "developer/rest-api"
+              "developer/custom-css"
             ]
           },
           {

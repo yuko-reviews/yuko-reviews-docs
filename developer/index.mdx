@@ -1,6 +1,6 @@
 ---
 title: "Developer Reference"
-description: "Hooks, shortcodes, custom CSS, REST endpoints, and webhook topics for customizing Yuko on WooCommerce."
+description: "Shortcodes, custom CSS, and webhook topics for customizing Yuko on WooCommerce."
 ---
 
 import NeedHelp from '/snippets/need-help.mdx';
@@ -12,20 +12,14 @@ These pages are written for developers and agencies who want to customize Yuko b
 ## What you can customize
 
 <CardGroup cols={2}>
-  <Card title="WordPress hooks & filters" icon="code" href="/developer/plugin-hooks">
-    50+ action and filter hooks exposed by the Yuko Integration plugin — change which order statuses trigger webhooks, modify schema output, hide native WooCommerce ratings, and more.
+  <Card title="Shortcodes" icon="square-code" href="/developer/shortcodes">
+    Reference for every shortcode — star rating, product reviews, all-reviews gallery, carousel — and the attributes each one accepts.
   </Card>
-  <Card title="Shortcodes & Gutenberg blocks" icon="square-code" href="/developer/shortcodes">
-    Reference for every shortcode and block — star rating, product reviews, all-reviews gallery, carousel — plus their supported attributes.
-  </Card>
-  <Card title="Custom CSS" icon="palette" href="/developer/custom-css">
-    Target widget internals with scoped CSS selectors. Every widget exposes a **Custom CSS** field in the dashboard; this guide lists the stable class names you can safely style.
-  </Card>
-  <Card title="REST API" icon="plug-circle-bolt" href="/developer/rest-api">
-    The WooCommerce-side REST endpoints the Yuko plugin registers, plus the public Yuko API endpoints for reading reviews, submitting reviews, and managing widgets from external services.
+  <Card title="Advanced CSS" icon="palette" href="/developer/custom-css">
+    Style widgets with the **Advanced CSS** editor inside each widget's customize panel. Guide to which widgets expose it and how to write robust rules.
   </Card>
   <Card title="Webhook topics" icon="bolt" href="/integrations/webhooks">
-    Event types you can subscribe to, their JSON payloads, and HMAC signature verification. Used for Slack notifications, CRM sync, custom analytics, and the WPLoyalty integration.
+    Event types you can subscribe to for custom integrations — Slack notifications, CRM sync, custom analytics, and the [WPLoyalty integration](/integrations/wployalty).
   </Card>
 </CardGroup>
 
@@ -36,10 +30,9 @@ These pages are written for developers and agencies who want to customize Yuko b
 The **Yuko Integration** WordPress plugin is what lives on the merchant's WooCommerce site. It:
 
 1. Authenticates to the Yuko backend using an `organization_uid` + `secret_key` pair stored in `yuko_plugin_options`.
-2. Registers custom REST routes under `/wp-json/yuko/v2/` for syncing products, orders, and customers.
-3. Listens to WooCommerce events (`woocommerce_order_status_changed`, `product.updated`, etc.) and fires outbound webhooks to the Yuko backend.
-4. Renders storefront widgets via shortcodes, blocks, and PHP widget classes, and enqueues `yuko-review-main.js` to handle iframe messaging.
-5. Replaces WooCommerce's default star ratings and JSON-LD schema with Yuko data.
+2. Listens to WooCommerce events (`woocommerce_order_status_changed`, `product.updated`, etc.) and fires outbound webhooks to the Yuko backend.
+3. Renders storefront widgets via shortcodes and PHP widget classes, and enqueues `yuko-review-main.js` to handle iframe messaging.
+4. Replaces WooCommerce's default star ratings and JSON-LD schema with Yuko data.
 
 All communication between the plugin and the Yuko backend is signed with **HMAC-SHA256** and validated on both ends. Iframe-based storefront widgets use a time-rotating HMAC hash for the `postMessage` channel.
 
@@ -52,7 +45,7 @@ All communication between the plugin and the Yuko backend is signed with **HMAC-
 - **PHP:** 7.4+ (8.0+ recommended)
 - **HPOS (custom order tables):** ✅ fully compatible
 - **WordPress Multisite:** supported, one Yuko account per site
-- **Block themes:** supported (Gutenberg blocks provided)
+- **Block themes:** supported (shortcodes render inside a **Shortcode** block)
 
 ---
 
