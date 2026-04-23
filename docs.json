@@ -15,11 +15,6 @@
           "anchor": "Yuko Dashboard",
           "icon": "book-open-cover",
           "href": "https://app.yukoapp.com"
-        },
-        {
-          "anchor": "Blog",
-          "icon": "newspaper",
-          "href": "https://yukoreviews.com/blog/"
         }
       ]
     },
