@@ -1,6 +1,6 @@
 ---
 description: "Integrate Yuko with WPLoyalty to reward customers for submitting reviews."
-title: "10.4 WPLoyalty Integration"
+title: "WPLoyalty Integration"
 ---
 
 **WP Loyalty – Yuko Review Add-On**
@@ -34,7 +34,7 @@ Follow these simple steps:
 
 <Steps>
   <Step title=" Download the Add‑On">
-    Get the **WPLoyalty – Yuko Reviews Add‑On** here: https://wployalty.net/add‑ons/yuko‑product‑reviews/
+    Get the **WPLoyalty – Yuko Reviews Add‑On** here: [https://wployalty.net/add‑ons/yuko‑product‑reviews/](https://wployalty.net/add‑ons/yuko‑product‑reviews/)
   </Step>
   <Step title=" Install and Activate">
     - Ensure the **WPLoyalty plugin** is already installed and active.
@@ -43,8 +43,7 @@ Follow these simple steps:
   <Step title="Enable/Disable the Add‑On">
     - Go to **WordPress Dashboard → WPLoyalty → Add‑ons**
     - Find **WPLoyalty – Yuko Reviews Add‑On**
-
-      ![Wl](/images/wl.png)
+      ![Yuko Wployalty Addon](/images/yuko-wployalty-addon.png)
     - Click **Activate** to enable or **Deactivate** to disable.
   </Step>
 </Steps>
@@ -57,26 +56,34 @@ Follow these simple steps:
 
 - After activation, a **Webhook URL** appears on the add‑on page.
 - Copy this URL.
-
   ![WP Loyalty Yuko Review ‹ Azure Flamingo 736846 Hostingersite Com — Word Press 01 16 2026 11 47 PM](/images/WPLoyalty-Yuko-Review-‹-azure-flamingo-736846-hostingersite-com-—-WordPress-01-16-2026_11_47_PM.png)
 
 **2. Add the Webhook in Yuko**
 
 - Log in to your **Yuko Dashboard**.
-- Navigate to **Settings → Integrations → Add Webhook**.
+- Navigate to **Accounts → Integrations → Add Webhook**.
 
-![Wp](/images/wp.png)
+<img
+  src="/images/yuko-add-webhook.png"
+  alt="Wp"
+  lightAlt="Wp"
+  darkAlt="Wp"
+  className="dark:hidden"
+/>
+<img
+  src="/images/yuko-add-webhook-1.png"
+  alt="Wp"
+  lightAlt="Wp"
+  darkAlt="Wp"
+  className="hidden dark:block"
+/>
 
 - Paste the **Webhook URL** copied from the add‑on.
 - Under **Webhook Events**, choose which events should trigger the webhook.
-- You can select one or multiple of the following:
-
+- You can select one or multiple events. Here are a few events listed:
   **Review Submitted** – triggers when a customer submits a review.
-
   **Review Published**   – triggers when a review is approved/published.
-
-  **Review Deleted**   – triggers when a review is removed.
-
+  **Review Deleted**   – triggers when a review is removed. 
   <Tip>
     For loyalty points, it’s usually best to select **Review Published**, so customers only earn points for approved reviews.
   </Tip>
@@ -85,12 +92,12 @@ Follow these simple steps:
 
 - Yuko generates a **Signature Key** after the webhook is created.
 - Copy this key.
-
-  ![YUKO 01 16 2026 11 50 PM](/images/YUKO-01-16-2026_11_50_PM.png)
 - Return to the **WPLoyalty add‑on page**.
 - Paste the key into the **Secret Key** field.
 
----
+<Frame>
+  ![Yuko Wployalty Webhooks 2](/images/yuko-wployalty-webhooks-2.png)
+</Frame>
 
 ### How the Add‑On Works
 
