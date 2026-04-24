@@ -8,7 +8,7 @@ import NeedHelp from '/snippets/need-help.mdx';
 
 ## Before You Start
 
-This guide helps you install Yuko on your WordPress + WooCommerce store and connect it to start collecting customer reviews.
+This guide helps you install Yuko on your WordPress \+ WooCommerce store and connect it to start collecting customer reviews.
 
 **What you'll achieve:**
 
@@ -31,7 +31,7 @@ Before starting, make sure you have:
   **WordPress Requirements:**
 
   - WordPress version 5.8 or higher
-  - WooCommerce plugin installed and active (version 6.0+)
+  - WooCommerce plugin installed and active (version 6.0\+)
   - PHP version 7.4 or higher
   - Admin access to your WordPress dashboard
 </Check>
@@ -62,11 +62,11 @@ Follow these 5 steps to complete your Yuko installation:
     **How to create account:**
 
     1. Visit [app.yukoapp.com](https://app.yukoapp.com/)
-    3. Enter your information:
+    2. Enter your information:
        - Full name
        - Business email address (use your store's domain email if possible)
        - Create a strong password
-    4. Click the **"Sign up"** button
+    3. Click the **"Sign up"** button
 
     ![Yuko1 Pn](/images/yuko1.png)
 
@@ -77,6 +77,7 @@ Follow these 5 steps to complete your Yuko installation:
     <Warning>
       **Important:** Use a business email, not a personal Gmail/Yahoo. Some features may require a verified business domain.
     </Warning>
+
     ---
 
     ### Verify Your Email
@@ -125,7 +126,6 @@ Follow these 5 steps to complete your Yuko installation:
 
     - Download the Yuko WooCommerce plugin when prompted
     - Upload and activate it on your WordPress site
-
     - Download the Yuko WooCommerce plugin when prompted by clicking on **"Download Plugin"**
     - You will see a zip file downloaded
     - Upload and activate it on your WordPress site
@@ -169,15 +169,26 @@ Follow these 5 steps to complete your Yuko installation:
     Return to your **Yuko Onboarding** (you will be redirected to this page)
 
     1. Return to your **Yuko Dashboard** (in the other browser tab)
-    4. In the **Store URL** field, enter your store's URL
+    2. In the **Store URL** field, enter your store's URL
        - Example: `https://yourstore.com` or `https://shop.yourstore.com`
        - Include `https://` but not `/wp-admin` or other paths
-    7. Click **Authenticate** to give Yuko permission
-
+    3. Click **Authenticate** to give Yuko permission
        ![Importa](/images/importa.png)
-    8. Wait for the connection to complete (shows "Connected" status)
-
-       ![Sett 1](/images/sett-1.png)
+    4. Wait for the connection to complete (shows "Connected" status) 
+       <img
+         src="/images/YUKO-04-24-2026_01_00_PM.png"
+         alt="Sett 1"
+         lightAlt="Sett 1"
+         darkAlt="Sett 1"
+         className="dark:hidden"
+       />
+       <img
+         src="/images/YUKO-04-24-2026_01_00_PM-1.png"
+         alt="Sett 1"
+         lightAlt="Sett 1"
+         darkAlt="Sett 1"
+         className="hidden dark:block"
+       />
 
     ### Sync Your Store Data
 
@@ -266,6 +277,7 @@ Now that installation is complete, set up your review collection system:
 
     **Time:** 10 minutes (if you know how to use FTP)
   </Accordion>
+
   <Accordion title="Install on WordPress Multisite" icon="layer-group">
     For WordPress Multisite installations:
 
@@ -283,6 +295,7 @@ Now that installation is complete, set up your review collection system:
 
     **Connection:** Each site needs separate connection to Yuko Dashboard (use different Store URLs for each site)
   </Accordion>
+
   <Accordion title="Use Staging Environment First" icon="flask">
     **Recommended for large stores:** Test on staging before production.
 
@@ -296,11 +309,12 @@ Now that installation is complete, set up your review collection system:
 
     **Note:** Each environment (staging, production) needs separate connection in Yuko Dashboard.
   </Accordion>
+
   <Accordion title="Server Requirements & Hosting" icon="server">
     **Minimum server requirements:**
 
-    - PHP 7.4 or higher (PHP 8.0+ recommended)
-    - MySQL 5.6+ or MariaDB 10.0+
+    - PHP 7.4 or higher (PHP 8.0\+ recommended)
+    - MySQL 5.6\+ or MariaDB 10.0\+
     - HTTPS enabled (SSL certificate installed)
     - WordPress memory limit: 128MB minimum (256MB recommended)
     - Max execution time: 30 seconds minimum
@@ -327,7 +341,7 @@ Now that installation is complete, set up your review collection system:
     **Possible causes:**
 
     1. **Cache issue:**
-       - Clear your browser cache (Ctrl+Shift+Delete)
+       - Clear your browser cache (Ctrl\+Shift\+Delete)
        - Log out of WordPress and log back in
        - Try a different browser
     2. **User permissions:**
@@ -345,6 +359,7 @@ Now that installation is complete, set up your review collection system:
     - PHP version (from WooCommerce → Status)
     - List of active plugins
   </Accordion>
+
   <Accordion title="Connection keeps failing" icon="wifi-slash">
     **Checklist to fix connection issues:**
 
@@ -377,6 +392,7 @@ Now that installation is complete, set up your review collection system:
     - Contact your hosting support
     - Ask them to whitelist Yuko API (app.yukoapp.com)
   </Accordion>
+
   <Accordion title="Products/Orders not syncing" icon="rotate-exclamation">
     **If products aren't appearing in Yuko:**
 
@@ -385,7 +401,7 @@ Now that installation is complete, set up your review collection system:
        - Products must be visible in catalog
     2. **Wait for sync:**
        - Initial sync takes 1-5 minutes for small stores
-       - Large stores (1000+ products) may take 15 minutes
+       - Large stores (1000\+ products) may take 15 minutes
     3. **Force manual sync:**
        - Go to Yuko Dashboard → Settings → Integrations
        - Click "Sync Now" button
@@ -397,6 +413,7 @@ Now that installation is complete, set up your review collection system:
     - Check that orders are marked "Completed" in WooCommerce
     - Pending, Processing, or Draft orders won't trigger review emails unless you map them in the workflow
   </Accordion>
+
   <Accordion title="Email verification link not working" icon="envelope-open-text">
     **If clicking verification link shows error:**
 
