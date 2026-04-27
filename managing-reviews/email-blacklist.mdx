@@ -17,9 +17,9 @@ Common uses:
 
 <DashboardPath path="Account → Email Blacklist" />
 
-![Email blacklist screen](/images/mn-2.png)
-
----
+<Frame>
+  ![Yuko Email Blacklist](/images/yuko-email-blacklist.png)
+</Frame>
 
 ## How it works
 
@@ -84,16 +84,17 @@ You can add entries one at a time, in bulk via comma-separated list, or by CSV u
   <Accordion title="Block every address on your own domain" icon="at">
     Useful during testing or for internal QA accounts.
 
-    ```
+    ```text
     *@yourstore.com
     ```
 
     Removes review requests for your whole team in one entry.
   </Accordion>
+
   <Accordion title="Block role-based addresses globally" icon="user-gear">
     Prevents bounces and complaints from shared inboxes that shouldn't receive marketing email.
 
-    ```
+    ```text
     admin@*
     billing@*
     support@*
@@ -101,10 +102,11 @@ You can add entries one at a time, in bulk via comma-separated list, or by CSV u
     noreply@*
     ```
   </Accordion>
+
   <Accordion title="Block a gift-card or test provider" icon="ban">
     If gift orders send to a placeholder address, you can exclude that domain entirely.
 
-    ```
+    ```text
     *@giftcards.example.com
     ```
   </Accordion>
@@ -117,8 +119,8 @@ You can add entries one at a time, in bulk via comma-separated list, or by CSV u
 | Tool | What it blocks | Affects existing reviews? |
 | --- | --- | --- |
 | **Email Blacklist** | Outbound Yuko emails to specific addresses/domains | No |
-| **[Product Blacklist](/managing-reviews/product-blacklist)** | Review requests for specific products | No |
-| **[Review restrictions](/managing-reviews/review-restrictions-limits)** | Who is allowed to submit reviews | No |
+| [**Product Blacklist**](/managing-reviews/product-blacklist) | Review requests for specific products | No |
+| [**Review restrictions**](/managing-reviews/review-restrictions-limits) | Who is allowed to submit reviews | No |
 | **Trash / Spam status** | Where an individual review appears | Yes — hides it |
 
 Use the Email Blacklist when the issue is **who receives mail**. Use the Product Blacklist when the issue is **which products get reviewed**.
