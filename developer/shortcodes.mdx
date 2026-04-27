@@ -1,0 +1,117 @@
+---
+title: "Shortcodes"
+description: "Reference for every Yuko shortcode you can embed in WooCommerce pages, posts, and templates."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+Yuko widgets are available as WordPress **shortcodes** for classic editor, page builders, and PHP templates. Dashboard toggles and styling still apply — shortcodes control placement.
+
+<Info>
+  **Block editor users:** use a **Shortcode** block and paste the shortcode string. Yuko does not yet ship dedicated Gutenberg blocks — the shortcodes work inside every WordPress editor and page builder we've tested.
+</Info>
+
+---
+
+## Available shortcodes
+
+| Shortcode | Widget |
+| --- | --- |
+| `[yuko_star_rating]` | [Star Rating](/display-reviews/star-rating-widget) |
+| `[yuko_product_reviews]` | [Product Reviews Display](/display-reviews/product-reviews-display-widget) |
+| `[yuko_all_reviews]` | [Wall of Fame](/display-reviews/all-reviews-wall-of-fame-widget) |
+| `[yuko_featured_carousel]` | [Testimonial Carousel](/display-reviews/carousel-testimonial-widget) |
+
+---
+
+## `[yuko_star_rating]`
+
+Displays a star rating and review count for a specific product.
+
+**Attribute:**
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `id` | int | Current product ID | WooCommerce product ID to display the rating for |
+
+**Examples:**
+
+```text
+[yuko_star_rating]
+[yuko_star_rating id="128"]
+```
+
+<Tip>
+  On a single product template (`content-single-product.php`), omit `id` — the shortcode picks up the current product automatically.
+</Tip>
+
+---
+
+## `[yuko_product_reviews]`
+
+Renders the full product reviews widget — header, filters, review list, photo gallery, and write-a-review form.
+
+**Attribute:**
+
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `id` | int | Current product ID | Product whose reviews to show |
+
+**Examples:**
+
+```text
+[yuko_product_reviews]
+[yuko_product_reviews id="128"]
+```
+
+---
+
+## `[yuko_all_reviews]`
+
+Paginated gallery of reviews across every product. Best used on a dedicated "Reviews" page.
+
+This shortcode accepts no attributes — configure layout, filters, and pagination inside the widget's **Customize** panel in the Yuko dashboard.
+
+```text
+[yuko_all_reviews]
+```
+
+---
+
+## `[yuko_featured_carousel]`
+
+Auto-playing slider of featured reviews. Good fit for homepages and landing pages.
+
+This shortcode accepts no attributes — configure slide count, autoplay, and curation rules inside the widget's **Customize** panel in the Yuko dashboard.
+
+```text
+[yuko_featured_carousel]
+```
+
+---
+
+## Using in PHP templates
+
+Render a shortcode directly from a theme file:
+
+```php
+echo do_shortcode( '[yuko_product_reviews id="' . esc_attr( $product->get_id() ) . '"]' );
+```
+
+For block themes, drop the shortcode into a **Shortcode** block inside your template part.
+
+---
+
+## Using with page builders
+
+Yuko shortcodes work in Elementor, Divi, Beaver Builder, Bricks, Oxygen, and Breakdance. Drop a **Shortcode** widget, paste the code, and preview.
+
+<Warning>
+  Some page builders aggressively cache rendered HTML. If a new review doesn't appear after submission, clear the builder's cache and your page/CDN caches.
+</Warning>
+
+---
+
+## Need Help?
+
+<NeedHelp />

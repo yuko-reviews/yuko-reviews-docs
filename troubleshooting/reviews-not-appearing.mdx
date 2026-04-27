@@ -1,0 +1,123 @@
+---
+title: "Reviews Not Appearing on the Storefront"
+description: "A review was submitted but you don't see it on the product page — here's how to trace it."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+---
+
+## Is the review actually in Yuko?
+
+Before blaming the storefront, confirm the review made it to your Yuko dashboard:
+
+1. Go to **Reviews → Manage Reviews**
+2. Clear all filters (status = All, rating = All)
+3. Search by the reviewer's email
+
+**If the review is listed:** the issue is display. Keep reading.
+**If the review is missing:** the submission failed — check [Sync issues](/troubleshooting/sync-issues) and your spam moderation settings.
+
+---
+
+## Is the review approved?
+
+A submitted review won't appear until it's **Approved** (Published). Check its status in **Reviews → Manage Reviews**.
+
+<AccordionGroup>
+  <Accordion title="Status is Pending" defaultOpen icon="clock">
+    You have **Auto-Publish** off, or the review tripped a moderation rule. Options:
+
+    - Approve manually: hover over the review row → **Approve**
+    - Change your default: **Reviews → Settings → General → Auto-publish new reviews** → toggle **ON**
+    - Adjust moderation rules: [Review moderation guide](/managing-reviews/review-moderation)
+  </Accordion>
+  <Accordion title="Status is Spam" icon="shield-halved">
+    Yuko's spam filter flagged it. If it's a false positive:
+
+    1. Open the review
+    2. Click **Not Spam** → **Approve**
+
+    To reduce false positives long-term, tune the spam filter and review the **[Email Blacklist](/managing-reviews/email-blacklist)**.
+  </Accordion>
+  <Accordion title="Status is Trash" icon="trash">
+    Someone (maybe you) moved it to Trash. Restore from **Reviews → Manage Reviews → Trash → Restore**. Trash is auto-emptied after 30 days.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Is the widget enabled?
+
+The Product Reviews Display widget must be **Live** for reviews to render.
+
+1. **Reviews → Widgets → Product Reviews Display**
+2. The top toggle should be **ON**
+3. Click **Preview on storefront** and check directly
+
+If the widget is on but reviews still don't show, check the **Preferences** tab inside the widget — a too-strict "minimum rating" or "verified only" filter can hide everything.
+
+---
+
+## Is page cache serving stale HTML?
+
+This catches almost everyone once:
+
+<Steps>
+  <Step title="Clear your page cache plugin" icon="broom">
+    WP Rocket, W3 Total Cache, LiteSpeed, WP Super Cache — all have a **Clear all cache** button in the admin bar.
+  </Step>
+  <Step title="Clear your CDN cache" icon="cloud">
+    Cloudflare: Caching → Configuration → **Purge Everything**
+    BunnyCDN / KeyCDN: Similar "Purge" button in their dashboards
+  </Step>
+  <Step title="Clear your browser cache" icon="rotate">
+    Hard refresh with Ctrl+Shift+R (Cmd+Shift+R on Mac). Or open an incognito window.
+  </Step>
+  <Step title="Wait 60 seconds and retry" icon="clock">
+    Yuko's own edge cache may hold the old HTML for up to a minute after widget changes.
+  </Step>
+</Steps>
+
+---
+
+## Widget is placed correctly but nothing renders
+
+Open your product page and view page source (Ctrl+U). Search for `yuko`.
+
+- **If you see `<div id="yuko-reviews">`** but the widget is blank: JavaScript isn't executing. Check the browser console for errors. Common culprits: ad-blockers, a JS error elsewhere on the page, or `wp_footer()` missing from your theme.
+- **If you don't see `yuko-reviews` anywhere:** the shortcode, block, or template hook isn't firing. Re-check widget placement in the Yuko dashboard, and confirm your theme doesn't override `single-product.php` in a way that strips Yuko's hooks.
+
+---
+
+## Star rating shows zero on category / archive pages
+
+Yuko disables the category-page star widget by default to protect archive page speed. Turn it on:
+
+**Reviews → Widgets → Star Rating → Preferences → Show on category pages** → **ON**
+
+Or enable the filter in code:
+
+```php
+add_filter( 'yuko_enable_category_page_rating_widget', '__return_true' );
+```
+
+After enabling, clear cache and reload a category page.
+
+---
+
+## Rich snippets / star rating not showing in Google
+
+Google takes 2–4 weeks to re-crawl and display schema changes. Verify your schema is correct:
+
+1. Open any product page
+2. Paste the URL into [Google Rich Results Test](https://search.google.com/test/rich-results)
+3. You should see a **Product** result with `aggregateRating`
+
+If the test passes, wait for Google's next crawl. If it fails, see **[Google SEO integration](/integrations/google-seo)** for a full schema checklist.
+
+---
+
+## Need Help?
+
+<NeedHelp />

@@ -29,84 +29,72 @@
             ]
           },
           {
-            "group": "1. Installation & Setup",
+            "group": "Installation & Setup",
             "pages": [
-              "installation-and-setup/woocommerce"
-            ]
-          },
-          {
-            "group": "2. Request Reviews",
-            "pages": [
-              "request-reviews/index",
-              "request-reviews/review-request-emails",
-              "request-reviews/review-reminder-email",
-              "request-reviews/photo-review-reminder-email",
-              "request-reviews/photo-review-reward-email",
-              "request-reviews/review-reply-added-email"
-            ]
-          },
-          {
-            "group": "3. Collect Reviews",
-            "pages": [
-              "collect-reviews",
-              "collect-reviews/review-collection-form",
-              "collect-reviews/collecting-shop-site-review",
-              "collect-reviews/customizing-review-inputs"
-            ]
-          },
-          {
-            "group": "4. Display Reviews",
-            "pages": [
-              "display-reviews/introductionToWidgets",
-              "display-reviews/product-reviews-display-widget",
-              "display-reviews/sidebar-widget",
-              "display-reviews/star-rating-widget",
-              "display-reviews/all-reviews-wall-of-fame-widget",
-              "display-reviews/carousel-testimonial-widget",
-              "display-reviews/flowing-review-badge-coming-soon",
-              "display-reviews/review-display-controls"
-            ]
-          },
-          {
-            "group": "5. Import Reviews",
-            "pages": [
-              "import-reviews",
+              "installation/woocommerce",
+              "import-reviews/index",
               "import-reviews/importing-from-woocommerce-review",
               "import-reviews/importing-from-judgeme-reviews"
             ]
           },
           {
-            "group": "6. Managing Reviews",
+            "group": "Collecting Reviews",
             "pages": [
-              "managing-reviews",
-              "managing-reviews/auto-publishing-reviews",
-              "managing-reviews/review-moderation",
-              "managing-reviews/review-restrictions-limits",
-              "managing-reviews/replying-to-reviews",
-              "managing-reviews/verified-badges-for-reviews"
+              "collect-reviews/index",
+              "collect-reviews/review-request-emails",
+              "collect-reviews/review-reminder-email",
+              "collect-reviews/photo-review-reminder-email",
+              "collect-reviews/photo-review-reward-email",
+              "collect-reviews/review-reply-added-email",
+              "collect-reviews/manual-review-requests",
+              "collect-reviews/review-collection-form",
+              "collect-reviews/customizing-review-inputs",
+              "collect-reviews/collecting-shop-site-review",
+              "collect-reviews/verified-buyer-badges"
             ]
           },
           {
-            "group": "7. Questions & Answers",
+            "group": "Displaying Reviews",
             "pages": [
-              "questions-and-answers",
+              "display-reviews/introduction-to-widgets",
+              "display-reviews/product-reviews-display-widget",
+              "display-reviews/star-rating-widget",
+              "display-reviews/sidebar-widget",
+              "display-reviews/all-reviews-wall-of-fame-widget",
+              "display-reviews/carousel-testimonial-widget",
+              "display-reviews/qna-display-widget",
+              "display-reviews/review-display-controls",
+              "display-reviews/branding",
+              "display-reviews/flowing-review-badge-coming-soon"
+            ]
+          },
+          {
+            "group": "Managing Reviews",
+            "pages": [
+              "managing-reviews/index",
+              "managing-reviews/review-moderation",
+              "managing-reviews/auto-publishing-reviews",
+              "managing-reviews/replying-to-reviews",
+              "managing-reviews/review-restrictions-limits",
+              "managing-reviews/email-blacklist",
+              "managing-reviews/product-blacklist",
+              "managing-reviews/product-groups",
+              "managing-reviews/review-syndication",
+              "managing-reviews/admin-notifications"
+            ]
+          },
+          {
+            "group": "Questions & Answers",
+            "pages": [
+              "questions-and-answers/index",
               "questions-and-answers/qa-collection-form",
-              "questions-and-answers/qa-display-widget",
               "questions-and-answers/managing-answering-questions"
             ]
           },
           {
-            "group": "8. Review Settings",
+            "group": "Workflows",
             "pages": [
-              "review-settings",
-              "review-settings/branding",
-              "review-settings/admin-notifications"
-            ]
-          },
-          {
-            "group": "9. Workflows",
-            "pages": [
-              "workflows",
+              "workflows/index",
               "workflows/getting-started-with-workflows",
               "workflows/review-request-workflow",
               "workflows/review-reminder-workflow",
@@ -114,22 +102,25 @@
             ]
           },
           {
-            "group": "10. Integrations",
+            "group": "Integrations",
             "pages": [
-              "integrations",
+              "integrations/index",
               "integrations/woocommerce",
               "integrations/google-seo",
-              "integrations/wployalty",
-              "integrations/webhooks",
-              "integrations/zapier",
               "integrations/google-shopping",
-              "integrations/facebook"
+              "integrations/google-business",
+              "integrations/facebook",
+              "integrations/klaviyo",
+              "integrations/wployalty",
+              "integrations/zapier",
+              "integrations/webhooks"
             ]
           },
           {
-            "group": "11. Account",
+            "group": "Account & Billing",
             "pages": [
               "account/account-settings",
+              "account/plans-and-billing",
               "account/updating-logo",
               "account/multi-store-management",
               "account/security-and-access",
@@ -137,9 +128,27 @@
             ]
           },
           {
-            "group": "12. Support",
+            "group": "Developer Reference",
             "pages": [
-              "support"
+              "developer/index",
+              "developer/shortcodes",
+              "developer/custom-css"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "troubleshooting/index",
+              "troubleshooting/installation-issues",
+              "troubleshooting/reviews-not-appearing",
+              "troubleshooting/emails-not-sending",
+              "troubleshooting/sync-issues"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "support/index"
             ]
           }
         ]
@@ -177,9 +186,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/yukoreviews",
+      "linkedin": "https://linkedin.com/company/yukoreviews"
     }
   },
   "integrations": {

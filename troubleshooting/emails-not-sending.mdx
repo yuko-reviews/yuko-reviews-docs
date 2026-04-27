@@ -1,0 +1,106 @@
+---
+title: "Review Emails Not Sending"
+description: "Trace why a review request, reminder, or reward email didn't reach your customer."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+---
+
+## Check the email log first
+
+**Yuko Dashboard → Reviews → Emails → Sent**
+
+Every email Yuko has ever queued is logged here with one of these states:
+
+| State | Meaning |
+| --- | --- |
+| **Sent** | Delivered to the customer's mail server successfully |
+| **Bounced** | Mail server rejected it (invalid address, full inbox) |
+| **Blocked** | Skipped — customer on [Email Blacklist](/managing-reviews/email-blacklist), product on [Product Blacklist](/managing-reviews/product-blacklist), or unsubscribed |
+| **Queued** | Waiting in the send queue (should clear within 5 minutes) |
+| **Failed** | Internal send error — open the row for details |
+| **(nothing)** | The workflow never decided to send — see next section |
+
+---
+
+## The email was never queued
+
+If you can't find a log entry for an order that should have been emailed:
+
+<AccordionGroup>
+  <Accordion title="Order never reached the trigger status" defaultOpen icon="flag-checkered">
+    Yuko's default trigger is **order status = Completed**. If the order is still **Processing**, **Pending payment**, or **On hold**, nothing fires.
+
+    Check the order in WordPress Admin → WooCommerce → Orders. If it should be Completed, mark it Completed — the email will queue within 5 minutes.
+  </Accordion>
+  <Accordion title="Customer or product is blacklisted" icon="ban">
+    - **Account → Email Blacklist** — is the customer's address or domain on the list? (Remember wildcards: `*@example.com` blocks the whole domain.)
+    - **Reviews → Product Blacklist** — is every product in the order blacklisted? If all products are blacklisted, Yuko skips the email entirely.
+
+    See [Email Blacklist](/managing-reviews/email-blacklist) and [Product Blacklist](/managing-reviews/product-blacklist) for how to remove entries.
+  </Accordion>
+  <Accordion title="Workflow is in Draft, not Live" icon="file-pen">
+    **Workflows → All** — the review request workflow must show **Live** status. Draft workflows do not send.
+
+    Click the status dropdown on the workflow row and set it to **Live**.
+  </Accordion>
+  <Accordion title="Customer unsubscribed" icon="user-slash">
+    Every Yuko email contains an unsubscribe link. Once clicked, that address receives no further Yuko email. Unsubscribes live in **Account → Email Blacklist** (marked with an unsubscribe icon) and can be removed manually if the customer asks.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## The email sent but the customer says they didn't receive it
+
+The log shows **Sent** but the inbox is empty. The mail reached the customer's server but got filtered.
+
+<Steps>
+  <Step title="Check spam / promotions folder" icon="trash-can">
+    Ask the customer to search "Yuko" or your store name in every folder — Gmail Promotions, Outlook Focused vs Other, and Spam/Junk.
+  </Step>
+  <Step title="Verify your From Name and Reply Email" icon="user-pen">
+    **Account → General** — the **From Name** should be your store (not "Yuko"). The **Reply Email** should be a real inbox on your domain — this helps deliverability.
+  </Step>
+  <Step title="Set up SPF and DKIM" icon="shield-check">
+    By default, Yuko sends from a shared domain. For higher deliverability, add our SPF record to your domain's DNS. Instructions are in **Account → Integrations → Email Sending**.
+
+    <Note>
+      **Custom sending domain** (send from `reviews@yourstore.com` with your own DKIM) is coming soon on the Growth plan. Until then, the shared domain works well if SPF is set up.
+    </Note>
+  </Step>
+  <Step title="Try a different test email" icon="vial">
+    Mail filters vary wildly by provider. Test against a Gmail, an Outlook, and a Yahoo address — if one receives and two don't, the filtering is provider-specific.
+  </Step>
+</Steps>
+
+---
+
+## Too many emails bouncing
+
+A high bounce rate hurts deliverability for all your future sends. Clean up the source:
+
+1. **Reviews → Emails → Sent → filter Bounced** — export the list
+2. Remove permanent bounces ("no such address", "domain not found") from your WooCommerce customer list or tag them as undeliverable
+3. Consider adding a disposable-email-domain pattern to your [Email Blacklist](/managing-reviews/email-blacklist) (e.g. `*@mailinator.com`, `*@trashmail.com`)
+
+---
+
+## Test the send flow end-to-end
+
+The fastest way to confirm email is working:
+
+1. Place a real test order on your store, paid with a real card (use a coupon for $0 if possible)
+2. Mark the order Completed
+3. Wait 5 minutes (or however your workflow delay is set)
+4. Check **Reviews → Emails → Sent** for the entry
+5. Check your inbox
+
+If the log shows Sent but your inbox doesn't, it's deliverability. If the log never shows an entry, it's workflow or blacklist.
+
+---
+
+## Need Help?
+
+<NeedHelp />

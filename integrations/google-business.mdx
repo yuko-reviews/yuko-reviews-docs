@@ -1,0 +1,66 @@
+---
+title: "Google Business Profile"
+description: "Connect your Google Business Profile so Yuko can read reviews from your Google listing."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+import { DashboardPath } from '/snippets/dashboard-path.mdx';
+import { ComingSoon } from '/snippets/coming-soon.mdx';
+
+The Google Business Profile integration lets Yuko authenticate against your Google listing so it can **read reviews** left on your Google Business Profile.
+
+<DashboardPath path="Account → Integrations → Google Business Profile" />
+
+<ComingSoon feature="Importing Google reviews into the Yuko moderation dashboard, and syncing merchant replies back to Google" />
+
+---
+
+## Current behaviour
+
+At this release, the integration is primarily an **authentication and read-access bridge**:
+
+- OAuth-connects your Google account to Yuko
+- Fetches reviews from your selected Business Profile location (paged)
+- Exposes the review feed to internal Yuko services
+
+The pieces still in development:
+
+- Importing those Google reviews into **Reviews → Manage Reviews** so you can moderate and reply from one place
+- Pushing merchant replies you write in Yuko back to Google Business Profile
+- Multi-location syncing in the dashboard
+
+If you have a use case that depends on these, [talk to us](https://yukoreviews.com/support) — we're prioritizing roll-out based on real demand.
+
+---
+
+## What Yuko will never do with this integration
+
+- **Push Yuko product reviews to your Google Business Profile.** Google does not accept third-party reviews on business listings. For star ratings in Google search results, use [Google SEO rich snippets](/integrations/google-seo) and [Google Shopping feed](/integrations/google-shopping) instead.
+
+---
+
+## Connect Google Business Profile
+
+<Steps>
+  <Step title="Click Connect with Google" icon="plug">
+    In Yuko: **Account → Integrations → Google Business Profile**. You'll be redirected to Google to authorize Yuko.
+  </Step>
+  <Step title="Grant the required scopes" icon="check">
+    Yuko requests read access to your business profile's reviews and location info. Approve to continue.
+  </Step>
+  <Step title="Select your location" icon="location-dot">
+    If your Google account manages multiple business locations, pick the one that matches the store connected to Yuko.
+  </Step>
+</Steps>
+
+---
+
+## Disconnect
+
+**Account → Integrations → Google Business Profile → Disconnect**. This revokes Yuko's access to your Google listing.
+
+---
+
+## Need Help?
+
+<NeedHelp />

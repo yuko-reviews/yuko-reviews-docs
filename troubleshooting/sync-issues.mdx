@@ -1,0 +1,120 @@
+---
+title: "Sync Issues"
+description: "Products, orders, or customers missing from Yuko — or out of date — here's how to fix it."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+---
+
+## How Yuko sync works
+
+Yuko keeps a copy of your products, orders, and customers for fast lookup during review workflows. Syncing happens three ways:
+
+1. **Real-time webhooks** — fire on `order.updated`, `product.updated`, `customer.deleted`, etc. This is how most data gets in.
+2. **Scheduled recovery** — the `yuko_reactivate_disabled_webhooks` action re-enables any webhooks WooCommerce has disabled after delivery failures.
+3. **Manual sync** — you click **Sync Data** in **Account → Integrations → WooCommerce**.
+
+If data is missing or stale, one of these three failed.
+
+---
+
+## Products missing from Yuko
+
+<AccordionGroup>
+  <Accordion title="Product is Draft or Private" defaultOpen icon="file-dashed-line">
+    By default, Yuko only syncs products with status **Published**. Draft, Pending Review, and Private products are skipped.
+
+    To include other statuses:
+
+    ```php
+    add_filter( 'yuko_product_sync_status', function ( $statuses ) {
+        $statuses[] = 'private';
+        return $statuses;
+    } );
+    ```
+  </Accordion>
+  <Accordion title="Large catalog still syncing" icon="hourglass-half">
+    Initial sync of 1,000+ products takes 5–15 minutes. Check progress at **Account → Integrations → WooCommerce → Configure** — you'll see "Syncing X of Y products".
+
+    Don't click **Sync Now** again until the current sync completes; it queues a duplicate run.
+  </Accordion>
+  <Accordion title="HPOS migration incomplete" icon="database">
+    If you recently enabled **High-Performance Order Storage**, WooCommerce is still migrating your legacy orders. Yuko mirrors WooCommerce — until HPOS migration is done, order sync may stall.
+
+    Check **WooCommerce → Status → Tools → Verify base database tables**. If HPOS shows "In progress", wait it out.
+  </Accordion>
+  <Accordion title="Webhook disabled by WooCommerce" icon="plug-circle-xmark">
+    WooCommerce auto-disables webhooks after 5 consecutive failures. If your site was down or slow recently, a webhook may be turned off.
+
+    Yuko schedules a recovery task (`yuko_reactivate_disabled_webhooks`) that re-enables disabled webhooks automatically on its next run.
+
+    To fix now without waiting: **WordPress Admin → WooCommerce → Settings → Advanced → Webhooks** — find Yuko webhooks and set status to **Active**.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Orders missing from Yuko
+
+<AccordionGroup>
+  <Accordion title="Order status never reached a tracked status" defaultOpen icon="flag">
+    Yuko tracks `order.paid` (status → Processing), `order.fulfilled` (status → Completed), and `order.cancelled`. Orders that skip straight to Completed without ever being Processing may miss the `paid` event. This is cosmetic unless your workflow depends on it.
+  </Accordion>
+  <Accordion title="Order has no customer email" icon="at">
+    Guest checkout orders without an email (test orders, manual entries) can't be synced — Yuko needs an email address to send review requests.
+  </Accordion>
+  <Accordion title="Blocked status" icon="ban">
+    The `yuko_blocked_order_statuses_for_webhooks` filter excludes Draft and Auto-Draft orders by default. If you've added custom statuses, check your theme's `functions.php`.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Customer data is stale
+
+Customer records (name, email) are synced on creation and update. If a customer updates their email in **My Account** but you still see the old address in Yuko:
+
+1. WordPress Admin → Users → Edit the customer → Save (this fires the update event)
+2. Or force a full customer sync: **Yuko Dashboard → Account → Integrations → WooCommerce → Configure → Sync Customers**
+
+Deleted customers in WordPress trigger a `customer.deleted` webhook and are removed from Yuko within a few seconds.
+
+---
+
+## Force a full manual sync
+
+When in doubt, reset the sync:
+
+<Steps>
+  <Step title="Open the integration" icon="plug">
+    Yuko Dashboard → **Account → Integrations → WooCommerce → Configure**
+  </Step>
+  <Step title="Click Sync Data" icon="rotate">
+    This re-pulls products, customers, and recent orders from WooCommerce via the REST API. Takes 1–15 minutes depending on store size.
+  </Step>
+  <Step title="Watch the progress indicator" icon="chart-line">
+    Stay on the page — if you navigate away, the sync continues but you lose the progress view.
+  </Step>
+  <Step title="Spot-check" icon="magnifying-glass">
+    After sync completes, verify a known product and a recent order both appear in Yuko with correct data.
+  </Step>
+</Steps>
+
+---
+
+## Still out of sync?
+
+A persistent sync gap usually means the webhook pipeline is broken. Gather:
+
+- A specific example (order ID / product ID that's missing)
+- The timestamp of the event in WooCommerce
+- The status showing in **WordPress Admin → WooCommerce → Settings → Advanced → Webhooks** for the Yuko webhooks
+
+Then [contact support](https://yukoreviews.com/support) with those details — we can trace the delivery log on our side.
+
+---
+
+## Need Help?
+
+<NeedHelp />

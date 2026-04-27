@@ -1,0 +1,102 @@
+---
+title: "Advanced CSS"
+description: "Style Yuko widgets to match your theme using the Advanced CSS editor inside the widget customize panel."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+import { PlanAvailability } from '/snippets/plan-availability.mdx';
+
+Most Yuko widgets expose an **Advanced CSS** editor in their customize panel. Rules you add there are injected when the widget renders on your storefront.
+
+<PlanAvailability plans="Basic, Advanced, and Growth plans" />
+
+---
+
+## Where to write Advanced CSS
+
+1. Open the widget: **Reviews → Widgets → [Widget] → Customize**
+2. Switch to the **Advanced CSS** tab (code icon)
+3. Write standard CSS — no preprocessor, no build step
+4. Click **Save** to publish
+
+Clear your page cache and CDN cache afterwards so visitors see the new styles.
+
+---
+
+## Which widgets expose Advanced CSS?
+
+Advanced CSS is available on most but not all widgets:
+
+| Widget | Advanced CSS tab |
+| --- | :---: |
+| All Reviews / Wall of Fame | ✓ |
+| Product Reviews Display | ✓ |
+| Review Collection Form | ✓ |
+| Reviews Carousel | ✓ |
+| Q&A Collection Form | ✓ |
+| Q&A Display | ✓ |
+| Star Rating | — |
+| Sidebar | — |
+
+For the **Star Rating** and **Sidebar** widgets, use the Colors and Style panels inside the widget, or add rules to your theme's stylesheet.
+
+---
+
+## Writing effective rules
+
+Widget markup is considered an **internal implementation detail** — class names are not a stable public API and may change between releases. To keep your styles robust:
+
+1. **Prefer the widget's own Colors, Style, and Layout panels** whenever possible — those settings are versioned and won't break on upgrade.
+2. **Use high-level structural selectors** (like the widget's outer wrapper) rather than deeply nested inner classes.
+3. **Scope your rules** to the widget's container so they don't affect the rest of the page.
+4. **Test after plugin updates** — if a release changes widget markup, your rules may need a light touch-up.
+
+If you need a style the customize panel doesn't offer, open the widget on your storefront, inspect the element, and target the class you see there. Keep the selector as simple as possible.
+
+---
+
+## Common recipes
+
+### Match your brand font across review widgets
+
+```css
+/* Apply globally to the widget wrapper, whatever class it has */
+[class*="review"] {
+  font-family: "Your Brand Font", sans-serif;
+}
+```
+
+### Tighter spacing on mobile
+
+```css
+@media (max-width: 640px) {
+  /* Reduce padding on the widget container */
+  .widget-outer-wrapper {
+    padding: 0.75rem !important;
+  }
+}
+```
+
+### Hide a specific element you don't want shown
+
+```css
+/* Open the widget on your storefront, inspect the element,
+   and replace the selector with the class you find */
+.element-you-want-hidden {
+  display: none !important;
+}
+```
+
+---
+
+## When Advanced CSS isn't enough
+
+For brand-wide consistency (logo, primary color, font) across every widget, use [Branding & appearance](/display-reviews/branding) — those settings are applied before widget-level styling so you don't have to repeat rules per widget.
+
+If you need behaviour that isn't exposed in any widget's customize panel or the branding settings, [talk to us](https://yukoreviews.com/support) — we're actively expanding the customization surface.
+
+---
+
+## Need Help?
+
+<NeedHelp />

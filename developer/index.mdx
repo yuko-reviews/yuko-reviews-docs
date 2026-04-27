@@ -1,0 +1,54 @@
+---
+title: "Developer Reference"
+description: "Shortcodes, custom CSS, and webhook topics for customizing Yuko on WooCommerce."
+---
+
+import NeedHelp from '/snippets/need-help.mdx';
+
+These pages are written for developers and agencies who want to customize Yuko beyond the dashboard settings. If you're a merchant looking for a feature switch, start with the [Display Reviews](/display-reviews/introduction-to-widgets) or [Managing Reviews](/managing-reviews/index) guides instead.
+
+---
+
+## What you can customize
+
+<CardGroup cols={2}>
+  <Card title="Shortcodes" icon="square-code" href="/developer/shortcodes">
+    Reference for every shortcode — star rating, product reviews, all-reviews gallery, carousel — and the attributes each one accepts.
+  </Card>
+  <Card title="Advanced CSS" icon="palette" href="/developer/custom-css">
+    Style widgets with the **Advanced CSS** editor inside each widget's customize panel. Guide to which widgets expose it and how to write robust rules.
+  </Card>
+  <Card title="Webhook topics" icon="bolt" href="/integrations/webhooks">
+    Event types you can subscribe to for custom integrations — Slack notifications, CRM sync, custom analytics, and the [WPLoyalty integration](/integrations/wployalty).
+  </Card>
+</CardGroup>
+
+---
+
+## Plugin architecture at a glance
+
+The **Yuko Integration** WordPress plugin is what lives on the merchant's WooCommerce site. It:
+
+1. Authenticates to the Yuko backend using an `organization_uid` + `secret_key` pair stored in `yuko_plugin_options`.
+2. Listens to WooCommerce events (`woocommerce_order_status_changed`, `product.updated`, etc.) and fires outbound webhooks to the Yuko backend.
+3. Renders storefront widgets via shortcodes and PHP widget classes, and enqueues `yuko-review-main.js` to handle iframe messaging.
+4. Replaces WooCommerce's default star ratings and JSON-LD schema with Yuko data.
+
+All communication between the plugin and the Yuko backend is signed with **HMAC-SHA256** and validated on both ends. Iframe-based storefront widgets use a time-rotating HMAC hash for the `postMessage` channel.
+
+---
+
+## Compatibility
+
+- **WordPress:** 6.0+
+- **WooCommerce:** 7.5+ (tested up to 10.7)
+- **PHP:** 7.4+ (8.0+ recommended)
+- **HPOS (custom order tables):** ✅ fully compatible
+- **WordPress Multisite:** supported, one Yuko account per site
+- **Block themes:** supported (shortcodes render inside a **Shortcode** block)
+
+---
+
+## Need Help?
+
+<NeedHelp />

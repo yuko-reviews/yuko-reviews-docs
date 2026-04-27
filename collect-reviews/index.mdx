@@ -1,555 +1,139 @@
 ---
-description: "Set up review collection forms on your store to gather authentic customer feedback"
-title: "Collect Reviews from Customers"
+title: "Collecting Reviews"
+description: "Turn shoppers into reviewers — automated emails, on-site forms, manual requests, and everything in between."
 ---
 
 import NeedHelp from '/snippets/need-help.mdx';
 
-## Make It Easy for Customers to Leave Reviews
-
-Getting customer reviews requires removing all friction from the review process. The easier you make it for customers to share feedback, the more reviews you'll collect. Yuko provides multiple ways to collect reviews - through emails, on-site forms, and direct links.
-
-**What you'll achieve:**
-
-- Collect product reviews directly on product pages
-- Gather store-wide testimonials about overall shopping experience
-- Encourage photo reviews with visual content
-- Customize review forms to match your brand
-- Make reviewing fast and mobile-friendly
+Yuko gives you four ways to collect reviews from WooCommerce customers. Most stores combine the first two — automated emails do the heavy lifting, and the on-site form catches the rest.
 
 <Info>
-  **Impact:** Stores with easy review forms collect 3-5x more reviews than those with complicated processes
+  **Response rate benchmarks:** 5–10% from a single review request email. 10–15% with a reminder. 15–25% with reminder + photo reward.
 </Info>
 
 ---
 
-## **How Review Collection Works**
-
-YUKO offers **two reliable ways to collect customer reviews**, covering both automated outreach and on-site collection. Below is a breakdown of what’s available and how each method works best
-
-### Collection Methods
+## Collection methods
 
 <CardGroup cols={2}>
-  <Card title="Email Review Requests" icon="envelope">
-    **Most effective method**\
-    \
-    **Best for:** Collecting reviews at scale after purchase
+  <Card title="Automated review request emails" icon="envelope" href="/collect-reviews/review-request-emails">
+    **The workhorse.**
 
-    YUKO automatically sends review request emails to customers after their order is fulfilled. These emails include a **direct link to a one-click review form**, making it quick and easy for customers to leave feedback.
-
-    **Why this works:**
-
-    - Sent automatically after purchase
-    - One-click access to the review form
-    - Customers don’t need to log in
-    - Highest response rates
-
-    **Typical response rate:**\
-    **5–10%**
-
-    → [Set up review request emails](/request-reviews/review-request-emails)
+    Yuko waits a configurable number of days after order completion, then sends a personalized email with a one-click link to the review form. Works for every order automatically.
   </Card>
-  <Card title="On-Site Review Forms" icon="browser">
-    **Always available option**\
-    \
-    **Best for:** Allowing customers to leave reviews anytime
+  <Card title="Review reminders" icon="clock" href="/collect-reviews/review-reminder-email">
+    **Recovers non-responders.**
 
-    YUKO provides an embedded review collection form that can be added directly to your store. Customers can submit reviews on their own, without waiting for an email.
+    A gentle follow-up 3–5 days after the first request, sent only to customers who haven't reviewed yet. Adds roughly +50% to your response rate.
+  </Card>
+  <Card title="On-site collection form" icon="pen-to-square" href="/collect-reviews/review-collection-form">
+    **Always-on review capture.**
 
-    **Common placements:**
+    Embedded form on product pages, a dedicated "Write a Review" page, or the customer account area — for shoppers who want to leave feedback without waiting for the email.
+  </Card>
+  <Card title="Manual review requests" icon="paper-plane" href="/collect-reviews/manual-review-requests">
+    **One-off sends.**
 
-    - Product pages
-    - Dedicated “Write a Review” page
-    - Customer account area
-
-    **Why this helps:**
-
-    - Always accessible
-    - Captures organic reviews
-    - Works well alongside email requests
-
-    **Typical response rate:**\
-    **1–2% organic reviews**
-
-    → [Add review collection form](/collect-reviews/review-collection-form)
+    From **Reviews → Orders**, click the email icon on any order to send a review request on demand — perfect for late fulfillments or imported historical orders.
   </Card>
 </CardGroup>
 
 ---
 
-## What You Can Collect
+## Rewards and incentives
+
+<CardGroup cols={2}>
+  <Card title="Photo review reminders" icon="camera" href="/collect-reviews/photo-review-reminder-email">
+    Nudge customers who left text-only reviews to add a photo. 15–25% add a photo when asked.
+  </Card>
+  <Card title="Photo review rewards" icon="gift" href="/collect-reviews/photo-review-reward-email">
+    Auto-issue a coupon when a customer submits a review with photos. 2–3× more photo reviews.
+  </Card>
+  <Card title="Review reply notifications" icon="bell" href="/collect-reviews/review-reply-added-email">
+    Email the customer when you reply to their review — closes the loop and encourages repeat reviews.
+  </Card>
+  <Card title="Verified buyer badges" icon="badge-check" href="/collect-reviews/verified-buyer-badges">
+    Show a badge on reviews from customers with a matching order. Verified reviews convert 70% better than unverified.
+  </Card>
+</CardGroup>
+
+---
+
+## What you can collect
 
 <AccordionGroup>
-  <Accordion title="Product Reviews (Most Common)" defaultOpen icon="star">
-    **Purpose:** Feedback on specific products customers purchased
-
-    **What customers provide:**
-
-    - Star rating (1-5)
-    - Written review text
-    - Product photos/videos (optional)
-    - Reviewer name and email
-    - Verified purchase badge
-
-    **Where they appear:**
-
-    - Product pages (below product description)
-    - Review widgets throughout store
-    - Google Shopping listings
-    - Social proof notifications
-
-    **Best practices:**
-
-    - Always ask for product reviews in post-purchase emails
-    - Make star rating required, text optional
-    - Encourage but don't require photos
-    - Show verified purchase badges
-
-    **Expected volume:** 5-10% of customers leave product reviews when asked via email
+  <Accordion title="Product reviews" defaultOpen icon="star">
+    Star rating + written text (optional) + photos (optional), tied to a specific product. Appears on product pages, star-rating widgets, and your Google Shopping feed. This is the default — every Yuko install collects these out of the box.
   </Accordion>
-  <Accordion title="Shop/Store Reviews (Testimonials)" icon="building-columns">
-    **Purpose:** Overall shopping experience and brand feedback
+  <Accordion title="Store / site reviews" icon="building-columns">
+    Overall-experience testimonials not tied to a single product. Ideal for the homepage, an About page, or a dedicated testimonials page.
 
-    **What customers provide:**
-
-    - Overall store rating
-    - Experience with service, shipping, quality
-    - Brand-level testimonials
-    - Not tied to specific products
-
-    **Where they appear:**
-
-    - Homepage as testimonials
-    - About Us page
-    - Footer trust section
-    - Landing pages
-
-    **When to collect:**
-
-    - After multiple purchases (loyal customers)
-    - After great customer service interaction
-    - From brand advocates
-    - On "Leave Feedback" page
-
-    **Best practices:**
-
-    - Don't ask for shop reviews in initial purchase emails
-    - Wait until customer has 2-3 orders
-    - Focus on service, shipping, overall experience
-    - Use for homepage social proof
-
-    **Expected volume:** 1-2% of visitors leave shop reviews organically
+    → [Collecting store / site reviews](/collect-reviews/collecting-shop-site-review)
   </Accordion>
-  <Accordion title="Photo Reviews" icon="camera">
-    **Purpose:** Visual proof of product quality and real-world usage
+  <Accordion title="Photo and video reviews" icon="images">
+    Visual reviews are 3× more trusted than text-only. Yuko accepts multiple photos per review and short videos. Encourage them with the [photo reward email](/collect-reviews/photo-review-reward-email).
+  </Accordion>
+  <Accordion title="Custom fields and questions" icon="list-check">
+    Add product-specific questions (e.g. fit, durability, skin type) to your review form. Customers answer once; the data is searchable and filterable in your dashboard.
 
-    **Impact of photo reviews:**
-
-    - 3x more trustworthy than text-only
-    - 20% higher conversion rates on pages with photos
-    - Answers sizing/fit/color questions
-    - Reduces returns
-
-    **How to encourage photo reviews:**
-
-    - Offer rewards (10% off for photos)
-    - Send photo reminder emails
-    - Make photo upload easy on mobile
-    - Show examples of good photos
-
-    **What customers share:**
-
-    - Product in use/worn
-    - Unboxing photos
-    - Size/fit comparisons
-    - Before/after (beauty, fitness)
-
-    **Best practices:**
-
-    - Accept multiple photos per review
-    - Allow video uploads (up to 30 seconds)
-    - Auto-compress large files
-    - Mobile-first upload experience
-
-    **Expected volume:** 10-15% of reviews include photos naturally, 30-40% with incentives
+    → [Customize review inputs](/collect-reviews/customizing-review-inputs)
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Review Collection Strategy
-
-Choose the right approach for your store:
+## Recommended strategy by store stage
 
 <Tabs>
-  <Tab title="Starting Out">
-    **Best for:** New stores, just launching reviews
+  <Tab title="Starting out">
+    **Goal: first 20 reviews**
 
-    **Setup:**
+    1. Turn on **Review Request Email**, 7 days after order completion
+    2. Add the **Review Collection Form** to product pages
+    3. Leave auto-publishing on (so reviews appear immediately)
 
-    1. ✅ Enable product reviews on all product pages
-    2. ✅ Set up review request emails (5-7 days after delivery)
-    3. ✅ Add basic review form to product pages
-    4. ⏸️ Skip shop reviews for now (focus on products)
-    5. ⏸️ Skip custom fields (keep it simple)
+    Skip reminders, photo prompts, and custom fields until you have steady flow.
 
-    **Expected results in 30 days:**
-
-    - 20-50 product reviews
-    - 5-10% response rate from emails
-    - 1-2% organic reviews from site
-
-    **Why this works:**
-
-    - Simple setup (1-2 hours)
-    - Focuses on product reviews (most valuable)
-    - Email requests drive majority of reviews
-    - Easy for customers to leave feedback
+    **Expected:** 5–10% response rate, 20–30 reviews in your first month at ~200 orders.
   </Tab>
-  <Tab title="Growing Store">
-    **Best for:** Stores with 50+ reviews, want to optimize
+  <Tab title="Growing">
+    **Goal: 100+ reviews, better visuals**
 
-    **Setup:**
+    1. Keep your request email on
+    2. Add **Review Reminder Email** 5 days after the request
+    3. Turn on **Photo Review Reward Email** (10% off coupon)
+    4. Enable **Verified Buyer Badges**
 
-    1. ✅ All "Starting Out" features
-    2. ✅ Add review reminder emails (50% more reviews)
-    3. ✅ Enable photo review rewards (2-3x more photos)
-    4. ✅ Add shop review page (for testimonials)
-    5. ✅ Customize 1-2 key questions
-
-    **Expected results in 30 days:**
-
-    - 100-200 product reviews
-    - 15-25% with photos
-    - 10-20 shop testimonials
-    - Better quality feedback
-
-    **Why this works:**
-
-    - Reminders catch missed opportunities
-    - Photo incentives increase visual proof
-    - Shop reviews diversify social proof
-    - Custom questions get specific insights
+    **Expected:** 15–20% response rate, 30–40% of reviews with photos.
   </Tab>
-  <Tab title="Maximizing Reviews">
-    **Best for:** Established stores, systematic review collection
+  <Tab title="Maximizing">
+    **Goal: highest-quality library**
 
-    **Setup:**
+    1. All of the above
+    2. Add **Photo Review Reminder** for text-only reviewers
+    3. Add one or two custom review fields per major product category
+    4. Use **[Workflows](/workflows/getting-started-with-workflows)** to send different emails per product group or customer segment
+    5. Reply to every review — this alone raises collection rate by ~35%
 
-    1. ✅ All "Growing Store" features
-    2. ✅ Custom review fields for key products
-    3. ✅ A/B test review request timing
-    4. ✅ Segment emails by product category
-    5. ✅ Monitor and reply to all reviews
-    6. ✅ Feature best reviews in marketing
-
-    **Expected results in 30 days:**
-
-    - 300-500+ product reviews
-    - 25-35% with photos
-    - 30-50 shop testimonials
-    - Rich, actionable feedback
-
-    **Why this works:**
-
-    - Optimized timing increases response
-    - Segmented emails feel more personal
-    - Replies encourage more reviews
-    - Featured reviews drive conversions
+    **Expected:** 20–25% response rate, 50%+ photo rate.
   </Tab>
 </Tabs>
 
 ---
 
-## Best Practices for Review Collection
+## Before you start
 
-<CardGroup cols={2}>
-  <Card title="Make It Mobile-Friendly" icon="mobile">
-    **70% of reviews come from mobile**
+Review collection works best once the basics are in place:
 
-    - Large, tappable buttons
-    - Minimal required fields
-    - Easy photo upload from camera roll
-    - One-hand operation
+- [Yuko plugin installed and connected](/installation/woocommerce)
+- Orders syncing correctly to the Yuko dashboard
+- Your email **From Name** and **Reply Email** set in Account → General
+- Branding applied (logo + brand color) so emails look on-brand
 
-    **Result:** 50% higher completion rate on mobile
-  </Card>
-  <Card title="Keep Forms Short" icon="list-check">
-    **Every extra field reduces completion**
-
-    - Star rating: Required
-    - Review text: Optional (but encouraged)
-    - Name: Required
-    - Email: Required (for verification)
-    - Photos: Optional
-
-    **Result:** 3-5 fields optimal, under 2 minutes to complete
-  </Card>
-  <Card title="Offer Incentives Carefully" icon="gift">
-    **Balance motivation with authenticity**
-
-    - ✅ Reward photo reviews (10% off)
-    - ✅ Thank reviewers (5% next order)
-    - ❌ Don't pay for positive reviews
-    - ❌ Don't incentivize all reviews
-
-    **Result:** 2-3x more photos without bias
-  </Card>
-</CardGroup>
-
----
-
-## Common Questions
-
-<AccordionGroup>
-  <Accordion title="Should reviews be required or optional?" icon="question">
-    **Make reviewing optional, never mandatory**
-
-    **Why:**
-
-    - Forced reviews create resentment
-    - Quality is better when voluntary
-    - Complies with platform policies
-    - Feels authentic to other shoppers
-
-    **Best approach:**
-
-    - Send review request emails (optional to respond)
-    - Add "Write a Review" option on site (not required)
-    - Offer small thank-you for reviews (not payment)
-    - Never block access/features for not reviewing
-
-    **Reality check:** Even with perfect setup, only 10-25% of customers will review. That's normal and okay.
-  </Accordion>
-  <Accordion title="How soon after purchase should I ask for reviews?" icon="clock">
-    **Depends on your product type:**
-
-    **Fast consumables (3-7 days):**
-
-    - Food, snacks, drinks
-    - Beauty samples, skincare
-    - Fast fashion accessories
-
-    **Standard products (7-10 days):**
-
-    - Most clothing and shoes
-    - Home goods, kitchen items
-    - Toys, gifts, standard electronics
-
-    **Considered purchases (10-14 days):**
-
-    - Furniture, large appliances
-    - Tech products (need time to test)
-    - Fitness equipment
-
-    **Service-based (14-30 days):**
-
-    - Software, subscriptions
-    - Courses, education
-    - Long-term products
-
-    <Tip>
-      **Start with 7 days** for most products, then adjust based on response rates. If response rate is low (less than 3%), customers may need more time.
-    </Tip>
-  </Accordion>
-  <Accordion title="What if customers leave reviews for wrong products?" icon="shuffle">
-    **This happens - here's how to handle it:**
-
-    **Common scenarios:**
-
-    **Scenario 1: Multi-item orders**
-
-    - Customer bought 3 products
-    - Review email includes all 3
-    - Customer reviews wrong product
-
-    **Solution:**
-
-    - Make product name VERY clear in email
-    - Use product images in review form
-    - Show "You purchased this on [date]"
-    - Allow customers to change product after submitting
-
-    **Scenario 2: Similar products confused**
-
-    - Customer owns multiple versions
-    - Reviews one thinking it's another
-    - Wrong product gets the review
-
-    **Solution:**
-
-    - You can move reviews to correct product in dashboard
-    - Contact customer to verify which product
-    - Edit review to clarify product
-
-    **Scenario 3: Gift purchaser reviews**
-
-    - Person who bought reviews instead of recipient
-    - Review says "bought as gift, haven't used"
-    - Not helpful for other customers
-
-    **Solution:**
-
-    - Ask "Did you use this product?" in review form
-    - Filter out "gift purchaser" reviews from display
-    - Follow up with actual user if possible
-  </Accordion>
-  <Accordion title="Can I collect reviews for products without purchase?" icon="cart-shopping">
-    **Yes, but mark them as unverified**
-
-    **Verified purchase reviews:**
-
-    - Customer bought from your store
-    - Order ID linked to review
-    - "Verified Purchase" badge shows
-    - More trusted by shoppers (70% more credible)
-
-    **Unverified reviews:**
-
-    - Anyone can submit (customers, friends, testers)
-    - No purchase proof
-    - No verified badge
-    - Still valuable but less trusted
-
-    **When to allow unverified reviews:**
-
-    - New product launches (need initial reviews)
-    - Product testers/influencers
-    - Friends and family purchases
-    - Imported reviews from other platforms
-
-    **Best practices:**
-
-    - Always show verified badge when applicable
-    - Allow filtering by verified/unverified
-    - Don't hide unverified reviews (be transparent)
-    - Prioritize verified reviews in display order
-
-    <Warning>
-      **Never fake reviews:** Don't write fake reviews or pay people who didn't purchase. This violates platform policies and damages trust when discovered.
-    </Warning>
-  </Accordion>
-  <Accordion title="Should I collect customer photos?" icon="camera-movie">
-    **Absolutely yes - photos increase conversions by 20%**
-
-    **Why photo/video reviews matter:**
-
-    - Show real-world product usage
-    - Answer sizing, color, fit questions
-    - Reduce returns (customers see accurate representation)
-    - More authentic than professional photos
-    - Increase trust dramatically
-
-    **How to encourage visual reviews:**
-
-    **Option 1: Offer rewards** (recommended)
-
-    - 10% off next order for photo reviews
-    - \$5 store credit for videos
-    - Send "photo reward email" when photos submitted
-
-    **Option 2: Ask politely**
-
-    - Include "Add photos" option in review form
-    - Show examples of good photos
-    - Make upload super easy (one tap on mobile)
-
-    **Option 3: Send reminder**
-
-    - If customer submits text-only review
-    - Send email 5 days later asking for photos
-    - 15-25% add photos when reminded
-
-    **Expected results:**
-
-    - 10-15% include photos naturally
-    - 30-40% include photos with rewards
-    - Videos are rare (less than 5%) but very valuable
-
-    <Tip>
-      **Photo quality doesn't matter:** Authentic, real-world photos from customers convert better than professional photos, even if they're lower quality.
-    </Tip>
-  </Accordion>
-  <Accordion title="How do I handle inappropriate or spam reviews?" icon="shield-check">
-    **Set up moderation and filters**
-
-    **Common issues:**
-
-    **Spam reviews:**
-
-    - Fake/bot submissions
-    - Competitor attacks
-    - Random nonsense text
-
-    **Solution:**
-
-    - Email verification required
-    - Manual approval for first-time reviewers
-    - Spam detection filters
-    - Block suspicious email domains
-
-    **Inappropriate content:**
-
-    - Profanity, offensive language
-    - Personal attacks
-    - Off-topic content
-
-    **Solution:**
-
-    - Automatic profanity filter
-    - Manual moderation queue
-    - Clear review guidelines
-    - Report button for customers
-
-    **Competitor reviews:**
-
-    - Mentions competitor products
-    - Direct comparisons
-    - Promotional content
-
-    **Solution:**
-
-    - Edit to remove competitor mentions
-    - Ask customer to revise
-    - Only show if relevant to your product
-
-    → [Learn about review moderation](/managing-reviews/review-moderation) → [Set up email blacklist](/managing-reviews/email-blacklist)
-  </Accordion>
-</AccordionGroup>
-
----
-
-## Next Steps
-
-<Steps>
-  <Step title="Add Review Form to Product Pages" icon="browser">
-    Embed the review collection form so customers can leave feedback directly on product pages.
-
-    **Time:** 10 minutes → [Review Collection Form Setup](/collect-reviews/review-collection-form)
-  </Step>
-  <Step title="Set Up Review Request Emails" icon="envelope">
-    Automatically ask customers for reviews 5-7 days after their order is delivered.
-
-    **Time:** 10 minutes → [Review Request Email Setup](/request-reviews/review-request-emails)
-  </Step>
-  <Step title="Customize Review Questions" icon="sliders">
-    Add custom fields to collect specific feedback relevant to your products.
-
-    **Time:** 15 minutes → [Customize Review Inputs](/collect-reviews/customizing-review-inputs)
-  </Step>
-  <Step title="Enable Shop Reviews (Optional)" icon="store">
-    Collect overall testimonials about shopping experience, not tied to products.
-
-    **Time:** 5 minutes → [Shop Review Setup](/collect-reviews/collecting-shop-site-review)
-  </Step>
-</Steps>
+Then pick your starting point from the cards above.
 
 ---
 
 ## Need Help?
 
 <NeedHelp />
-
-<Note>
-  **Pro tip:** Start with product reviews first - they're the most valuable. Once you have 50+ product reviews, then add shop reviews and custom fields. Don't overcomplicate the initial setup.
-</Note>
