@@ -1,59 +1,83 @@
 ---
-description: "Thank customers who add photos to reviews and offer rewards to encourage more visual feedback"
-title: "Photo Review Reward Email Setup"
+description: "Thank customers who add reviews and offer rewards to encourage more visual feedback"
+title: "Review Reward Email Setup"
 ---
 
 import NeedHelp from '/snippets/need-help.mdx';
 
-## Get 2-3x More Photo Reviews with Small Rewards
+## Get 2-3x More Reviews with Small Rewards
 
-Photos make reviews 3x more trustworthy and increase product page conversions by 20%. Offering a small reward (10% off or \$5 credit) for photo reviews increases photo submission rates from 10% to 30-40%.
+Reviews help build trust and improve conversions. Offering a small reward (10% off or \$5 credit) encourages more customers to share their experience.
 
 **What you'll achieve:**
 
-- Thank customers immediately for adding photos
-- Encourage more customers to include photos (2-3x increase)
+- Thank customers immediately for adding reviews.
+- Encourage more customers to add reviews and photos (2-3x increase)
 - Build customer loyalty with appreciation rewards
-- Boost conversion rates with visual social proof
+- Boost conversion rates with stronger social proof
 
 <Info>
-  **Impact:** 2-3x more photo reviews | **Typical reward:** 10% off or \$5-10 credit
+  **Impact:** Higher review volume | **Typical reward:** 10% off or \$5-10 credit
 </Info>
 
 ---
 
 ## How It Works
 
-Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
+Yuko Dashboard → **Reviews → Emails → Reward for Review Email**
 
-![Prrnew](/images/prrnew.png)
+<Frame>
+  ![Yuko Reward For Reviews](/images/yuko-reward-for-reviews.png)
+</Frame>
 
 ### The Automatic Process
 
 <Steps>
-  <Step title="Customer Submits Review with Photo" icon="camera">
-    Customer writes a review and uploads one or more photos of the product.
+  <Step title="Customer Submits Review " icon="camera">
+    The customer writes a review  of the product.
   </Step>
-  <Step title="Yuko Detects Photo" icon="eye">
-    Yuko automatically detects that the review includes photos.
+  <Step title="Yuko Detects Review or Photo" icon="eye">
+    Yuko automatically detects the submitted review.
 
-    **Smart detection:** Works whether customer adds photo during initial review or adds it later.
+    **Smart condition:**
+
+    - If _Reward only for reviews with photos_ is enabled, only reviews that include photos will qualify
+    - If disabled, all reviews (with or without photos) are eligible
+
+    <Frame>
+      <img
+        src="/images/yuko-review-reward-photo.png"
+        alt="Image"
+        title="Image"
+        lightAlt="Image"
+        darkAlt="Image"
+        className="dark:hidden"
+      />
+      <img
+        src="images/yuko-review-reward-photo.png"
+        alt="Image"
+        title="Image"
+        lightAlt="Image"
+        darkAlt="Image"
+        className="hidden dark:block"
+      />
+    </Frame>
   </Step>
   <Step title="Reward Email Sends Immediately" icon="gift">
-    Within minutes, customer receives thank-you email with their reward code.
+    Within minutes, the customer receives a thank-you email with their reward code.
 
     **Timing:** Instant gratification = happier customers
   </Step>
   <Step title="Customer Uses Reward" icon="shopping-cart">
-    Customer applies discount code on their next purchase.
+    The customer applies the discount code on their next purchase.
 
-    **Result:** You got valuable photo review + increased customer lifetime value.
+    **Result:** You get more reviews \+ increased customer lifetime value
   </Step>
 </Steps>
 
 ---
 
-## Why Photo Reviews Matter
+## Why Reviews Matter
 
 <CardGroup cols={2}>
   <Card title="Build Trust" icon="shield-check">
@@ -66,6 +90,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     **Impact:** Higher trust = more sales
   </Card>
+
   <Card title="Show Real Results" icon="images">
     **Visual Proof**
 
@@ -76,6 +101,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     **Impact:** Reduces returns by 15%
   </Card>
+
   <Card title="Increase Conversions" icon="arrow-trend-up">
     **Numbers Don't Lie**
 
@@ -86,6 +112,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     **Impact:** More sales from same traffic
   </Card>
+
   <Card title="Stand Out" icon="star">
     **Competitive Advantage**
 
@@ -110,7 +137,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     Controls the type of reward customers receive after submitting a photo review.
 
-    Navigation: Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email → Edit → Settings**
+    Navigation: Yuko Dashboard → **Reviews → Emails → Reward for Review Email **
 
     Available options:
 
@@ -122,20 +149,21 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
       **Most effective:** 10% off next order is the sweet spot - generous enough to motivate, small enough to be profitable
     </Tip>
   </Accordion>
+
   <Accordion title="Discount Value: How Much to Offer" icon="percent">
     **Setting:** Discount Value (for percentage or amount discounts)
 
     **Finding the right amount:**
 
-    | Discount  | Motivation Level | When to Use                          |
-    | --------- | ---------------- | ------------------------------------ |
-    | 5% off    | Low              | Established stores with many reviews |
-    | 10% off   | Good             | Sweet spot for most stores           |
-    | 15% off   | High             | New stores building review base      |
-    | 20%+ off  | Very High        | Rarely needed, cuts into margins     |
-    | \$5 off   | Medium           | Products under \$50                  |
-    | \$10 off  | High             | Products \$50-100                    |
-    | \$15+ off | Very High        | Expensive products \$100+            |
+    | Discount | Motivation Level | When to Use |
+    | --- | --- | --- |
+    | 5% off | Low | Established stores with many reviews |
+    | 10% off | Good | Sweet spot for most stores |
+    | 15% off | High | New stores building review base |
+    | 20%\+ off | Very High | Rarely needed, cuts into margins |
+    | \$5 off | Medium | Products under \$50 |
+    | \$10 off | High | Products \$50-100 |
+    | \$15\+ off | Very High | Expensive products \$100\+ |
 
     **General guidelines:**
 
@@ -145,9 +173,10 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
     - **Low-margin products:** Stick to 10% or free shipping
 
     <Warning>
-      **Don't go too high:** 25%+ discounts train customers to only buy with coupons. You'll lose money long-term.
+      **Don't go too high:** 25%\+ discounts train customers to only buy with coupons. You'll lose money long-term.
     </Warning>
   </Accordion>
+
   <Accordion title="Email subject line" icon="heart">
     ### What this setting does
 
@@ -170,6 +199,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
     - Urgency language (“Act now”, “Final chance”)
     - Overly promotional wording
   </Accordion>
+
   <Accordion title="Preview Text" icon="clock">
     ### What this setting does
 
@@ -187,6 +217,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
     - _A small thank-you for your photo review_
     - _Your feedback helps other shoppers_
   </Accordion>
+
   <Accordion title="Email Title" icon="text">
     ### What this setting does
 
@@ -203,6 +234,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
     - _We Appreciate Your Feedback_
     - _Your Review Matters_
   </Accordion>
+
   <Accordion title="Email Message" icon="message">
     ### What makes a good reward email
 
@@ -215,7 +247,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     ### Example message structure (shortcode-safe)
 
-    ```
+    ```text
     Hi {{review_author_name}},
     
     Thank you for submitting your photo review for {{review_product_name}}!
@@ -275,7 +307,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     **Example:**
 
-    ```
+    ```text
     Thanks for your review of {{review_product_name}}!
     ```
   </Tab>
@@ -289,7 +321,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     **Example:**
 
-    ```
+    ```text
     Use code {{PHOTO10:COUPON:CODE}} for {{PHOTO10:COUPON:VALUE}} off!
     Valid until {{PHOTO10:COUPON:EXPIRY}}
     ```
@@ -304,7 +336,7 @@ Yuko Dashboard → **Reviews → Emails → Photo Review Reward Email**
 
     **Example:**
 
-    ```
+    ```text
     From your order {{order_name}}
     ```
   </Tab>

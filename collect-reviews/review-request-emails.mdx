@@ -24,7 +24,9 @@ The Review Request Email is your primary tool for collecting customer feedback. 
 
 Yuko Dashboard → **Reviews → Emails → Review Request Email**
 
-![Rrnew](/images/rrnew.png)
+<Frame>
+  ![Yuko Review Request](/images/yuko-review-request.png)
+</Frame>
 
 ### The Automatic Process
 
@@ -58,15 +60,24 @@ Yuko Dashboard → **Reviews → Emails → Review Request Email**
 
 ---
 
-## Email Settings
-
-Configure your review request email to match your products and brand:
-
 <AccordionGroup>
   <Accordion title="Timing: When to Send" defaultOpen icon="calendar">
     **Setting:** Delay - Days after order fulfillment
 
-    ![Set Re](/images/setre.png)
+    <img
+      src="/images/yuko-review-request-setting.png"
+      alt="Set Re"
+      lightAlt="Set Re"
+      darkAlt="Set Re"
+      className="dark:hidden"
+    />
+    <img
+      src="images/yuko-review-request-setting.png"
+      alt="Set Re"
+      lightAlt="Set Re"
+      darkAlt="Set Re"
+      className="hidden dark:block"
+    />
 
     **What it controls :** Set the number of days YUKO should wait **after an order is fulfilled** before sending the review request email.
 
@@ -74,20 +85,21 @@ Configure your review request email to match your products and brand:
 
     **How to choose the right timing:**
 
-    | Product Type       | Recommended Delay | Reason                         |
-    | ------------------ | ----------------- | ------------------------------ |
-    | Clothing/Fashion   | 5-7 days          | Time to wear and wash          |
-    | Electronics        | 10-14 days        | Time to unbox, set up, and use |
-    | Supplements/Health | 21-30 days        | Time to see results            |
-    | Books/Digital      | 3-5 days          | Quick to consume               |
-    | Home Goods         | 7-10 days         | Time to set up and use         |
-    | Food/Perishables   | 3-5 days          | Quick consumption              |
-    | Furniture          | 10-14 days        | Time to assemble and use       |
+    | Product Type | Recommended Delay | Reason |
+    | --- | --- | --- |
+    | Clothing/Fashion | 5-7 days | Time to wear and wash |
+    | Electronics | 10-14 days | Time to unbox, set up, and use |
+    | Supplements/Health | 21-30 days | Time to see results |
+    | Books/Digital | 3-5 days | Quick to consume |
+    | Home Goods | 7-10 days | Time to set up and use |
+    | Food/Perishables | 3-5 days | Quick consumption |
+    | Furniture | 10-14 days | Time to assemble and use |
 
     <Tip>
       **Pro tip:** Don't send too soon. If you ask before customers use the product, they can't write a helpful review. Better to wait a bit longer than send too early.
     </Tip>
   </Accordion>
+
   <Accordion title="Subject Line: First Impression" icon="envelope">
     **Setting:** Email Subject
 
@@ -97,10 +109,10 @@ Configure your review request email to match your products and brand:
 
     ✅ **Good subject lines:**
 
-    - How’s your order_name?
-    - customer_first_name, share your thoughts on your order
+    - How’s your order\_name?
+    - customer\_first\_name, share your thoughts on your order
     - Quick question about your recent order
-    - We’d love your feedback on order_name
+    - We’d love your feedback on order\_name
 
     ### ❌ **Avoid:**
 
@@ -135,6 +147,7 @@ Configure your review request email to match your products and brand:
     - _Your feedback helps other shoppers_
     - _Tell us how your order went_
   </Accordion>
+
   <Accordion title="Email Title" icon="subtitles">
     ### What this setting does
 
@@ -152,6 +165,7 @@ Configure your review request email to match your products and brand:
     - _We’d Love Your Feedback_
     - _Tell Us What You Think_
   </Accordion>
+
   <Accordion title="Email Message" icon="message">
     ### What makes a good review request email
 
@@ -162,7 +176,7 @@ Configure your review request email to match your products and brand:
 
     ### Example message structure
 
-    ```
+    ```text
     Hi {{customer_first_name}},
     
     Thanks for your recent order {{order_name}}.
@@ -183,9 +197,9 @@ Configure your review request email to match your products and brand:
     - Multiple calls to action
 
     <Tip>
-      
     </Tip>
   </Accordion>
+
   <Accordion title="Email Footer" icon="notes">
     \*\*What it controls: \*\*The closing content of the email.
 
@@ -194,6 +208,7 @@ Configure your review request email to match your products and brand:
 
     (Used in both review request and reminder emails.)
   </Accordion>
+
   <Accordion title="Unsubscribe Text & Description" icon="text">
     ### Why this matters
 
@@ -228,7 +243,7 @@ Make your emails personal by inserting customer and order information:
 
     **Example:**
 
-    ```
+    ```text
     Hi {{customer_first_name}},
     ```
 
@@ -246,7 +261,7 @@ Make your emails personal by inserting customer and order information:
 
     **Example:**
 
-    ```
+    ```text
     Thank you for order {{order_name}}!
     ```
 
@@ -257,7 +272,7 @@ Make your emails personal by inserting customer and order information:
 
     **For all products in order:**
 
-    ```
+    ```text
     {{product_reviews_block}}
     ```
 
@@ -265,7 +280,7 @@ Make your emails personal by inserting customer and order information:
 
     **Loop through products individually:**
 
-    ```
+    ```text
     {% for item in order_items %}
       {{item.review_block}}
     {% endfor %}
@@ -287,7 +302,7 @@ Make your emails personal by inserting customer and order information:
 
     **Example:**
 
-    ```
+    ```text
     Use code {{REVIEW10:COUPON:CODE}} for {{REVIEW10:COUPON:VALUE}} off your next order!
     ```
 
@@ -323,6 +338,7 @@ Make your emails personal by inserting customer and order information:
       **Starting out?** First month may be lower (3-5%) as customers get used to emails. Give it time to improve.
     </Info>
   </Accordion>
+
   <Accordion title="Should I offer a discount for reviewing?" icon="gift">
     **Pros:**
 
@@ -351,6 +367,7 @@ Make your emails personal by inserting customer and order information:
     - Free shipping on next purchase
     - Entry into monthly \$100 giveaway
   </Accordion>
+
   <Accordion title="Can I send to all past customers?" icon="users">
     **Should you email old customers?**
 
@@ -358,7 +375,7 @@ Make your emails personal by inserting customer and order information:
 
     - **Recent customers (last 30-60 days):** Yes, send review requests
     - **Older customers (60-90 days):** Maybe, if they haven't reviewed
-    - **Very old (90+ days):** No, they won't remember the product
+    - **Very old (90\+ days):** No, they won't remember the product
 
     **How to do it:**
 
@@ -376,6 +393,7 @@ Make your emails personal by inserting customer and order information:
       **Risk:** Emailing very old customers may result in spam complaints. Stick to recent orders (under 90 days).
     </Warning>
   </Accordion>
+
   <Accordion title="What if I sell multiple products per order?" icon="boxes">
     **Two approaches:**
 
@@ -395,9 +413,10 @@ Make your emails personal by inserting customer and order information:
     **Our recommendation:** Use single email with product review block. Customers appreciate less inbox clutter.
 
     <Tip>
-      **Pro tip:** If order has 5+ products, consider asking for one "overall order review" instead of per-product reviews. Customers won't review 10 items individually.
+      **Pro tip:** If order has 5\+ products, consider asking for one "overall order review" instead of per-product reviews. Customers won't review 10 items individually.
     </Tip>
   </Accordion>
+
   <Accordion title="How do I test my email before sending?" icon="flask">
     **Always test before enabling:**
 
@@ -428,6 +447,7 @@ Make your emails personal by inserting customer and order information:
       **Test on multiple devices:** Check on iPhone, Android, desktop email clients (Gmail, Outlook, Apple Mail). They all display differently.
     </Tip>
   </Accordion>
+
   <Accordion title="Can I A/B test different email versions?" icon="flask-vial">
     **Yes, but do it manually:**
 
