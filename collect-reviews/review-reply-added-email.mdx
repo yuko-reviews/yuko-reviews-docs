@@ -27,7 +27,20 @@ When you reply to customer reviews, most reviewers never see your response unles
 
 Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email**
 
-![Rra New](/images/rranew.png)
+<img
+  src="/images/yuko-review-reply-added.png"
+  alt="Rra New"
+  lightAlt="Rra New"
+  darkAlt="Rra New"
+  className="dark:hidden"
+/>
+<img
+  src="images/yuko-review-reply-added.png"
+  alt="Rra New"
+  lightAlt="Rra New"
+  darkAlt="Rra New"
+  className="hidden dark:block"
+/>
 
 ### The Automatic Process
 
@@ -75,6 +88,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **This email solves it:** Brings them back to see your reply
   </Card>
+
   <Card title="Shows You Care" icon="heart">
     **Builds emotional connection:**
 
@@ -85,6 +99,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Result:** Customer feels valued and appreciated
   </Card>
+
   <Card title="Turns Negatives into Positives" icon="arrows-rotate">
     **Handle complaints professionally:**
 
@@ -95,6 +110,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Result:** Recovery from bad experiences
   </Card>
+
   <Card title="Encourages Advocacy" icon="users">
     **Creates brand advocates:**
 
@@ -115,9 +131,22 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
   <Accordion title="Timing: When to Send Notification" defaultOpen icon="clock">
     **Setting: Days after to notify a reply**
 
-    **Navigation: **Yuko Dashboard → **Reviews → Emails → Review Reply Added Email → Edit → Settings**
+    \*\*Navigation: \*\*Yuko Dashboard → **Reviews → Emails → Review Reply Added Email **
 
-    ![Ss](/images/ss.png)
+    <img
+      src="/images/yuko-review-reply-added-setting.png"
+      alt="Ss"
+      lightAlt="Ss"
+      darkAlt="Ss"
+      className="dark:hidden"
+    />
+    <img
+      src="images/yuko-review-reply-added-setting.png"
+      alt="Ss"
+      lightAlt="Ss"
+      darkAlt="Ss"
+      className="hidden dark:block"
+    />
 
     **What this setting does**
 
@@ -129,15 +158,16 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     ### When to use this setting
 
-    | Delay                   | When to use               | Why                                           |
-    | :---------------------- | :------------------------ | :-------------------------------------------- |
-    | **1 day (recommended)** | Most stores               | Timely notification without feeling intrusive |
-    | **2–3 days**            | High review volume stores | Avoids frequent notifications                 |
-    | **0 days**              | ❌ Not recommended         | Can feel immediate and disruptive             |
+    | Delay | When to use | Why |
+    | :-- | :-- | :-- |
+    | **1 day (recommended)** | Most stores | Timely notification without feeling intrusive |
+    | **2–3 days** | High review volume stores | Avoids frequent notifications |
+    | **0 days** | ❌ Not recommended | Can feel immediate and disruptive |
 
     **Best practice:**\
     A short delay keeps the interaction human and thoughtful, rather than automated.
   </Accordion>
+
   <Accordion title="Subject Line: Make it Personal" icon="envelope">
     **Setting:** Email Subject
 
@@ -165,9 +195,10 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
     - Vague system messages (“Notification update”)
 
     <Info>
-      **Personal touch:** Using your actual name ("Sarah replied to your review") feels more human than "[Store Name] replied."
+      **Personal touch:** Using your actual name ("Sarah replied to your review") feels more human than "\[Store Name\] replied."
     </Info>
   </Accordion>
+
   <Accordion title="Preview Text" icon="message">
     ### What this setting does
 
@@ -184,6 +215,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
     - _Thanks for sharing your experience_
     - _Your feedback matters to us_
   </Accordion>
+
   <Accordion title="Email Title" icon="eye">
     ### What this setting does
 
@@ -200,6 +232,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
     - _Thanks for Your Feedback_
     - _Your Review Matters_
   </Accordion>
+
   <Accordion title="Message (Body)" icon="message">
     ### What makes a good reply notification email
 
@@ -212,7 +245,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     ### Example message structure (shortcode-safe)
 
-    ```
+    ```text
     Hi {{review_author_name}},
     
     Thank you for sharing your feedback on {{review_product_name}}.
@@ -251,6 +284,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
       Pro tip: Reply notifications work best when they feel like a real conversation, not a system alert.
     </Tip>
   </Accordion>
+
   <Accordion title="Email Footer" icon="notes">
     **How this works**
 
@@ -259,6 +293,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     This footer is shared across all review-related emails.
   </Accordion>
+
   <Accordion title="Unsubscribe Text & Description" icon="text">
     ### Why this matters
 
@@ -293,7 +328,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Example:**
 
-    ```
+    ```text
     Thanks for your {{review_rating}}-star review of {{review_product_name}}!
     ```
   </Tab>
@@ -304,7 +339,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Example:**
 
-    ```
+    ```text
     Our response:
     {{reply_content}}
     ```
@@ -319,7 +354,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Example:**
 
-    ```
+    ```text
     Regarding your order {{order_name}}
     ```
   </Tab>
@@ -357,7 +392,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
     - Use templates for common types
     - Keep replies brief (2-4 sentences)
 
-    **What if you get 100+ reviews per week?**
+    **What if you get 100\+ reviews per week?**
 
     - Reply to all negative reviews (priority)
     - Reply to detailed positive reviews (selective)
@@ -368,6 +403,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
       **80/20 rule:** If you can't reply to all reviews, prioritize negatives (handle complaints) and photo reviews (reward effort). This covers 80% of the value with 20% of the work.
     </Tip>
   </Accordion>
+
   <Accordion title="Personalize Every Reply" icon="user">
     **Never use generic templates verbatim**
 
@@ -395,6 +431,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
       **Save time with templates:** Create reply templates for common scenarios (positive, negative, neutral), but ALWAYS customize with customer's name and specific details from their review.
     </Info>
   </Accordion>
+
   <Accordion title="Handle Negative Reviews with Care" icon="triangle-exclamation">
     **Your reply is public - others are watching**
 
@@ -408,7 +445,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Example negative review reply:**
 
-    ```
+    ```text
     Hi John,
     
     Thank you for your honest feedback about the shipping delay. We sincerely apologize - that's definitely not the experience we want you to have.
@@ -432,6 +469,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
       **Never delete honest negative reviews:** It damages trust. Reply professionally instead - it shows other customers you handle problems well.
     </Warning>
   </Accordion>
+
   <Accordion title="Reply Timing Strategy" icon="calendar">
     **When to write your replies:**
 
@@ -451,12 +489,12 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
 
     **Urgency levels:**
 
-    | Review Type       | Reply Speed     | Why                               |
-    | ----------------- | --------------- | --------------------------------- |
-    | 1-2 star negative | Within 24 hours | Damage control, show you care     |
-    | 3 star neutral    | Within 48 hours | Opportunity to improve experience |
-    | 4-5 star positive | Within 72 hours | Thank them, build relationship    |
-    | Photo reviews     | Within 48 hours | Reward the extra effort           |
+    | Review Type | Reply Speed | Why |
+    | --- | --- | --- |
+    | 1-2 star negative | Within 24 hours | Damage control, show you care |
+    | 3 star neutral | Within 48 hours | Opportunity to improve experience |
+    | 4-5 star positive | Within 72 hours | Thank them, build relationship |
+    | Photo reviews | Within 48 hours | Reward the extra effort |
 
     <Tip>
       **Set calendar reminder:** Block 15-30 minutes daily for "review replies" - makes it a habit instead of forgotten task.
@@ -496,6 +534,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
       **High ROI activity:** Replying to reviews (and notifying customers) has one of the highest customer retention ROIs - costs almost nothing, builds loyalty significantly.
     </Info>
   </Accordion>
+
   <Accordion title="Should I reply to positive reviews or just negatives?" icon="question">
     **BOTH - but with different approaches**
 
@@ -541,6 +580,7 @@ Navigation: Yuko Dashboard → **Reviews → Emails → Review Reply Added Email
       **Priority:** If short on time, reply to ALL negatives and SOME positives. Negatives have higher business impact, but positives build relationships.
     </Tip>
   </Accordion>
+
   <Accordion title="Should I include an incentive in my reply?" icon="gift">
     **Depends on the review type**
 
