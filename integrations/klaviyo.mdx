@@ -17,12 +17,15 @@ The Klaviyo integration pushes Yuko review events into Klaviyo as **Events** wit
 When a review-related action happens in Yuko, the matching event is sent to Klaviyo with the customer's email as the profile identifier.
 
 | Event ID | Display name | Fires when |
-| --- | --- | --- |
+| :-- | :-- | :-- |
 | `order_review_request` | Review Request | A review request is triggered for an order |
 | `review_request_sent` | Review Request Sent | A review request email is delivered |
 | `review_submitted` | Review Submitted | A customer submits a review |
 | `review_approved` | Review Published | A review reaches Published status |
 | `review_reply_added` | Review Reply Added | You post a merchant reply to a review |
+| `review_deleted` | Review Deleted | A review is deleted or removed |
+| `question_submitted` | Question Submitted | A customer submits a question |
+| `question_published` | Question Published | A customer question reaches the Published status |
 
 ---
 
@@ -30,19 +33,43 @@ When a review-related action happens in Yuko, the matching event is sent to Klav
 
 Each review event carries the fields below, so you can filter Klaviyo flows and segments on them:
 
-| Property | Description |
-| --- | --- |
-| `review_uuid` | Yuko's unique ID for the review |
-| `email` | Customer email (also used as the Klaviyo profile identifier) |
-| `rating` | Star rating 1–5 |
-| `status` | Current review status (e.g. `approved`, `pending`) |
-| `review_title` | Review headline |
-| `review_content` | Full review text |
-| `product_name` | Name of the product reviewed |
-| `has_photos` | `true` if the review includes photos |
-| `has_videos` | `true` if the review includes videos |
-| `is_verified` | `true` if the review came from a verified buyer |
-| `created_at` | ISO timestamp of review creation |
+| Property Name | Description |
+| :-- | :-- |
+| `yuko_customer_first_name` | First name of the customer |
+| `yuko_customer_last_name` | Last name of the customer |
+| `yuko_customer_email` | Email address of the customer |
+| `yuko_shopify_customer_id` | Shopify customer ID of the customer |
+| `yuko_org_uuid` | Unique identifier (UUID) of the organization/store |
+| `yuko_program_module` | Yuko program modules enabled for the store (e.g., reviews, loyalty, tiers, referral) |
+| `yuko_program_currency` | Currency used by the loyalty/rewards program |
+| `yuko_product_name` | Name of the product |
+| `yuko_platform_product_id` | Platform-specific product ID |
+| `yuko_platform_variation_id` | Platform-specific product variation ID |
+| `yuko_created_at` | Timestamp when the record (review/question) was created |
+| `yuko_timestamp` | Event timestamp for when the action occurred |
+| `yuko_deleted_at` | Timestamp indicating when the record was deleted (empty if active) |
+| `yuko_email` | Sender/system email address associated with the event |
+| `yuko_platform_order_id` | Platform-specific order ID that triggered the event |
+| `yuko_review_uuid` | Unique identifier (UUID) of the review |
+| `yuko_review_parent_uuid` | UUID of the parent review (used for replies or threaded reviews) |
+| `yuko_review_title` | Title or headline of the review |
+| `yuko_review_content` | Body content/text of the review |
+| `yuko_rating` | Star rating given by the customer (typically 1–5) |
+| `yuko_is_verified` | Indicates whether the review is from a verified purchaser |
+| `yuko_status` | Current status of the review (e.g., approved, pending, rejected) |
+| `yuko_review_url` | Direct URL to the product review form |
+| `yuko_store_review_url` | URL to the store-level review form |
+| `yuko_review_urls` | Array of review URLs with associated product details (product ID, variation, UUID, name) |
+| `yuko_has_media` | Indicates whether the review contains any media (photos or videos) |
+| `yuko_has_photos` | Indicates whether the review contains photo content |
+| `yuko_has_videos` | Indicates whether the review contains video content |
+| `yuko_question_uuid` | Unique identifier (UUID) of the question |
+| `yuko_question_content` | Body content/text of the question |
+| `yuko_question_status` | Current status of the question (e.g., approved, pending, rejected) |
+| `yuko_question_author_email` | Email address of the person who submitted the question |
+| `yuko_answer_content` | Body content/text of the answer to the question |
+| `yuko_answer_status` | Current status of the answer (e.g., approved, pending, rejected) |
+| `yuko_answered_at` | Timestamp when the question was answered |
 
 Filter on `rating`, `has_photos`, and `is_verified` to build highly targeted flows without writing any Klaviyo-side logic.
 
@@ -68,20 +95,19 @@ Filter on `rating`, `has_photos`, and `is_verified` to build highly targeted flo
 
 <CardGroup cols={2}>
   <Card title="Thank-you flow after a 5-star review" icon="heart">
-    **Trigger:** `review_approved` where `rating = 5`
-    **Actions:** Send thank-you email, tag profile as "Advocate", add to a referral list.
+    **Trigger:** `review_approved` where `rating = 5` **Actions:** Send thank-you email, tag profile as "Advocate", add to a referral list.
   </Card>
+
   <Card title="Win-back on low ratings" icon="face-frown">
-    **Trigger:** `review_approved` where `rating ≤ 2`
-    **Actions:** Wait 24 hours, send personal apology email with a 20% off coupon, notify support in Slack.
+    **Trigger:** `review_approved` where `rating ≤ 2` **Actions:** Wait 24 hours, send personal apology email with a 20% off coupon, notify support in Slack.
   </Card>
+
   <Card title="Photo-review spotlight" icon="camera">
-    **Trigger:** `review_approved` where `has_photos = true`
-    **Actions:** Route the review to your UGC tooling or a social-proof app.
+    **Trigger:** `review_approved` where `has_photos = true` **Actions:** Route the review to your UGC tooling or a social-proof app.
   </Card>
+
   <Card title="Verified-buyer nurture" icon="badge-check">
-    **Segment definition:** customers with at least one `review_approved` where `is_verified = true`
-    **Use:** Early-access launches, loyalty perks, referral invites.
+    **Segment definition:** customers with at least one `review_approved` where `is_verified = true` **Use:** Early-access launches, loyalty perks, referral invites.
   </Card>
 </CardGroup>
 
@@ -94,7 +120,7 @@ Filter on `rating`, `has_photos`, and `is_verified` to build highly targeted flo
 | Review request and reminder sequences | **Yuko** — built-in, tuned for deliverability |
 | Photo review rewards / coupon on submission | **Yuko** — generates coupon and sends email in one step |
 | Win-back, re-engagement, multi-touch nurture | **Klaviyo** — stronger segmentation and multi-channel |
-| Cross-channel (email + SMS + push) | **Klaviyo** — multi-channel orchestration |
+| Cross-channel (email \+ SMS \+ push) | **Klaviyo** — multi-channel orchestration |
 
 Use Yuko for collection-flow emails. Use Klaviyo for downstream marketing flows where review activity is the trigger.
 
