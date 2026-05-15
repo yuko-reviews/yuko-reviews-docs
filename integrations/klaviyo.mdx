@@ -33,47 +33,124 @@ When a review-related action happens in Yuko, the matching event is sent to Klav
 
 Each review event carries the fields below, so you can filter Klaviyo flows and segments on them:
 
-| Property Name | Description |
-| :-- | :-- |
-| `yuko_customer_first_name` | First name of the customer |
-| `yuko_customer_last_name` | Last name of the customer |
-| `yuko_customer_email` | Email address of the customer |
-| `yuko_shopify_customer_id` | Shopify customer ID of the customer |
-| `yuko_org_uuid` | Unique identifier (UUID) of the organization/store |
-| `yuko_program_module` | Yuko program modules enabled for the store (e.g., reviews, loyalty, tiers, referral) |
-| `yuko_program_currency` | Currency used by the loyalty/rewards program |
-| `yuko_product_name` | Name of the product |
-| `yuko_platform_product_id` | Platform-specific product ID |
-| `yuko_platform_variation_id` | Platform-specific product variation ID |
-| `yuko_created_at` | Timestamp when the record (review/question) was created |
-| `yuko_timestamp` | Event timestamp for when the action occurred |
-| `yuko_deleted_at` | Timestamp indicating when the record was deleted (empty if active) |
-| `yuko_email` | Sender/system email address associated with the event |
-| `yuko_platform_order_id` | Platform-specific order ID that triggered the event |
-| `yuko_review_uuid` | Unique identifier (UUID) of the review |
-| `yuko_review_parent_uuid` | UUID of the parent review (used for replies or threaded reviews) |
-| `yuko_review_title` | Title or headline of the review |
-| `yuko_review_content` | Body content/text of the review |
-| `yuko_rating` | Star rating given by the customer (typically 1–5) |
-| `yuko_is_verified` | Indicates whether the review is from a verified purchaser |
-| `yuko_status` | Current status of the review (e.g., approved, pending, rejected) |
-| `yuko_review_url` | Direct URL to the product review form |
-| `yuko_store_review_url` | URL to the store-level review form |
-| `yuko_review_urls` | Array of review URLs with associated product details (product ID, variation, UUID, name) |
-| `yuko_has_media` | Indicates whether the review contains any media (photos or videos) |
-| `yuko_has_photos` | Indicates whether the review contains photo content |
-| `yuko_has_videos` | Indicates whether the review contains video content |
-| `yuko_question_uuid` | Unique identifier (UUID) of the question |
-| `yuko_question_content` | Body content/text of the question |
-| `yuko_question_status` | Current status of the question (e.g., approved, pending, rejected) |
-| `yuko_question_author_email` | Email address of the person who submitted the question |
-| `yuko_answer_content` | Body content/text of the answer to the question |
-| `yuko_answer_status` | Current status of the answer (e.g., approved, pending, rejected) |
-| `yuko_answered_at` | Timestamp when the question was answered |
+## **Common Event Properties**
+
+Every review-related event Yuko sends to Klaviyo carries the following properties, in addition to the event-specific properties documented per event.
+
+| **Property** | **Type** | **Description** |
+| --- | --- | --- |
+| `yuko_customer_email` | String | Customer email (matches Klaviyo profile) |
+| `yuko_customer_first_name` | String | Customer first name |
+| `yuko_customer_last_name` | String | Customer last name |
+| `yuko_shopify_customer_id` | String | The Shopify customer ID this event relates to |
+| `yuko_program_module` | String | Active Yuko module for this event |
+| `yuko_program_currency` | String | Customer's currency code |
+| `yuko_timestamp` | ISO | When the event was triggered in Yuko |
+| `yuko_org_uuid` | String | Yuko organisation UUID |
+
+### **Yuko Review Request**
+
+- Klaviyo metric: **Yuko Review Request** 
+- Event slug: review\_request
+- When it fires: A review request for a customer generated
+
+| **Property** | **Type** | **Description** |
+| :-- | :-- | :-- |
+| `yuko_review_uuid` | String | Unique identifier for the review |
+| `yuko_store_review_url` | String | URL to the store's review page |
+| `yuko_review_url` | String | Direct URL to the product review form |
+| `yuko_review_urls` | Array (JSON) | Array of product review URL objects with metadata |
+| `yuko_platform_product_id` | String | Shopify / platform product ID |
+| `yuko_platform_order_id` | String | Shopify / platform order ID that triggered the request |
+| `yuko_platform_variation_id` | String | Product variant ID (empty if not applicable) |
+| `yuko_product_name` | String | Name of the product being reviewed |
+| `yuko_rating` | Integer | Star rating submitted by the customer (1–5) |
+| `yuko_review_title` | String | Title of the review |
+| `yuko_review_content` | String | Body text of the review |
+| `yuko_status` | String | Review moderation status |
+| `yuko_is_verified` | Boolean | Whether the reviewer is a verified purchaser |
+| `yuko_has_media` | Boolean | Whether the review contains any media (photo or video) |
+| `yuko_has_photos` | Boolean | Whether the review contains photos |
+| `yuko_has_videos` | Boolean | Whether the review contains videos |
+| `yuko_review_parent_uuid` | String | UUID of the parent review (for reply reviews; empty otherwise) |
+| `yuko_email` | String | Store notification email address |
+| `yuko_created_at` | ISO 8601 string | When the review record was created in Yuko |
+| `yuko_deleted_at` | ISO 8601 string | When the review was deleted (empty if not deleted) |
+
+### **Yuko Review Request Sent**
+
+- Klaviyo metric: **Yuko Review Request Sent**
+- Event slug: review\_request\_sent
+- When it fires: The review request email/notification is actually delivered to the customer
+
+Carries the same property set as **Yuko Review Request**.
+
+### **Yuko Review Submitted**
+
+- Klaviyo metric: **Yuko Review Submitted**
+- Event slug: review\_submitted
+- When it fires: The customer submits a review
+
+Carries the same property set as **Yuko Review Request**.
+
+### **Yuko Review Published**
+
+- Klaviyo metric: **Yuko Review Published**
+- Event slug: review\_published
+- When it fires: Submitted review is published
+
+Carries the same property set as **Yuko Review Request**.
+
+### **Yuko Review Deleted**
+
+- Klaviyo metric: **Yuko Review Deleted**
+- Event slug: review\_deleted
+- When it fires: Review is deleted
+
+Carries the same property set as **Yuko Review Request**.
+
+### **Yuko Review Reply Added**
+
+- Klaviyo metric: **Yuko Review Reply Added**
+- Event slug: review\_reply\_added
+- When it fires: Reply is added to an existing review
+
+Carries the same property set as **Yuko Review Request**.
+
+## **Question Event Properties**
+
+These properties appear on question-related events: 
+
+### **Yuko Question Submitted**
+
+- Klaviyo metric: **Yuko Question Submitted**
+- Event slug: question\_submitted
+- When it fires: A customer submits a product question through the Q&A widget
+
+| **Property** | **Type** | **Description** |
+| :-- | :-- | :-- |
+| `yuko_question_uuid` | String | Unique identifier for the question |
+| `yuko_platform_product_id` | String | Shopify / platform product ID |
+| `yuko_platform_variation_id` | String | Product variant ID (empty if not applicable) |
+| `yuko_product_name` | String | Name of the product the question is about |
+| `yuko_question_content` | String | The text of the customer's question |
+| `yuko_question_status` | String | Moderation status of the question |
+| `yuko_question_author_email` | String | Email of the person who submitted the question |
+| `yuko_answer_content` | String | The answer text provided by the store |
+| `yuko_answer_status` | String | Moderation status of the answer |
+| `yuko_answered_at` | ISO 8601 string | When the question was answered |
+| `yuko_created_at` | ISO 8601 string | When the question record was created in Yuko |
+| `yuko_deleted_at` | ISO 8601 string | When the question was deleted (empty if not deleted) |
+
+### **Yuko Question Published**
+
+- Klaviyo metric: **Yuko Question Published**
+- Event slug: question\_published
+- When it fires: A question (and its answer) is published to the storefront
+
+Carries the same property set as **Yuko Question Published**.
 
 Filter on `rating`, `has_photos`, and `is_verified` to build highly targeted flows without writing any Klaviyo-side logic.
-
----
 
 ## Connect Klaviyo
 
